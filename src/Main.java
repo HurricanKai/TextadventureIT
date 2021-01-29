@@ -9,12 +9,24 @@ public class Main
     {
         var console = new Console();
 
-        var mapWidth = 100;
-        var mapHeight = 100;
+        var mapWidth = 40;
+        var mapHeight = 15;
 
-        var tileGenerator = new EmptyTileGenerator();
+        var tileGenerator = new WeightedTileGenerator(new Weighted[]
+        {
+            new Weighted(100f, new EmptyTileGenerator())
+        });
+        var postProcessors = new IMapPostProcessor[]
+        {
+            new AddRandomConnectionMapPostProcessor()
+        };
         IMapGenerator generator = new BacktrackingMapGenerator();
+        // var generator = new OpenRoomMapGenerator();
         var map = generator.Generate(mapWidth, mapHeight, tileGenerator);
+        for(var processor : postProcessors)
+            map = processor.Process(map);
+
+
         var renderables = new IRenderable[]
         {
             new DebugDisplay(),

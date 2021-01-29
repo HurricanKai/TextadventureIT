@@ -29,7 +29,7 @@ public class MapRenderer implements IRenderable
     private static final char LeftBlock =   '█';
     private static final char UpBlock =     '█';
     private static final char DownBlock =   '█';
-    private static final char Empty =       '░';
+    private static final char Empty =       ' ';
     private void MapToChars(Map map, int y, char[] target)
     {
         var tiley = y / 3;

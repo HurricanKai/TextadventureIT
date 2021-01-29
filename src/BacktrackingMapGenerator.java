@@ -4,6 +4,8 @@ import java.util.Stack;
 
 public class BacktrackingMapGenerator implements IMapGenerator
 {
+    private static final boolean DEBUG = false;
+
     @Override
     public Map Generate(int sizeX, int sizeY, ITileGenerator tileGenerator)
     {
@@ -15,6 +17,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
         {
             for (int y = 0; y < sizeY; y++)
             {
+                if (!DEBUG)
                 tiles[x][y] = tileGenerator.Generate(x, y);
             }
         }
@@ -22,12 +25,25 @@ public class BacktrackingMapGenerator implements IMapGenerator
         var stack = new Stack<Integer>();
         var current = 0;
 
+        int pathI = 0;
         while(true)
         {
             visited.add(current);
 
             var x = Util.GetX(current, sizeX, sizeY);
             var y = Util.GetY(current, sizeX, sizeY);
+            if (DEBUG && tiles[x][y] == null)
+            {
+                char finalPathI = Integer.toString(pathI).charAt(0);
+                tiles[x][y] = new Tile()
+                {
+                    @Override
+                    public char renderFloor()
+                    {
+                        return finalPathI;
+                    }
+                };
+            }
             var tile = tiles[x][y];
 
             System.out.printf("Walking %s %s\n", x, y);
@@ -68,10 +84,24 @@ public class BacktrackingMapGenerator implements IMapGenerator
                     return new Map(sizeX, sizeY, tiles);
 
                 current = stack.pop();
+                pathI = (pathI + 1) % 9;
                 continue;
             }
 
             var d = possibleDirs.get(random.nextInt(possibleDirs.size()));
+            if (DEBUG && tiles[d.X][d.Y] == null)
+            {
+                char finalPathI2 = Integer.toString(pathI).charAt(0);
+                tiles[d.X][d.Y] = new Tile()
+                {
+                    @Override
+                    public char renderFloor()
+                    {
+                        return finalPathI2;
+                    }
+                };
+            }
+
             var o = tiles[d.X][d.Y];
             if (d.X > x)
             {
