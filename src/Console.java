@@ -26,8 +26,8 @@ public class Console
         var c = textArea.getCaret();
         c.setSelectionVisible(false);
         textArea.setCaretColor(Color.WHITE);
-        font = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/NotoSansJP-Bold.otf"));
-        font = font.deriveFont(10f);
+        var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/NotoSansJP-Bold.otf"));
+        font = tempfont.deriveFont(10f);
         textArea.setFont(font);
         backBuffer = new StringBuilder();
     }
@@ -55,5 +55,13 @@ public class Console
         return "";
     }
 
-    public Font getFont() { return font; }
+    public int getStringWidth(String s)
+    {
+        return textArea.getGraphics().getFontMetrics(font).stringWidth(s);
+    }
+
+    public int getStringWidth(char[] c, int start, int length)
+    {
+        return textArea.getGraphics().getFontMetrics(font).stringWidth(c, start, length);
+    }
 }
