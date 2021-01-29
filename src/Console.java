@@ -62,6 +62,6 @@ public class Console
 
     public int getStringWidth(char[] c, int start, int length)
     {
-        return textArea.getGraphics().getFontMetrics(font).stringWidth(c, start, length);
+        return textArea.getGraphics().getFontMetrics(font).charsWidth(c, start, length);
     }
 }
