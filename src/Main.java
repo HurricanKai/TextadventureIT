@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
 import java.io.IOException;
 
 public class Main
@@ -8,7 +9,12 @@ public class Main
     {
         var console = new Console();
 
-        var map = PrimsGen.GenerateRandomMap(10, 20, new EmptyTileGenerator());
+        var mapWidth = 100;
+        var mapHeight = 100;
+
+        var tileGenerator = new EmptyTileGenerator();
+        IMapGenerator generator = new BacktrackingMapGenerator();
+        var map = generator.Generate(mapWidth, mapHeight, tileGenerator);
         var renderables = new IRenderable[]
         {
             new DebugDisplay(),
@@ -21,7 +27,6 @@ public class Main
 
             console.SwapBuffer();
 
-            System.in.read();
             var n = console.ReadLine();
             if (n.equals("exit"))
                 break;

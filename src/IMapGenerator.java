@@ -1,4 +1,4 @@
 public interface IMapGenerator
 {
-    Map Generate();
+    Map Generate(int sizeX, int sizeY, ITileGenerator tileGenerator);
 }

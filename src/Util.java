@@ -4,4 +4,14 @@ public class Util
     {
         return (maxx * x) + y;
     }
+
+    public static int GetY(int i, int maxx, int maxy)
+    {
+        return i % maxx;
+    }
+
+    public static int GetX(int i, int maxx, int maxy)
+    {
+        return i / maxx;
+    }
 }
