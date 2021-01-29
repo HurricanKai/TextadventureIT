@@ -14,7 +14,7 @@ public class Console
         JFrame frame = new JFrame("TitleLessJFrame");
         //frame.setUndecorated(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
+        frame.setSize(1000, 1000);
         frame.setVisible(true);
 
         textArea = new JTextArea();
@@ -22,12 +22,12 @@ public class Console
         frame.getContentPane().add(textArea);
         textArea.setSize(frame.getSize());
         textArea.setForeground(Color.WHITE);
-        textArea.setLineWrap(true);
+        // textArea.setLineWrap(true);
         var c = textArea.getCaret();
         c.setSelectionVisible(false);
         textArea.setCaretColor(Color.WHITE);
-        var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/NotoSansJP-Bold.otf"));
-        font = tempfont.deriveFont(10f);
+        var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/Inconsolata-Medium.ttf"));
+        font = tempfont.deriveFont(15f);
         textArea.setFont(font);
         backBuffer = new StringBuilder();
     }
@@ -47,7 +47,6 @@ public class Console
     {
         textArea.setText(backBuffer.toString());
         backBuffer = new StringBuilder();
-
     }
 
     public String ReadLine()

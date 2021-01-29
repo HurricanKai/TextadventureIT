@@ -1,37 +1,37 @@
 public class Map {
-    private final int xSize;
-    private final int ySize;
-    private Tile[][] _tiles;
+    private final int sizeX;
+    private final int sizeY;
+    private Tile[][] tiles;
 
-    public Map(int xSize, int ySize, Tile[][] _tiles) {
-        this.xSize = xSize;
-        this.ySize = ySize;
-        this._tiles = _tiles;
+    public Map(int sizeX, int sizeY, Tile[][] tiles) {
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.tiles = tiles;
     }
 
     public Tile[][] get_tiles() {
-        return _tiles;
+        return tiles;
     }
 
     public void set_tiles(Tile[][] tiles) {
-        this._tiles = tiles;
+        this.tiles = tiles;
     }
 
     public Tile get_tile(int x, int y) {
-        return _tiles[x][y];
+        return tiles[x][y];
     }
 
     public void set_tile(int x, int y, Tile tile) {
-        _tiles[x][y] = tile;
+        tiles[x][y] = tile;
     }
 
-    public int getXSize()
+    public int getSizeX()
     {
-        return xSize;
+        return sizeX;
     }
 
-    public int getYSize()
+    public int getSizeY()
     {
-        return ySize;
+        return sizeY;
     }
 }

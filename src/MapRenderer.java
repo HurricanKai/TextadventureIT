@@ -12,20 +12,24 @@ public class MapRenderer implements IRenderable
     public void Render(Console console)
     {
         // render map
-        for (int y = 0; y < (map.getYSize() * 3); y++)
+        for (int y = 0; y < (map.getSizeY() * 3); y++)
         {
-            chars = new char[map.getXSize() * 3];
+            chars = new char[map.getSizeX() * 3];
             MapToChars(map, y, chars);
             console.Write(chars);
             console.NewLine();
         }
     }
 
-    private static final char RightBlock =  '▐';
-    private static final char LeftBlock =   '▌';
-    private static final char UpBlock =     '▀';
-    private static final char DownBlock =   '▄';
-    private static final char Empty =       '░';
+    // private static final char RightBlock =  '▐';
+    // private static final char LeftBlock =   '▌';
+    // private static final char UpBlock =     '▀';
+    // private static final char DownBlock =   '▄';
+    private static final char RightBlock =  '█';
+    private static final char LeftBlock =   '█';
+    private static final char UpBlock =     '█';
+    private static final char DownBlock =   '█';
+    private static final char Empty =       ' ';
     private void MapToChars(Map map, int y, char[] target)
     {
         var tiley = y / 3;

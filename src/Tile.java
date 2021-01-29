@@ -25,5 +25,25 @@ public abstract class Tile
         return canMoveDown;
     }
 
+    public void setCanMoveLeft(boolean canMoveLeft)
+    {
+        this.canMoveLeft = canMoveLeft;
+    }
+
+    public void setCanMoveRight(boolean canMoveRight)
+    {
+        this.canMoveRight = canMoveRight;
+    }
+
+    public void setCanMoveUp(boolean canMoveUp)
+    {
+        this.canMoveUp = canMoveUp;
+    }
+
+    public void setCanMoveDown(boolean canMoveDown)
+    {
+        this.canMoveDown = canMoveDown;
+    }
+
     public abstract char renderFloor();
 }
