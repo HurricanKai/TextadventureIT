@@ -8,11 +8,12 @@ public class Main
     {
         var console = new Console();
 
-        var map = PrimsGen.GenerateRandomMap(10, 20, new EmptyTileGenerator());
+        // var map = PrimsGen.GenerateRandomMap(10, 20, new EmptyTileGenerator());
         var renderables = new IRenderable[]
         {
             new DebugDisplay(),
-            new MapRenderer(map),
+            // new MapRenderer(map),
+            new Gui(),
         };
         while(true)
         {
