@@ -7,6 +7,7 @@ public class Console
 {
     private final JTextArea textArea;
     private StringBuilder backBuffer;
+    private final Font font;
 
     public Console() throws IOException, FontFormatException
     {
@@ -25,8 +26,9 @@ public class Console
         var c = textArea.getCaret();
         c.setSelectionVisible(false);
         textArea.setCaretColor(Color.WHITE);
-        var font = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/NotoSansJP-Bold.otf"));
-        textArea.setFont(font.deriveFont(10f));
+        font = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/NotoSansJP-Bold.otf"));
+        font = font.deriveFont(10f);
+        textArea.setFont(font);
         backBuffer = new StringBuilder();
     }
 
@@ -52,4 +54,6 @@ public class Console
     {
         return "";
     }
+
+    public Font getFont() { return font; }
 }
