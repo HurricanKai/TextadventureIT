@@ -6,17 +6,16 @@ public class MapRenderer implements IRenderable
     public MapRenderer(Map map)
     {
         this.map = map;
-        chars = new char[10 * 3];
     }
 
     @Override
     public void Render(Console console)
     {
         // render map
-        for (int y = (map.getYSize() * 3); y > 0; y--)
+        for (int y = 0; y < (map.getYSize() * 3); y++)
         {
             chars = new char[map.getXSize() * 3];
-            MapToChars(map, 0, y - 1, map.getXSize() * 3, y, chars);
+            MapToChars(map, y, chars);
             console.Write(chars);
             console.NewLine();
         }
@@ -27,44 +26,39 @@ public class MapRenderer implements IRenderable
     private static final char UpBlock =     '▀';
     private static final char DownBlock =   '▄';
     private static final char Empty =       '░';
-    private void MapToChars(Map map, int minx, int miny, int maxx, int maxy, char[] target)
+    private void MapToChars(Map map, int y, char[] target)
     {
-        for (int x = minx; x < maxx; x++)
+        var tiley = y / 3;
+        var tileoffsety = y % 3;
+        for (int x = 0; x < target.length; x++)
         {
             var tilex = x / 3;
             var tileoffsetx = x % 3;
-            for (int y = miny; y < maxy; y++)
+
+            if (tileoffsetx == 0 && tileoffsety == 0
+                    || tileoffsetx == 2 && tileoffsety == 0
+                    || tileoffsetx == 0 && tileoffsety == 2
+                    || tileoffsetx == 2 && tileoffsety == 2)
             {
-                var tiley = y / 3;
-                var tileoffsety = y % 3;
-                int i = Util.Index2D(x - minx, y - miny, maxx, maxy);
+                target[x] = '█';
+            } else
+            {
+                var tile = map.get_tile(tilex, tiley);
 
-                if (tileoffsetx == 0 && tileoffsety == 0
-                        || tileoffsetx == 2 && tileoffsety == 0
-                        || tileoffsetx == 0 && tileoffsety == 2
-                        || tileoffsetx == 2 && tileoffsety == 2)
-                {
-                    target[i] = '█';
-                }
-                else
-                {
-                    var tile = map.get_tile(tilex, tiley);
+                if (tileoffsetx == 2 && tileoffsety == 1)
+                    target[x] = tile.canMoveRight() ? Empty : RightBlock;
 
-                    if (tileoffsetx == 2 && tileoffsety == 1)
-                        target[i] = tile.canMoveRight() ? Empty : RightBlock;
+                else if (tileoffsetx == 0 && tileoffsety == 1)
+                    target[x] = tile.canMoveLeft() ? Empty : LeftBlock;
 
-                    else if (tileoffsetx == 0 && tileoffsety == 1)
-                        target[i] = tile.canMoveLeft() ? Empty : LeftBlock;
+                else if (tileoffsetx == 1 && tileoffsety == 0)
+                    target[x] = tile.canMoveUp() ? Empty : UpBlock;
 
-                    else if (tileoffsetx == 1 && tileoffsety == 2)
-                        target[i] = tile.canMoveUp() ? Empty : UpBlock;
+                else if (tileoffsetx == 1 && tileoffsety == 2)
+                    target[x] = tile.canMoveDown() ? Empty : DownBlock;
 
-                    else if (tileoffsetx == 1 && tileoffsety == 0)
-                        target[i] = tile.canMoveDown() ? Empty : DownBlock;
-
-                    else if (tileoffsetx == 1 && tileoffsety == 1)
-                        target[i] = tile.renderFloor();
-                }
+                else if (tileoffsetx == 1 && tileoffsety == 1)
+                    target[x] = tile.renderFloor();
             }
         }
     }
