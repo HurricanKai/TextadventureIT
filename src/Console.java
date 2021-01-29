@@ -64,4 +64,9 @@ public class Console
     {
         return textArea.getGraphics().getFontMetrics(font).charsWidth(c, start, length);
     }
+
+    public int getCharWidth(char c)
+    {
+        return textArea.getGraphics().getFontMetrics(font).charWidth(c);
+    }
 }
