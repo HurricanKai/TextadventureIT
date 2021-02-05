@@ -46,6 +46,7 @@ public abstract class Tile
     }
 
     public abstract char renderFloor(GameState gameState);
+    public abstract String[] getTitleLines(GameState gameState);
 
     public IAction[] getPossibleActions()
     {

@@ -37,6 +37,10 @@ public class WeightedTileGenerator implements ITileGenerator
             {
                 return 'E';
             }
+
+            private final String[] titleLines = new String[0];
+            @Override
+            public String[] getTitleLines(GameState gameState) { return titleLines; }
         };
     }
 }

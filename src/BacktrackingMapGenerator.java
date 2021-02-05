@@ -42,6 +42,10 @@ public class BacktrackingMapGenerator implements IMapGenerator
                     {
                         return finalPathI;
                     }
+
+                    private final String[] titleLines = new String[0];
+                    @Override
+                    public String[] getTitleLines(GameState gameState) { return titleLines; }
                 };
             }
             var tile = tiles[x][y];
@@ -99,6 +103,10 @@ public class BacktrackingMapGenerator implements IMapGenerator
                     {
                         return finalPathI2;
                     }
+
+                    private final String[] titleLines = new String[0];
+                    @Override
+                    public String[] getTitleLines(GameState gameState) { return titleLines; }
                 };
             }
 

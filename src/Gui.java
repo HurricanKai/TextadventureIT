@@ -13,11 +13,9 @@ public class Gui implements IRenderable
     @Override
     public void Render(Console console, GameState gameState)
     {
-        console.NewLine();
         int maxLineLength = 0;
         int spaceWidth = console.getCharWidth(' ');
         var actions = gameState.getTile().getPossibleActions();
-
 
         for (IDisplay display : displays)
         {
@@ -41,9 +39,12 @@ public class Gui implements IRenderable
             {
                 String[] lines = displays[displayIndex].getLines(gameState);
                 linesLength = lines.length;
-                lineWidth = console.getStringWidth(lines[lineIndex]);
 
-                console.Write(lines[lineIndex]);
+                if (lines.length > 0)
+                {
+                    lineWidth = console.getStringWidth(lines[lineIndex]);
+                    console.Write(lines[lineIndex]);
+                }
             }
             int amountSpaces = (maxLineLength - lineWidth) / spaceWidth;
 
@@ -66,7 +67,6 @@ public class Gui implements IRenderable
                 console.Write(actions[actionIndex].getDescription());
                 actionIndex++;
             }
-
 
             console.NewLine();
 

@@ -17,6 +17,14 @@ public final class Teleporter extends Tile
         return 'Р';
     }
 
+    private static final String[] titleLines = new String[]
+    {
+        "Ein uralter Teleporter. Du könntest ihn aktivieren, aber es ist ungewiss wohin er dich bringt.",
+        "Nur die richtung kannst du abschätzen."
+    };
+    @Override
+    public String[] getTitleLines(GameState gameState) { return titleLines; }
+
     @Override
     protected void addToPossibleActions(List<IAction> list)
     {
