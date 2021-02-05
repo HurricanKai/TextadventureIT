@@ -18,7 +18,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
             for (int y = 0; y < sizeY; y++)
             {
                 if (!DEBUG)
-                tiles[x][y] = tileGenerator.Generate(x, y);
+                tiles[x][y] = tileGenerator.Generate(x, y, sizeX, sizeY, random);
             }
         }
 

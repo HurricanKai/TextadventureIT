@@ -4,10 +4,9 @@ import java.util.Random;
 public class WeightedTileGenerator implements ITileGenerator
 {
     private final Weighted<ITileGenerator>[] tileGenerators;
-    private final Random random;
+
     public WeightedTileGenerator(Weighted<ITileGenerator>[] tileGenerators)
     {
-        this.random = new Random();
         this.tileGenerators = new Weighted[tileGenerators.length];
 
         // normalize weights (sum of all weights == 1.0)
@@ -19,7 +18,7 @@ public class WeightedTileGenerator implements ITileGenerator
     }
 
     @Override
-    public Tile Generate(int x, int y)
+    public Tile Generate(int x, int y, int maxx, int maxy, Random random)
     {
         var rnd = random.nextDouble();
 
@@ -27,7 +26,7 @@ public class WeightedTileGenerator implements ITileGenerator
         {
             rnd -= weight.getWeight();
             if (rnd < 0)
-                return weight.getValue().Generate(x, y);
+                return weight.getValue().Generate(x, y, maxx, maxy, random);
         }
 
         System.out.printf("FAILED TO GENERATE %s %s remaining weight %s\n", x, y, rnd);

@@ -15,8 +15,9 @@ public class Main
 
         var tileGenerator = new WeightedTileGenerator(new Weighted[]
         {
-            new Weighted(80f, new SingleTileGenerator(new EmptyTile())),
-            new Weighted(20f, new SingleTileGenerator(new Spikes())),
+            new Weighted(100f, new EmptyGenerator()),
+            new Weighted(15f, new SpikesGenerator()),
+            new Weighted(1f, new TeleporterGenerator()),
         });
         var postProcessors = new IMapPostProcessor[]
         {
