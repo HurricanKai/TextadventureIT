@@ -51,7 +51,7 @@ public abstract class Tile
     {
         var list = new ArrayList<IAction>();
         addToPossibleActions(list);
-        return (IAction[]) list.toArray();
+        return list.toArray(IAction[]::new);
     }
 
     protected void addToPossibleActions(List<IAction> list)
