@@ -1,4 +1,4 @@
-public class HealthComponent implements IComponent
+public class HealthDisplay implements IDisplay
 {
     @Override
     public String[] getLines(GameState gameState)

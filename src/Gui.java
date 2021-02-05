@@ -1,15 +1,12 @@
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 public class Gui implements IRenderable
 {
-    private final IComponent[] components;
+    private final IDisplay[] displays;
 
     public Gui()
     {
-        components = new IComponent[]
+        displays = new IDisplay[]
                 {
-                    new HealthComponent()
+                    new HealthDisplay()
                 };
     }
 
@@ -22,9 +19,9 @@ public class Gui implements IRenderable
         var actions = gameState.getTile().getPossibleActions();
 
 
-        for (IComponent component : components)
+        for (IDisplay display : displays)
         {
-            String[] lines = component.getLines(gameState);
+            String[] lines = display.getLines(gameState);
             for (int i = 0; i < lines.length; i++)
             {
                 maxLineLength = Math.max(console.getStringWidth(lines[i]),maxLineLength);
@@ -32,21 +29,21 @@ public class Gui implements IRenderable
             }
         }
 
-        int actionCount = 0;
-        int componentCount = 0;
-        int lineCount = 0;
+        int actionIndex = 0;
+        int displayIndex = 0;
+        int lineIndex = 0;
 
         do
         {
             int linesLength = 0;
             int lineWidth = 0;
-            if (componentCount < components.length)
+            if (displayIndex < displays.length)
             {
-                String[] lines = components[componentCount].getLines(gameState);
+                String[] lines = displays[displayIndex].getLines(gameState);
                 linesLength = lines.length;
-                lineWidth = console.getStringWidth(lines[lineCount]);
+                lineWidth = console.getStringWidth(lines[lineIndex]);
 
-                console.Write(lines[lineCount]);
+                console.Write(lines[lineIndex]);
             }
             int amountSpaces = (maxLineLength - lineWidth) / spaceWidth;
 
@@ -63,24 +60,24 @@ public class Gui implements IRenderable
             console.Write(" | ");
 
 
-            if (actionCount < actions.length)
+            if (actionIndex < actions.length)
             {
-                console.Write(+ (actionCount + 1) + ": ");
-                console.Write(actions[actionCount].getDescription());
-                actionCount++;
+                console.Write(+ (actionIndex + 1) + ": ");
+                console.Write(actions[actionIndex].getDescription());
+                actionIndex++;
             }
 
 
             console.NewLine();
 
-            lineCount++;
-            if (lineCount >= linesLength)
+            lineIndex++;
+            if (lineIndex >= linesLength)
             {
-                componentCount++;
-                lineCount = 0;
+                displayIndex++;
+                lineIndex = 0;
             }
 
-        } while (actionCount < actions.length || componentCount < components.length);
+        } while (actionIndex < actions.length || displayIndex < displays.length);
     }
 
     public void keyTyped(char c, GameState state)
