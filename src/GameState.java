@@ -1,15 +1,18 @@
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 public class GameState
 {
     private Vector2I position;
     private final Map map;
     private int timeStep;
-    private float health;
+    private Dictionary<String, Object> customState = new Hashtable<>();
 
     public GameState(Vector2I position, Map map)
     {
         this.position = position;
         this.map = map;
-        this.health = 1.0f;
+        putState("health", 1.0f);
     }
 
     public Tile getTile()
@@ -39,13 +42,6 @@ public class GameState
         getTile().onPlayerEnter(this);
     }
 
-    public float getHealth() { return health; }
-
-    public void setHealth(float health)
-    {
-        this.health = health;
-    }
-
     public void onStep()
     {
         var tiles = map.get_tiles();
@@ -54,5 +50,15 @@ public class GameState
             for (Tile tile : v)
                 tile.onStep(this);
         }
+    }
+
+    public <T> void putState(String key, T value)
+    {
+        customState.put(key, value);
+    }
+
+    public <T> T getState(String key)
+    {
+        return (T) customState.get(key);
     }
 }

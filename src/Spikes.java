@@ -13,6 +13,6 @@ public class Spikes extends Tile
     @Override
     public void onPlayerEnter(GameState gameState)
     {
-        gameState.setHealth(gameState.getHealth() - .10f);
+        gameState.putState("health", ((float)gameState.getState("health")) - .10f);
     }
 }
