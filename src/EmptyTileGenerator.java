@@ -6,7 +6,7 @@ public class EmptyTileGenerator implements ITileGenerator
         return new Tile()
         {
             @Override
-            public char renderFloor()
+            public char renderFloor(GameState gameState)
             {
                 return '░';
             }

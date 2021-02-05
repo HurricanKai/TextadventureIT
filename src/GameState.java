@@ -2,6 +2,7 @@ public class GameState
 {
     private Vector2I position;
     private final Map map;
+    private int timeStep;
 
     public GameState(Vector2I position, Map map)
     {
@@ -23,6 +24,10 @@ public class GameState
     {
         return position;
     }
+
+    public int getTimeStep() { return timeStep; }
+
+    public void incrementTimeStep() { timeStep++; }
 
     public void setPosition(Vector2I position)
     {

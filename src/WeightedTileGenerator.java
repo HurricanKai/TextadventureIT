@@ -34,7 +34,7 @@ public class WeightedTileGenerator implements ITileGenerator
         return new Tile()
         {
             @Override
-            public char renderFloor()
+            public char renderFloor(GameState gameState)
             {
                 return 'E';
             }

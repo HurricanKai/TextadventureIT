@@ -18,7 +18,7 @@ public class MapRenderer implements IRenderable
         for (int y = 0; y < (map.getSizeY() * 3); y++)
         {
             chars = new char[map.getSizeX() * 3];
-            MapToChars(map, y, chars);
+            MapToChars(map, y, chars, gameState);
             if (y == playerTilePositionY + 1)
                 chars[playerTilePositionX + 1] = '#';
             console.Write(chars);
@@ -35,7 +35,7 @@ public class MapRenderer implements IRenderable
     private static final char UpBlock =     '█';
     private static final char DownBlock =   '█';
     private static final char Empty =       ' ';
-    private void MapToChars(Map map, int y, char[] target)
+    private void MapToChars(Map map, int y, char[] target, GameState gameState)
     {
         var tiley = y / 3;
         var tileoffsety = y % 3;
@@ -67,7 +67,7 @@ public class MapRenderer implements IRenderable
                     target[x] = tile.canMoveSouth() ? Empty : DownBlock;
 
                 else if (tileoffsetx == 1 && tileoffsety == 1)
-                    target[x] = tile.renderFloor();
+                    target[x] = tile.renderFloor(gameState);
             }
         }
     }

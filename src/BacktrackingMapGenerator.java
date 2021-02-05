@@ -38,7 +38,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
                 tiles[x][y] = new Tile()
                 {
                     @Override
-                    public char renderFloor()
+                    public char renderFloor(GameState gameState)
                     {
                         return finalPathI;
                     }
@@ -95,7 +95,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
                 tiles[d.X][d.Y] = new Tile()
                 {
                     @Override
-                    public char renderFloor()
+                    public char renderFloor(GameState gameState)
                     {
                         return finalPathI2;
                     }

@@ -94,6 +94,7 @@ public class Main
                 renderable.Render(console, gameState);
 
             console.SwapBuffer();
+            gameState.incrementTimeStep();
         }
     }
 }

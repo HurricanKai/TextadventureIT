@@ -45,7 +45,7 @@ public abstract class Tile
         this.canMoveSouth = canMoveSouth;
     }
 
-    public abstract char renderFloor();
+    public abstract char renderFloor(GameState gameState);
 
     public IAction[] getPossibleActions()
     {
