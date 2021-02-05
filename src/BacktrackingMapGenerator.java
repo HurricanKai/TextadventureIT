@@ -105,26 +105,26 @@ public class BacktrackingMapGenerator implements IMapGenerator
             var o = tiles[d.X][d.Y];
             if (d.X > x)
             {
-                tile.setCanMoveRight(true);
-                o.setCanMoveLeft(true);
+                tile.setCanMoveEast(true);
+                o.setCanMoveWest(true);
                 System.out.println("Branching off right");
             }
             if (d.X < x)
             {
-                tile.setCanMoveLeft(true);
-                o.setCanMoveRight(true);
+                tile.setCanMoveWest(true);
+                o.setCanMoveEast(true);
                 System.out.println("Branching off left");
             }
             if (d.Y < y)
             {
-                tile.setCanMoveUp(true);
-                o.setCanMoveDown(true);
+                tile.setCanMoveNorth(true);
+                o.setCanMoveSouth(true);
                 System.out.println("Branching off up");
             }
             if (d.Y > y)
             {
-                tile.setCanMoveDown(true);
-                o.setCanMoveUp(true);
+                tile.setCanMoveSouth(true);
+                o.setCanMoveNorth(true);
                 System.out.println("Branching off down");
             }
 

@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public class Gui implements IRenderable
 {
     private final IComponent[] components;
@@ -13,8 +11,9 @@ public class Gui implements IRenderable
     }
 
     @Override
-    public void Render(Console console)
+    public void Render(Console console, GameState gameState)
     {
+        console.NewLine();
         int maxLineLength = 0;
         int spaceWidth = console.getCharWidth(' ');
         String[] lines;

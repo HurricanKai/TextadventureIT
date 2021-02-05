@@ -1,49 +1,69 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Tile
 {
-    private boolean canMoveLeft;
-    private boolean canMoveRight;
-    private boolean canMoveUp;
-    private boolean canMoveDown;
+    private boolean canMoveWest;
+    private boolean canMoveEast;
+    private boolean canMoveNorth;
+    private boolean canMoveSouth;
 
-    public boolean canMoveLeft()
+    public boolean canMoveWest() { return canMoveWest; }
+
+    public boolean canMoveEast()
     {
-        return canMoveLeft;
+        return canMoveEast;
     }
 
-    public boolean canMoveRight()
+    public boolean canMoveNorth()
     {
-        return canMoveRight;
+        return canMoveNorth;
     }
 
-    public boolean canMoveUp()
+    public boolean canMoveSouth()
     {
-        return canMoveUp;
+        return canMoveSouth;
     }
 
-    public boolean canMoveDown()
+    public void setCanMoveWest(boolean canMoveWest)
     {
-        return canMoveDown;
+        this.canMoveWest = canMoveWest;
     }
 
-    public void setCanMoveLeft(boolean canMoveLeft)
+    public void setCanMoveEast(boolean canMoveEast)
     {
-        this.canMoveLeft = canMoveLeft;
+        this.canMoveEast = canMoveEast;
     }
 
-    public void setCanMoveRight(boolean canMoveRight)
+    public void setCanMoveNorth(boolean canMoveNorth)
     {
-        this.canMoveRight = canMoveRight;
+        this.canMoveNorth = canMoveNorth;
     }
 
-    public void setCanMoveUp(boolean canMoveUp)
+    public void setCanMoveSouth(boolean canMoveSouth)
     {
-        this.canMoveUp = canMoveUp;
-    }
-
-    public void setCanMoveDown(boolean canMoveDown)
-    {
-        this.canMoveDown = canMoveDown;
+        this.canMoveSouth = canMoveSouth;
     }
 
     public abstract char renderFloor();
+
+    public IAction[] getPossibleActions()
+    {
+        var list = new ArrayList<IAction>();
+        addToPossibleActions(list);
+        return (IAction[]) list.toArray();
+    }
+
+    protected void addToPossibleActions(List<IAction> list)
+    {
+        if (canMoveWest())
+            list.add(MoveWestAction.Instance);
+        if (canMoveEast())
+            list.add(MoveEastSection.Instance);
+        if (canMoveNorth())
+            list.add(MoveNorthAction.Instance);
+        if (canMoveSouth())
+            list.add(MoveSouthAction.Instance);
+    }
 }
+

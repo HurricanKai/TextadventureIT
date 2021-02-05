@@ -16,26 +16,26 @@ public class AddRandomConnectionMapPostProcessor implements IMapPostProcessor
                 var chance = 1.0 - .10; // 20%
                 if (x > 0 && random.nextDouble() > chance)
                 {
-                    col[y].setCanMoveLeft(true);
-                    tiles[x - 1][y].setCanMoveRight(true);
+                    col[y].setCanMoveWest(true);
+                    tiles[x - 1][y].setCanMoveEast(true);
                 }
 
                 if (x < (map.getSizeX() - 1) && random.nextDouble() > chance)
                 {
-                    col[y].setCanMoveRight(true);
-                    tiles[x + 1][y].setCanMoveLeft(true);
+                    col[y].setCanMoveEast(true);
+                    tiles[x + 1][y].setCanMoveWest(true);
                 }
 
                 if (y > 0 && random.nextDouble() > chance)
                 {
-                    col[y].setCanMoveUp(true);
-                    col[y - 1].setCanMoveDown(true);
+                    col[y].setCanMoveNorth(true);
+                    col[y - 1].setCanMoveSouth(true);
                 }
 
                 if (y < (map.getSizeY() - 1) && random.nextDouble() > chance)
                 {
-                    col[y].setCanMoveDown(true);
-                    col[y + 1].setCanMoveUp(true);
+                    col[y].setCanMoveSouth(true);
+                    col[y + 1].setCanMoveNorth(true);
                 }
             }
         }

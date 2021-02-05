@@ -10,10 +10,10 @@ public class OpenRoomMapGenerator implements IMapGenerator
             for (int y = 0; y < sizeY; y++)
             {
                 var tile = tileGenerator.Generate(x, y);
-                tile.setCanMoveUp(true);
-                tile.setCanMoveDown(true);
-                tile.setCanMoveRight(true);
-                tile.setCanMoveLeft(true);
+                tile.setCanMoveNorth(true);
+                tile.setCanMoveSouth(true);
+                tile.setCanMoveEast(true);
+                tile.setCanMoveWest(true);
                 tiles[x][y] = tile;
             }
         }

@@ -1,6 +1,4 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.font.FontRenderContext;
 import java.io.IOException;
 
 public class Main
@@ -30,13 +28,15 @@ public class Main
         var renderables = new IRenderable[]
         {
             new DebugDisplay(),
-            // new MapRenderer(map),
+            new MapRenderer(map),
             new Gui(),
         };
+
+        var gameState = new GameState(new Vector2I(0, 0), map);
         while(true)
         {
             for (var renderable : renderables)
-                renderable.Render(console);
+                renderable.Render(console, gameState);
 
             console.SwapBuffer();
 
