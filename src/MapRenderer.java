@@ -19,8 +19,8 @@ public class MapRenderer implements IRenderable
         {
             chars = new char[map.getSizeX() * 3];
             MapToChars(map, y, chars);
-            if (y == playerTilePositionY)
-                chars[playerTilePositionX] = '#';
+            if (y == playerTilePositionY + 1)
+                chars[playerTilePositionX + 1] = '#';
             console.Write(chars);
             console.NewLine();
         }

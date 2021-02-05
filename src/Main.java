@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 
 public class Main
@@ -24,25 +26,41 @@ public class Main
         for(var processor : postProcessors)
             map = processor.Process(map);
 
-
+        var gui = new Gui();
         var renderables = new IRenderable[]
         {
             new DebugDisplay(),
             new MapRenderer(map),
-            new Gui(),
+            gui,
         };
 
         var gameState = new GameState(new Vector2I(0, 0), map);
+        console.addKeyListener(new KeyListener()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                gui.keyTyped(e.getKeyChar(), gameState);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e)
+            {
+
+            }
+        });
         while(true)
         {
             for (var renderable : renderables)
                 renderable.Render(console, gameState);
 
             console.SwapBuffer();
-
-            var n = console.ReadLine();
-            if (n.equals("exit"))
-                break;
         }
     }
 }

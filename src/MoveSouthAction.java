@@ -12,7 +12,7 @@ public final class MoveSouthAction implements IAction
     public void Execute(GameState gameState)
     {
         var pos = gameState.getPosition();
-        pos.Y -= 1;
+        pos.Y += 1;
         gameState.setPosition(pos); // not necessary but for the sake of it
     }
 }

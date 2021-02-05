@@ -1,3 +1,6 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 public class Gui implements IRenderable
 {
     private final IComponent[] components;
@@ -33,11 +36,11 @@ public class Gui implements IRenderable
         int componentCount = 0;
         int lineCount = 0;
 
-        while(true)
+        do
         {
             int linesLength = 0;
             int lineWidth = 0;
-            if(componentCount < components.length)
+            if (componentCount < components.length)
             {
                 String[] lines = components[componentCount].getLines();
                 linesLength = lines.length;
@@ -57,11 +60,12 @@ public class Gui implements IRenderable
                 console.Write(" ");
             }
 
-            console.Write(" | " + (actionCount + 1) +": ");
+            console.Write(" | ");
 
 
-            if(actionCount < actions.length)
+            if (actionCount < actions.length)
             {
+                console.Write(+ (actionCount + 1) + ": ");
                 console.Write(actions[actionCount].getDescription());
                 actionCount++;
             }
@@ -69,18 +73,47 @@ public class Gui implements IRenderable
 
             console.NewLine();
 
-
-
-            if(lineCount >= linesLength)
+            lineCount++;
+            if (lineCount >= linesLength)
             {
                 componentCount++;
                 lineCount = 0;
             }
 
-            if(actionCount >= actions.length && componentCount >= components.length)
-            {
+        } while (actionCount < actions.length || componentCount < components.length);
+    }
+
+    public void keyTyped(char c, GameState state)
+    {
+        switch(c)
+        {
+            case '1':
+                state.getTile().getPossibleActions()[0].Execute(state);
                 break;
-            }
+            case '2':
+                state.getTile().getPossibleActions()[1].Execute(state);
+                break;
+            case '3':
+                state.getTile().getPossibleActions()[2].Execute(state);
+                break;
+            case '4':
+                state.getTile().getPossibleActions()[3].Execute(state);
+                break;
+            case '5':
+                state.getTile().getPossibleActions()[4].Execute(state);
+                break;
+            case '6':
+                state.getTile().getPossibleActions()[5].Execute(state);
+                break;
+            case '7':
+                state.getTile().getPossibleActions()[6].Execute(state);
+                break;
+            case '8':
+                state.getTile().getPossibleActions()[7].Execute(state);
+                break;
+            case '9':
+                state.getTile().getPossibleActions()[8].Execute(state);
+                break;
         }
     }
 }

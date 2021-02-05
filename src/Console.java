@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -8,10 +9,11 @@ public class Console
     private final JTextArea textArea;
     private StringBuilder backBuffer;
     private final Font font;
+    private final JFrame frame;
 
     public Console() throws IOException, FontFormatException
     {
-        JFrame frame = new JFrame("TitleLessJFrame");
+        frame = new JFrame("TitleLessJFrame");
         //frame.setUndecorated(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
@@ -49,11 +51,6 @@ public class Console
         backBuffer = new StringBuilder();
     }
 
-    public String ReadLine()
-    {
-        return "";
-    }
-
     public int getStringWidth(String s)
     {
         return textArea.getGraphics().getFontMetrics(font).stringWidth(s);
@@ -67,5 +64,10 @@ public class Console
     public int getCharWidth(char c)
     {
         return textArea.getGraphics().getFontMetrics(font).charWidth(c);
+    }
+
+    public void addKeyListener(KeyListener keyListener)
+    {
+        textArea.addKeyListener(keyListener);
     }
 }
