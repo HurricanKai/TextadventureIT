@@ -2,10 +2,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Main
 {
-    public static void main(String[] args) throws IOException, FontFormatException
+    public static void main(String[] args) throws IOException, FontFormatException, InterruptedException
     {
         var console = new Console();
 
@@ -95,6 +96,7 @@ public class Main
 
             console.SwapBuffer();
             gameState.incrementTimeStep();
+            TimeUnit.MILLISECONDS.sleep(100);
         }
     }
 }

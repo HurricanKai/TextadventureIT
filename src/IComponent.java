@@ -1,4 +1,4 @@
 public interface IComponent
 {
-    String[] getLines();
+    String[] getLines(GameState gameState);
 }

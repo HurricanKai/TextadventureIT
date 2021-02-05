@@ -9,7 +9,7 @@ public class Gui implements IRenderable
     {
         components = new IComponent[]
                 {
-                    new TestComponent()
+                    new HealthComponent()
                 };
     }
 
@@ -24,7 +24,7 @@ public class Gui implements IRenderable
 
         for (IComponent component : components)
         {
-            String[] lines = component.getLines();
+            String[] lines = component.getLines(gameState);
             for (int i = 0; i < lines.length; i++)
             {
                 maxLineLength = Math.max(console.getStringWidth(lines[i]),maxLineLength);
@@ -42,7 +42,7 @@ public class Gui implements IRenderable
             int lineWidth = 0;
             if (componentCount < components.length)
             {
-                String[] lines = components[componentCount].getLines();
+                String[] lines = components[componentCount].getLines(gameState);
                 linesLength = lines.length;
                 lineWidth = console.getStringWidth(lines[lineCount]);
 

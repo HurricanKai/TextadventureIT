@@ -2,7 +2,7 @@ public class TestComponent implements IComponent
 {
 
     @Override
-    public String[] getLines()
+    public String[] getLines(GameState gameState)
     {
         return new String[]
                 {
