@@ -56,14 +56,6 @@ public abstract class Tile
 
     protected void addToPossibleActions(List<IAction> list)
     {
-        if (canMoveWest())
-            list.add(MoveWestAction.Instance);
-        if (canMoveEast())
-            list.add(MoveEastSection.Instance);
-        if (canMoveNorth())
-            list.add(MoveNorthAction.Instance);
-        if (canMoveSouth())
-            list.add(MoveSouthAction.Instance);
     }
 }
 

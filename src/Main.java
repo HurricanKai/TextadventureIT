@@ -46,13 +46,46 @@ public class Main
             @Override
             public void keyPressed(KeyEvent e)
             {
-
             }
 
             @Override
             public void keyReleased(KeyEvent e)
             {
+                var pos = gameState.getPosition();
+                switch (e.getKeyCode())
+                {
+                    case KeyEvent.VK_UP:
+                        if (pos.Y > 0)
+                        {
+                            pos.Y -= 1;
+                            gameState.setPosition(pos);
+                        }
+                        break;
 
+                    case KeyEvent.VK_DOWN:
+                        if (pos.Y < gameState.getMap().getSizeY() - 1)
+                        {
+                            pos.Y += 1;
+                            gameState.setPosition(pos);
+                        }
+                        break;
+
+                    case KeyEvent.VK_LEFT:
+                        if (pos.X > 0)
+                        {
+                            pos.X -= 1;
+                            gameState.setPosition(pos);
+                        }
+                        break;
+
+                    case KeyEvent.VK_RIGHT:
+                        if (pos.X < gameState.getMap().getSizeX() - 1)
+                        {
+                            pos.X += 1;
+                            gameState.setPosition(pos);
+                        }
+                        break;
+                }
             }
         });
         while(true)
