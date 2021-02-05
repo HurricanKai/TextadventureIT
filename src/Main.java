@@ -15,7 +15,8 @@ public class Main
 
         var tileGenerator = new WeightedTileGenerator(new Weighted[]
         {
-            new Weighted(100f, new EmptyTileGenerator())
+            new Weighted(80f, new SingleTileGenerator(new EmptyTile())),
+            new Weighted(20f, new SingleTileGenerator(new Spikes())),
         });
         var postProcessors = new IMapPostProcessor[]
         {
@@ -96,6 +97,7 @@ public class Main
 
             console.SwapBuffer();
             gameState.incrementTimeStep();
+            gameState.onStep();
             TimeUnit.MILLISECONDS.sleep(100);
         }
     }

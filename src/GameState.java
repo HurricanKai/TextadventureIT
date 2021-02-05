@@ -24,7 +24,8 @@ public class GameState
 
     public Vector2I getPosition()
     {
-        return position;
+        // for safety reasons, we return a copy
+        return position.copy();
     }
 
     public int getTimeStep() { return timeStep; }
@@ -33,7 +34,9 @@ public class GameState
 
     public void setPosition(Vector2I position)
     {
+        getTile().onPlayerExit(this);
         this.position = position;
+        getTile().onPlayerEnter(this);
     }
 
     public float getHealth() { return health; }
@@ -41,5 +44,15 @@ public class GameState
     public void setHealth(float health)
     {
         this.health = health;
+    }
+
+    public void onStep()
+    {
+        var tiles = map.get_tiles();
+        for (Tile[] v : tiles)
+        {
+            for (Tile tile : v)
+                tile.onStep(this);
+        }
     }
 }

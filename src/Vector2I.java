@@ -8,4 +8,9 @@ public class Vector2I
         X = x;
         Y = y;
     }
+
+    public Vector2I copy()
+    {
+        return new Vector2I(X, Y);
+    }
 }

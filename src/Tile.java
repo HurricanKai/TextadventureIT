@@ -57,5 +57,20 @@ public abstract class Tile
     protected void addToPossibleActions(List<IAction> list)
     {
     }
+
+    public void onPlayerEnter(GameState gameState)
+    {
+
+    }
+
+    public void onPlayerExit(GameState gameState)
+    {
+
+    }
+
+    public void onStep(GameState gameState)
+    {
+
+    }
 }
 

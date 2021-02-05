@@ -28,7 +28,7 @@ public class Console
         var c = textArea.getCaret();
         c.setSelectionVisible(false);
         textArea.setCaretColor(Color.WHITE);
-        var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/Inconsolata-Medium.ttf"));
+        var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/Inconsolata/OpenType-TT/Inconsolata-Medium.ttf"));
         font = tempfont.deriveFont(15f);
         textArea.setFont(font);
         backBuffer = new StringBuilder();
