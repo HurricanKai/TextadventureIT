@@ -56,7 +56,7 @@ public class Main
                 switch (e.getKeyCode())
                 {
                     case KeyEvent.VK_UP:
-                        if (pos.Y > 0)
+                        if (gameState.getTile().canMoveNorth() && pos.Y > 0)
                         {
                             pos.Y -= 1;
                             gameState.setPosition(pos);
@@ -64,7 +64,7 @@ public class Main
                         break;
 
                     case KeyEvent.VK_DOWN:
-                        if (pos.Y < gameState.getMap().getSizeY() - 1)
+                        if (gameState.getTile().canMoveSouth() && pos.Y < gameState.getMap().getSizeY() - 1)
                         {
                             pos.Y += 1;
                             gameState.setPosition(pos);
@@ -72,7 +72,7 @@ public class Main
                         break;
 
                     case KeyEvent.VK_LEFT:
-                        if (pos.X > 0)
+                        if (gameState.getTile().canMoveWest() && pos.X > 0)
                         {
                             pos.X -= 1;
                             gameState.setPosition(pos);
@@ -80,7 +80,7 @@ public class Main
                         break;
 
                     case KeyEvent.VK_RIGHT:
-                        if (pos.X < gameState.getMap().getSizeX() - 1)
+                        if (gameState.getTile().canMoveEast() && pos.X < gameState.getMap().getSizeX() - 1)
                         {
                             pos.X += 1;
                             gameState.setPosition(pos);
