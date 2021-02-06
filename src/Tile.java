@@ -45,17 +45,19 @@ public abstract class Tile
         this.canMoveSouth = canMoveSouth;
     }
 
+    public void initialize(GameState gameState) { }
+
     public abstract char renderFloor(GameState gameState);
     public abstract String[] getTitleLines(GameState gameState);
 
-    public IAction[] getPossibleActions()
+    public IAction[] getPossibleActions(GameState gameState)
     {
         var list = new ArrayList<IAction>();
-        addToPossibleActions(list);
+        addToPossibleActions(list, gameState);
         return list.toArray(IAction[]::new);
     }
 
-    protected void addToPossibleActions(List<IAction> list)
+    protected void addToPossibleActions(List<IAction> list, GameState gameState)
     {
     }
 

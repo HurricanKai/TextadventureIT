@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Main
@@ -18,6 +19,7 @@ public class Main
             new Weighted(100f, new EmptyGenerator()),
             new Weighted(15f, new SpikesGenerator()),
             new Weighted(1f, new TeleporterGenerator()),
+            new Weighted(1f, new FatherDaughterQuestGenerator()),
         });
         var postProcessors = new IMapPostProcessor[]
         {
@@ -93,6 +95,15 @@ public class Main
                 }
             }
         });
+
+        for (Tile[] tiles : map.get_tiles())
+        {
+            for(Tile tile : tiles)
+            {
+                tile.initialize(gameState);
+            }
+        }
+
         while(true)
         {
             for (var renderable : renderables)

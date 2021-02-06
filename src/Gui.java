@@ -15,7 +15,7 @@ public class Gui implements IRenderable
     {
         int maxLineLength = 0;
         int spaceWidth = console.getCharWidth(' ');
-        var actions = gameState.getTile().getPossibleActions();
+        var actions = gameState.getTile().getPossibleActions(gameState);
 
         for (IDisplay display : displays)
         {
@@ -80,36 +80,36 @@ public class Gui implements IRenderable
         } while (actionIndex < actions.length || displayIndex < displays.length);
     }
 
-    public void keyTyped(char c, GameState state)
+    public void keyTyped(char c, GameState gameState)
     {
         switch(c)
         {
             case '1':
-                state.getTile().getPossibleActions()[0].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[0].Execute(gameState);
                 break;
             case '2':
-                state.getTile().getPossibleActions()[1].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[1].Execute(gameState);
                 break;
             case '3':
-                state.getTile().getPossibleActions()[2].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[2].Execute(gameState);
                 break;
             case '4':
-                state.getTile().getPossibleActions()[3].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[3].Execute(gameState);
                 break;
             case '5':
-                state.getTile().getPossibleActions()[4].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[4].Execute(gameState);
                 break;
             case '6':
-                state.getTile().getPossibleActions()[5].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[5].Execute(gameState);
                 break;
             case '7':
-                state.getTile().getPossibleActions()[6].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[6].Execute(gameState);
                 break;
             case '8':
-                state.getTile().getPossibleActions()[7].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[7].Execute(gameState);
                 break;
             case '9':
-                state.getTile().getPossibleActions()[8].Execute(state);
+                gameState.getTile().getPossibleActions(gameState)[8].Execute(gameState);
                 break;
         }
     }

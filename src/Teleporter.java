@@ -14,7 +14,7 @@ public final class Teleporter extends Tile
     @Override
     public char renderFloor(GameState gameState)
     {
-        return 'Р';
+        return 'Т';
     }
 
     private static final String[] titleLines = new String[]
@@ -26,9 +26,9 @@ public final class Teleporter extends Tile
     public String[] getTitleLines(GameState gameState) { return titleLines; }
 
     @Override
-    protected void addToPossibleActions(List<IAction> list)
+    protected void addToPossibleActions(List<IAction> list, GameState gameState)
     {
-        super.addToPossibleActions(list);
+        super.addToPossibleActions(list, gameState);
         list.add(new IAction()
         {
             @Override

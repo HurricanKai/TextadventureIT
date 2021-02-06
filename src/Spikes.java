@@ -3,7 +3,7 @@ public class Spikes extends Tile
     @Override
     public char renderFloor(GameState gameState)
     {
-        return 'А';
+        return 'Ѕ';
     }
 
     private static final String[] titleLines = new String[] { "Oh nein! Eine falle! Du verlierst etwas leben." };
