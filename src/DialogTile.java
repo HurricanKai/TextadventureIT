@@ -32,6 +32,7 @@ public abstract class DialogTile extends Tile
                         public void Execute(GameState gameState)
                         {
                             currentDialog = tempEntryStore;
+                            tempEntryStore = null;
                         }
                     }
             });
@@ -155,7 +156,10 @@ public abstract class DialogTile extends Tile
                     public void Execute(GameState gameState)
                     {
                         currentDialog = childNode;
-                        childBuilder.action.Invoke(gameState);
+                        if (childBuilder.action != null)
+                        {
+                            childBuilder.action.Invoke(gameState);
+                        }
                     }
                 };
             }

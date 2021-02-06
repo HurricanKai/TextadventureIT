@@ -20,6 +20,7 @@ public class Main
             new Weighted(15f, new SpikesGenerator()),
             new Weighted(1f, new TeleporterGenerator()),
             new Weighted(1f, new FatherDaughterQuestGenerator()),
+            new Weighted(1f, new TestDialogGenerator())
         });
         var postProcessors = new IMapPostProcessor[]
         {
