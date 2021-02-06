@@ -8,6 +8,7 @@ public abstract class DialogTile extends Tile
     private DialogNode rootDialog;
     private DialogNode tempEntryStore;
     private final DialogNode entryDialogNode;
+    protected boolean isFirstVisit = true;
 
     public DialogTile()
     {
@@ -65,10 +66,22 @@ public abstract class DialogTile extends Tile
     public void onPlayerEnter(GameState gameState)
     {
         super.onPlayerEnter(gameState);
-        if (entryDialogNode != null)
+        if (!isFirstVisit && entryDialogNode != null)
         {
             tempEntryStore = currentDialog;
             currentDialog = entryDialogNode;
+        }
+    }
+
+    @Override
+    public void onPlayerExit(GameState gameState)
+    {
+        super.onPlayerExit(gameState);
+        isFirstVisit = false;
+        if (tempEntryStore != null)
+        {
+            currentDialog = tempEntryStore;
+            tempEntryStore = null;
         }
     }
 
