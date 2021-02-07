@@ -5,8 +5,5 @@ public class EmptyTile extends Tile
     public String[] getTitleLines(GameState gameState) { return titleLines; }
 
     @Override
-    public char renderFloor(GameState gameState)
-    {
-        return '░';
-    }
+    public char renderFloor(GameState gameState) { return ' '; }
 }
