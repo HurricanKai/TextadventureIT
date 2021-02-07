@@ -35,7 +35,7 @@ public class Main
         var renderables = new IRenderable[]
         {
             new DebugDisplay(),
-            new SpacedMapRenderer(map),
+            new CompactMapRenderer(map),
             new BlankLineRenderer(),
             new TitleLineRenderer(),
             gui,
