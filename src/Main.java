@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Main
@@ -36,7 +35,7 @@ public class Main
         var renderables = new IRenderable[]
         {
             new DebugDisplay(),
-            new MapRenderer(map),
+            new SpacedMapRenderer(map),
             new BlankLineRenderer(),
             new TitleLineRenderer(),
             gui,
