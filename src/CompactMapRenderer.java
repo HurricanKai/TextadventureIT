@@ -11,8 +11,6 @@ public class CompactMapRenderer extends MapRendererBase
     public void Render(Console console, GameState gameState)
     {
         var playerPosition = gameState.getPosition();
-        var playerTilePositionX = playerPosition.X * 3;
-        var playerTilePositionY = playerPosition.Y * 3;
 
         for (int tiley = 0; tiley < map.getSizeY(); tiley++)
         {
@@ -30,8 +28,8 @@ public class CompactMapRenderer extends MapRendererBase
                     }
                 }
 
-                if (tiley == playerTilePositionY && tileoffsety == 1)
-                    chars[playerTilePositionX + 1] = '#';
+                if (tiley == playerPosition.Y && tileoffsety == 1)
+                    chars[playerPosition.X * 2 + 1] = '#';
                 console.Write(chars);
                 console.NewLine();
             }
