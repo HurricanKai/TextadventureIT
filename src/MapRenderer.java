@@ -53,32 +53,26 @@ public class MapRenderer implements IRenderable
         var playerPosition = gameState.getPosition();
         var playerTilePositionX = playerPosition.X * 3;
         var playerTilePositionY = playerPosition.Y * 3;
-        
-        for (int y = 0; (y / 3) < map.getSizeY(); y++)
+
+        for (int tiley = 0; tiley < map.getSizeY(); tiley++)
         {
-            chars = new char[map.getSizeX() * 2 + 1];
-            var tiley = y / 3;
-            var tileoffsety = (y % 3);
-            if (tileoffsety == 0 && y != 0 && y != (map.getSizeY() * 2))
-                continue;
-
-            int i = 0;
-            for (int x = 0; (x / 3) < map.getSizeX(); x++)
+            for (int tileoffsety = tiley == 0 ? 0 : 1; tileoffsety <= 2; tileoffsety++)
             {
-                var tilex = x / 3;
-                var tileoffsetx = x % 3;
-                if (tileoffsetx == 0 && x != 0 && x != map.getSizeX() * 2)
-                    continue;
+                chars = new char[map.getSizeX() * 2 + 1];
 
-                chars[i++] = getTileOffsetChar(map.get_tile(tilex, tiley), tileoffsetx, tileoffsety, gameState);
+                for (int tilex = 0; tilex < map.getSizeX(); tilex++)
+                {
+                    for (int tileoffsetx = tilex == 0 ? 0 : 1; tileoffsetx <= 2; tileoffsetx++)
+                    {
+                        chars[tilex * 2 + tileoffsetx] = getTileOffsetChar(map.get_tile(tilex, tiley), tileoffsetx, tileoffsety, gameState);
+                    }
+                }
+
+                if (tiley == playerTilePositionY && tileoffsety == 1)
+                    chars[playerTilePositionX + 1] = '#';
+                console.Write(chars);
+                console.NewLine();
             }
-
-            System.out.println(i);
-
-            if (y == playerTilePositionY + 1)
-                chars[playerTilePositionX + 1] = '#';
-            console.Write(chars);
-            console.NewLine();
         }
     }
 
