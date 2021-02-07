@@ -53,11 +53,6 @@ public class Main
             @Override
             public void keyPressed(KeyEvent e)
             {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e)
-            {
                 var pos = gameState.getPosition();
                 switch (e.getKeyCode())
                 {
@@ -93,6 +88,11 @@ public class Main
                         }
                         break;
                 }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e)
+            {
             }
         });
 
