@@ -5,6 +5,7 @@ public class CompactMapRenderer extends MapRendererBase
     public CompactMapRenderer(Map map)
     {
         super(map);
+        chars = new char[map.getSizeX() * 2 + 1];
     }
 
     @Override
@@ -17,8 +18,6 @@ public class CompactMapRenderer extends MapRendererBase
             // we only want to draw the sub-tile above the actual tile if the current tile is col 0 (since that is the upper wall)
             for (int tileoffsety = tiley == 0 ? 0 : 1; tileoffsety <= 2; tileoffsety++)
             {
-                chars = new char[map.getSizeX() * 2 + 1];
-
                 for (int tilex = 0; tilex < map.getSizeX(); tilex++)
                 {
                     // we only want to draw the sub-tile above the actual tile if the current tile is row 0 (since that is the left wall)

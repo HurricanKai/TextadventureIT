@@ -5,6 +5,7 @@ public class SpacedMapRenderer extends MapRendererBase
     public SpacedMapRenderer(Map map)
     {
         super(map);
+        chars = new char[map.getSizeX() * 3];
     }
 
     @Override
@@ -16,7 +17,6 @@ public class SpacedMapRenderer extends MapRendererBase
         // render map non-overlapping
         for (int y = 0; y < (map.getSizeY() * 3); y++)
         {
-            chars = new char[map.getSizeX() * 3];
             var tiley = y / 3;
             var tileoffsety = y % 3;
             for (int x = 0; x < chars.length; x++)
