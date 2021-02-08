@@ -18,7 +18,7 @@ public class WeightedTileGenerator implements ITileGenerator
     }
 
     @Override
-    public Tile Generate(int x, int y, int maxx, int maxy, Random random)
+    public Tile Generate(TileTemplate template, int x, int y, int z, int maxx, int maxy, int maxz, Random random)
     {
         var rnd = random.nextDouble();
 
@@ -26,11 +26,11 @@ public class WeightedTileGenerator implements ITileGenerator
         {
             rnd -= weight.getWeight();
             if (rnd < 0)
-                return weight.getValue().Generate(x, y, maxx, maxy, random);
+                return weight.getValue().Generate(template, x, y, z, maxx, maxy, maxz, random);
         }
 
         System.out.printf("FAILED TO GENERATE %s %s remaining weight %s\n", x, y, rnd);
-        return new Tile()
+        return new Tile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth())
         {
             @Override
             public char renderFloor(GameState gameState)

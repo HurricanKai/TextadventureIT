@@ -19,6 +19,11 @@ public final class DaughterQuest extends Tile
                     "Hier habe ich ein Mädchen gefunden."
             };
 
+    public DaughterQuest(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
+    {
+        super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
+    }
+
     @Override
     public char renderFloor(GameState gameState)
     {

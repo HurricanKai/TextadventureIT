@@ -2,5 +2,5 @@ import java.util.Random;
 
 public interface ITileGenerator
 {
-    Tile Generate(int x, int y, int maxx, int maxy, Random random);
+    Tile Generate(TileTemplate template, int x, int y, int z, int maxx, int maxy, int maxz, Random random);
 }

@@ -27,6 +27,11 @@ public final class FatherQuest extends Tile
                     "Bitte findet sie!",
             };
 
+    public FatherQuest(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
+    {
+        super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
+    }
+
     @Override
     public void initialize(GameState gameState)
     {

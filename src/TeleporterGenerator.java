@@ -4,7 +4,7 @@ public final class TeleporterGenerator implements ITileGenerator
 {
 
     @Override
-    public Tile Generate(int x, int y, int maxx, int maxy, Random random)
+    public Tile Generate(TileTemplate template, int x, int y, int z, int maxx, int maxy, int maxz, Random random)
     {
         var range = random.nextDouble() * 30; // NOTE: this range is a bit difficult to get right
                                               // issue is, if the range is too big, hits will always be out of bounds,
@@ -58,10 +58,10 @@ public final class TeleporterGenerator implements ITileGenerator
             }
             else
             {
-                return Generate(x, y, maxx, maxy, random); // this is very unlikely
+                return Generate(template, x, y, z, maxx, maxy, maxz, random); // this is very unlikely
             }
         }
 
-        return new Teleporter(new Vector2I(targetx, targety), directionString);
+        return new Teleporter(new Vector3I(targetx, targety, z), directionString, template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth());
     }
 }

@@ -1,4 +1,4 @@
-import java.util.Random;
+/*import java.util.Random;
 
 public class OpenRoomMapGenerator implements IMapGenerator
 {
@@ -12,7 +12,7 @@ public class OpenRoomMapGenerator implements IMapGenerator
         {
             for (int y = 0; y < sizeY; y++)
             {
-                var tile = tileGenerator.Generate(x, y, sizeX, sizeY, random);
+                var tile = tileGenerator.Generate(x, y, , sizeX, sizeY, random);
                 tile.setCanMoveNorth(true);
                 tile.setCanMoveSouth(true);
                 tile.setCanMoveEast(true);
@@ -23,4 +23,4 @@ public class OpenRoomMapGenerator implements IMapGenerator
 
         return new Map(sizeX, sizeY, tiles);
     }
-}
+}*/

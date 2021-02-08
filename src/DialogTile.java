@@ -10,8 +10,9 @@ public abstract class DialogTile extends Tile
     private final DialogNode entryDialogNode;
     protected boolean isFirstVisit = true;
 
-    public DialogTile()
+    public DialogTile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
+        super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
         var builder = new DialogBuilder();
         buildDialog(builder);
         rootDialog = builder.Build();

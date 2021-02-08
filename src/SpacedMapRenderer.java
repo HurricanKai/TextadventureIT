@@ -14,6 +14,7 @@ public class SpacedMapRenderer extends MapRendererBase
         var playerPosition = gameState.getPosition();
         var playerTilePositionX = playerPosition.X * 3;
         var playerTilePositionY = playerPosition.Y * 3;
+        var z = playerPosition.Z;
         // render map non-overlapping
         for (int y = 0; y < (map.getSizeY() * 3); y++)
         {
@@ -24,7 +25,7 @@ public class SpacedMapRenderer extends MapRendererBase
                 var tilex = x / 3;
                 var tileoffsetx = x % 3;
 
-                chars[x] = getTileOffsetChar(map.get_tile(tilex, tiley), tileoffsetx, tileoffsety, gameState);
+                chars[x] = getTileOffsetChar(map.get_tile(tilex, tiley, z), tileoffsetx, tileoffsety, gameState);
             }
             if (y == playerTilePositionY + 1)
                 chars[playerTilePositionX + 1] = '#';

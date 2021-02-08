@@ -23,7 +23,7 @@ public class CompactMapRenderer extends MapRendererBase
                     // we only want to draw the sub-tile above the actual tile if the current tile is row 0 (since that is the left wall)
                     for (int tileoffsetx = tilex == 0 ? 0 : 1; tileoffsetx <= 2; tileoffsetx++)
                     {
-                        chars[tilex * 2 + tileoffsetx] = getTileOffsetChar(map.get_tile(tilex, tiley), tileoffsetx, tileoffsety, gameState);
+                        chars[tilex * 2 + tileoffsetx] = getTileOffsetChar(map.get_tile(tilex, tiley, playerPosition.Z), tileoffsetx, tileoffsety, gameState);
                     }
                 }
 

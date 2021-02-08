@@ -3,10 +3,18 @@ import java.util.List;
 
 public abstract class Tile
 {
-    private boolean canMoveWest;
-    private boolean canMoveEast;
-    private boolean canMoveNorth;
-    private boolean canMoveSouth;
+    private final boolean canMoveWest;
+    private final boolean canMoveEast;
+    private final boolean canMoveNorth;
+    private final boolean canMoveSouth;
+
+    public Tile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
+    {
+        this.canMoveWest = canMoveWest;
+        this.canMoveEast = canMoveEast;
+        this.canMoveNorth = canMoveNorth;
+        this.canMoveSouth = canMoveSouth;
+    }
 
     public boolean canMoveWest() { return canMoveWest; }
 
@@ -23,26 +31,6 @@ public abstract class Tile
     public boolean canMoveSouth()
     {
         return canMoveSouth;
-    }
-
-    public void setCanMoveWest(boolean canMoveWest)
-    {
-        this.canMoveWest = canMoveWest;
-    }
-
-    public void setCanMoveEast(boolean canMoveEast)
-    {
-        this.canMoveEast = canMoveEast;
-    }
-
-    public void setCanMoveNorth(boolean canMoveNorth)
-    {
-        this.canMoveNorth = canMoveNorth;
-    }
-
-    public void setCanMoveSouth(boolean canMoveSouth)
-    {
-        this.canMoveSouth = canMoveSouth;
     }
 
     public void initialize(GameState gameState) { }

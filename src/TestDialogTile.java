@@ -2,6 +2,11 @@ import java.awt.*;
 
 public final class TestDialogTile extends DialogTile
 {
+    public TestDialogTile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
+    {
+        super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
+    }
+
     @Override
     protected void buildDialog(DialogBuilder dialogBuilder)
     {

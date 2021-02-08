@@ -3,9 +3,8 @@ import java.util.Random;
 public class AddRandomConnectionMapPostProcessor implements IMapPostProcessor
 {
     @Override
-    public Map Process(Map map)
+    public TileTemplate[][][] Process(TileTemplate[][][] tiles)
     {
-        var tiles = map.get_tiles();
         var random = new Random();
 
         for (int x = 0; x < tiles.length; x++)
@@ -13,33 +12,37 @@ public class AddRandomConnectionMapPostProcessor implements IMapPostProcessor
             var col = tiles[x];
             for (int y = 0; y < col.length; y++)
             {
-                var chance = 1.0 - .10; // 20%
-                if (x > 0 && random.nextDouble() > chance)
+                var row = col[y];
+                for (int z = 0; z < row.length; z++)
                 {
-                    col[y].setCanMoveWest(true);
-                    tiles[x - 1][y].setCanMoveEast(true);
-                }
+                    var chance = 1.0 - .10; // 20%
+                    if (x > 0 && random.nextDouble() > chance)
+                    {
+                        row[z].setCanMoveWest(true);
+                        tiles[x - 1][y][z].setCanMoveEast(true);
+                    }
 
-                if (x < (map.getSizeX() - 1) && random.nextDouble() > chance)
-                {
-                    col[y].setCanMoveEast(true);
-                    tiles[x + 1][y].setCanMoveWest(true);
-                }
+                    if (x < tiles.length - 1 && random.nextDouble() > chance)
+                    {
+                        row[z].setCanMoveEast(true);
+                        tiles[x + 1][y][z].setCanMoveWest(true);
+                    }
 
-                if (y > 0 && random.nextDouble() > chance)
-                {
-                    col[y].setCanMoveNorth(true);
-                    col[y - 1].setCanMoveSouth(true);
-                }
+                    if (y > 0 && random.nextDouble() > chance)
+                    {
+                        row[z].setCanMoveNorth(true);
+                        col[y - 1][z].setCanMoveSouth(true);
+                    }
 
-                if (y < (map.getSizeY() - 1) && random.nextDouble() > chance)
-                {
-                    col[y].setCanMoveSouth(true);
-                    col[y + 1].setCanMoveNorth(true);
+                    if (y < row.length - 1 && random.nextDouble() > chance)
+                    {
+                        row[z].setCanMoveSouth(true);
+                        col[y + 1][z].setCanMoveNorth(true);
+                    }
                 }
             }
         }
 
-        return map;
+        return tiles;
     }
 }

@@ -1,4 +1,4 @@
 public interface IMapPostProcessor
 {
-    Map Process(Map map);
+    TileTemplate[][][] Process(TileTemplate[][][] map);
 }

@@ -3,12 +3,12 @@ import java.util.Hashtable;
 
 public class GameState
 {
-    private Vector2I position;
+    private Vector3I position;
     private final Map map;
     private int timeStep;
     private Dictionary<String, Object> customState = new Hashtable<>();
 
-    public GameState(Vector2I position, Map map)
+    public GameState(Vector3I position, Map map)
     {
         this.position = position;
         this.map = map;
@@ -17,7 +17,7 @@ public class GameState
 
     public Tile getTile()
     {
-        return map.get_tile(position.X, position.Y);
+        return map.get_tile(position.X, position.Y, position.Z);
     }
 
     public Map getMap()
@@ -25,7 +25,7 @@ public class GameState
         return map;
     }
 
-    public Vector2I getPosition()
+    public Vector3I getPosition()
     {
         // for safety reasons, we return a copy
         return position.copy();
@@ -35,7 +35,7 @@ public class GameState
 
     public void incrementTimeStep() { timeStep++; }
 
-    public void setPosition(Vector2I position)
+    public void setPosition(Vector3I position)
     {
         getTile().onPlayerExit(this);
         this.position = position;
@@ -45,10 +45,11 @@ public class GameState
     public void onStep()
     {
         var tiles = map.get_tiles();
-        for (Tile[] v : tiles)
+        for (Tile[][] v : tiles)
         {
-            for (Tile tile : v)
-                tile.onStep(this);
+            for (Tile[] v2 : v)
+                for (Tile tile : v2)
+                    tile.onStep(this);
         }
     }
 

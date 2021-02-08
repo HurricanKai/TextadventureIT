@@ -2,11 +2,12 @@ import java.util.List;
 
 public final class Teleporter extends Tile
 {
-    private Vector2I target;
+    private Vector3I target;
     private String directionString;
 
-    public Teleporter(Vector2I target, String directionString)
+    public Teleporter(Vector3I target, String directionString, boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
+        super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
         this.target = target;
         this.directionString = directionString;
     }
