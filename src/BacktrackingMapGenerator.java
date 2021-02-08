@@ -33,7 +33,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
 
             System.out.printf("Walking %s %s %s\n", x, y, z);
 
-            var sameLevelMultiplier = 10;
+            var sameLevelMultiplier = 100;
             var possibleDirs = new ArrayList<Vector3I>();
 
             if (x - 1 >= 0)
