@@ -82,35 +82,40 @@ public class Gui implements IRenderable
 
     public void keyTyped(char c, GameState gameState)
     {
+        var possibleActions = gameState.getTile().getPossibleActions(gameState);
+        int index = -1;
         switch(c)
         {
             case '1':
-                gameState.getTile().getPossibleActions(gameState)[0].Execute(gameState);
+                index = 0;
                 break;
             case '2':
-                gameState.getTile().getPossibleActions(gameState)[1].Execute(gameState);
+                index = 1;
                 break;
             case '3':
-                gameState.getTile().getPossibleActions(gameState)[2].Execute(gameState);
+                index = 2;
                 break;
             case '4':
-                gameState.getTile().getPossibleActions(gameState)[3].Execute(gameState);
+                index = 3;
                 break;
             case '5':
-                gameState.getTile().getPossibleActions(gameState)[4].Execute(gameState);
+                index = 4;
                 break;
             case '6':
-                gameState.getTile().getPossibleActions(gameState)[5].Execute(gameState);
+                index = 5;
                 break;
             case '7':
-                gameState.getTile().getPossibleActions(gameState)[6].Execute(gameState);
+                index = 6;
                 break;
             case '8':
-                gameState.getTile().getPossibleActions(gameState)[7].Execute(gameState);
+                index = 7;
                 break;
             case '9':
-                gameState.getTile().getPossibleActions(gameState)[8].Execute(gameState);
+                index = 8;
                 break;
         }
+        if (index < 0 || index > possibleActions.length)
+            return;
+        possibleActions[index].Execute(gameState);
     }
 }
