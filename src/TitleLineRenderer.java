@@ -9,6 +9,7 @@ public final class TitleLineRenderer implements IRenderable
         {
             console.Write(line);
             console.NewLine();
+            console.NewLine();
         }
     }
 }

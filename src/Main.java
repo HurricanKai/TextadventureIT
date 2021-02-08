@@ -19,10 +19,12 @@ public class Main
             new Weighted(15f, new SpikesGenerator()),
             new Weighted(1f, new TeleporterGenerator()),
             new Weighted(1f, new FatherDaughterQuestGenerator()),
-            new Weighted(1f, new TestDialogGenerator())
+            new Weighted(1f, new TestDialogGenerator()),
+            new Weighted(2f, new CampfireGenerator()),
         });
         var postProcessors = new IMapPostProcessor[]
         {
+
             new AddRandomConnectionMapPostProcessor()
         };
         IMapGenerator generator = new BacktrackingMapGenerator();
