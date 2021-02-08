@@ -139,7 +139,8 @@ public class Main
         {
             for(Tile[] row : col)
             {
-                row[gameState.getPosition().Z].initialize(gameState);
+                for(Tile t : row)
+                    t.initialize(gameState);
             }
         }
 
