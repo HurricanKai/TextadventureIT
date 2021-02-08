@@ -2,8 +2,9 @@ import java.util.List;
 
 public class Campfire extends AnimatedTile
 {
-    public Campfire(int startIndex)
+    public Campfire(int startIndex, boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
+        super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
         setStartIndex(startIndex);
     }
 
