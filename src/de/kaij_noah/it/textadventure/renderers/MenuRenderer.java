@@ -2,9 +2,9 @@ package de.kaij_noah.it.textadventure.renderers;
 
 import de.kaij_noah.it.textadventure.MenuDisplays.HealthMenuDisplay;
 import de.kaij_noah.it.textadventure.base.GameState;
+import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.IMenuDisplay;
 import de.kaij_noah.it.textadventure.base.IRenderer;
-import de.kaij_noah.it.textadventure.gui.Console;
 
 public final class MenuRenderer implements IRenderer
 {
@@ -19,7 +19,7 @@ public final class MenuRenderer implements IRenderer
     }
 
     @Override
-    public void Render(Console console, GameState gameState)
+    public void Render(IConsole console, GameState gameState)
     {
         int maxLineLength = 0;
         int spaceWidth = console.getCharWidth(' ');

@@ -1,8 +1,8 @@
 package de.kaij_noah.it.textadventure.renderers;
 
 import de.kaij_noah.it.textadventure.base.GameState;
+import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.Map;
-import de.kaij_noah.it.textadventure.gui.Console;
 
 public final class SpacedMapRenderer extends MapRendererBase
 {
@@ -15,7 +15,7 @@ public final class SpacedMapRenderer extends MapRendererBase
     }
 
     @Override
-    public void Render(Console console, GameState gameState)
+    public void Render(IConsole console, GameState gameState)
     {
         var playerPosition = gameState.getPosition();
         var playerTilePositionX = playerPosition.X * 3;
