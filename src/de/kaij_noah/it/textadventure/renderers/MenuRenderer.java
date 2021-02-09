@@ -1,12 +1,12 @@
 package de.kaij_noah.it.textadventure.renderers;
 
-import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.MenuDisplays.HealthMenuDisplay;
+import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IMenuDisplay;
 import de.kaij_noah.it.textadventure.base.IRenderer;
 import de.kaij_noah.it.textadventure.gui.Console;
 
-public class MenuRenderer implements IRenderer
+public final class MenuRenderer implements IRenderer
 {
     private final IMenuDisplay[] displays;
 
@@ -14,7 +14,7 @@ public class MenuRenderer implements IRenderer
     {
         displays = new IMenuDisplay[]
                 {
-                    new HealthMenuDisplay()
+                        new HealthMenuDisplay()
                 };
     }
 
@@ -30,7 +30,7 @@ public class MenuRenderer implements IRenderer
             String[] lines = display.getLines(gameState);
             for (int i = 0; i < lines.length; i++)
             {
-                maxLineLength = Math.max(console.getStringWidth(lines[i]),maxLineLength);
+                maxLineLength = Math.max(console.getStringWidth(lines[i]), maxLineLength);
 
             }
         }
@@ -71,7 +71,7 @@ public class MenuRenderer implements IRenderer
 
             if (actionIndex < actions.length)
             {
-                console.Write(+ (actionIndex + 1) + ": ");
+                console.Write(+(actionIndex + 1) + ": ");
                 console.Write(actions[actionIndex].getDescription());
                 actionIndex++;
             }
@@ -92,7 +92,7 @@ public class MenuRenderer implements IRenderer
     {
         var possibleActions = gameState.getTile().getPossibleActions(gameState);
         int index = -1;
-        switch(c)
+        switch (c)
         {
             case '1':
                 index = 0;

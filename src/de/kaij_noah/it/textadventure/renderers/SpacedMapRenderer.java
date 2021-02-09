@@ -3,11 +3,10 @@ package de.kaij_noah.it.textadventure.renderers;
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.Map;
 import de.kaij_noah.it.textadventure.gui.Console;
-import de.kaij_noah.it.textadventure.renderers.MapRendererBase;
 
-public class SpacedMapRenderer extends MapRendererBase
+public final class SpacedMapRenderer extends MapRendererBase
 {
-    private char[] chars;
+    private final char[] chars;
 
     public SpacedMapRenderer(Map map)
     {

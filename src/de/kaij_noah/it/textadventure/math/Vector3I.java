@@ -1,6 +1,6 @@
 package de.kaij_noah.it.textadventure.math;
 
-public class Vector3I
+public final class Vector3I
 {
     public int X;
     public int Y;

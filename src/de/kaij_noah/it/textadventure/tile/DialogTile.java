@@ -9,12 +9,11 @@ import java.util.ArrayList;
 public abstract class DialogTile extends Tile
 {
     private static final String[] emptyTitleLines = new String[0];
-
-    private DialogNode currentDialog;
-    private DialogNode rootDialog;
-    private DialogNode tempEntryStore;
     private final DialogNode entryDialogNode;
     protected boolean isFirstVisit = true;
+    private DialogNode currentDialog;
+    private final DialogNode rootDialog;
+    private DialogNode tempEntryStore;
 
     public DialogTile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
@@ -44,8 +43,7 @@ public abstract class DialogTile extends Tile
                         }
                     }
             });
-        }
-        else
+        } else
         {
             entryDialogNode = null;
         }
@@ -93,7 +91,23 @@ public abstract class DialogTile extends Tile
     }
 
     protected abstract void buildDialog(DialogBuilder dialogBuilder);
-    protected String[] getEntryLines() { return null; }
+
+    protected String[] getEntryLines()
+    {
+        return null;
+    }
+
+    // poor^H^H^H^H java mans Action<GameState, DialogBuilder>
+    protected interface IDialogBuilderAction
+    {
+        void Invoke(DialogBuilder dialogBuilder);
+    }
+
+    // same for Action<DialogBuilder>
+    protected interface ITileAction
+    {
+        void Invoke(GameState gameState);
+    }
 
     private final class DialogNode
     {
@@ -107,18 +121,6 @@ public abstract class DialogTile extends Tile
             TitleLines = titleLines;
             Actions = actions;
         }
-    }
-
-    // poor^H^H^H^H java mans Action<GameState, DialogBuilder>
-    protected interface IDialogBuilderAction
-    {
-        void Invoke(DialogBuilder dialogBuilder);
-    }
-
-    // same for Action<DialogBuilder>
-    protected interface ITileAction
-    {
-        void Invoke(GameState gameState);
     }
 
     protected final class DialogBuilder

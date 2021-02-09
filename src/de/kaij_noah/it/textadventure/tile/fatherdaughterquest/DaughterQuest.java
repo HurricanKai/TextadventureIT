@@ -8,22 +8,19 @@ import java.util.List;
 
 public final class DaughterQuest extends Tile
 {
-    private boolean daughterAway = false;
-
     private final static String[] titleLine = new String[]
             {
                     "Entschuldigt, könnt ihr mir helfen? Ich habe mich verirrt! *schluchz*",
             };
-
     private final static String[] daughterAwayTitleLineFatherQuest = new String[]
             {
                     "Hier habe ich die Tochter eines Mannes gefunden."
             };
-
     private final static String[] daughterAwayTitleLineNoFatherQuest = new String[]
             {
                     "Hier habe ich ein Mädchen gefunden."
             };
+    private boolean daughterAway = false;
 
     public DaughterQuest(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
@@ -36,8 +33,7 @@ public final class DaughterQuest extends Tile
         if (daughterAway)
         {
             return 'р';
-        }
-        else
+        } else
         {
             return 'Р';
         }
@@ -52,13 +48,11 @@ public final class DaughterQuest extends Tile
                     (boolean) gameState.getState("fatherQuestFinished"))
             {
                 return daughterAwayTitleLineFatherQuest;
-            }
-            else
+            } else
             {
                 return daughterAwayTitleLineNoFatherQuest;
             }
-        }
-        else
+        } else
         {
             return titleLine;
         }
@@ -90,8 +84,7 @@ public final class DaughterQuest extends Tile
                         daughterAway = true;
                     }
                 });
-            }
-            else
+            } else
             {
                 list.add(new IAction()
                 {

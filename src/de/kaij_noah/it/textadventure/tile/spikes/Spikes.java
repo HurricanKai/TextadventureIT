@@ -3,8 +3,10 @@ package de.kaij_noah.it.textadventure.tile.spikes;
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.Tile;
 
-public class Spikes extends Tile
+public final class Spikes extends Tile
 {
+    private static final String[] titleLines = new String[]{"Oh nein! Eine falle! Du verlierst etwas leben."};
+
     public Spikes(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
@@ -16,13 +18,15 @@ public class Spikes extends Tile
         return 'Ѕ';
     }
 
-    private static final String[] titleLines = new String[] { "Oh nein! Eine falle! Du verlierst etwas leben." };
     @Override
-    public String[] getTitleLines(GameState gameState) { return titleLines; }
+    public String[] getTitleLines(GameState gameState)
+    {
+        return titleLines;
+    }
 
     @Override
     public void onPlayerEnter(GameState gameState)
     {
-        gameState.putState("health", ((float)gameState.getState("health")) - .10f);
+        gameState.putState("health", ((float) gameState.getState("health")) - .10f);
     }
 }

@@ -1,18 +1,16 @@
 package de.kaij_noah.it.textadventure.base;
 
-import de.kaij_noah.it.textadventure.base.Map;
-import de.kaij_noah.it.textadventure.base.Tile;
 import de.kaij_noah.it.textadventure.math.Vector3I;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class GameState
+public final class GameState
 {
-    private Vector3I position;
     private final Map map;
+    private Vector3I position;
     private int timeStep;
-    private Dictionary<String, Object> customState = new Hashtable<>();
+    private final Dictionary<String, Object> customState = new Hashtable<>();
 
     public GameState(Vector3I position, Map map)
     {
@@ -37,15 +35,21 @@ public class GameState
         return position.copy();
     }
 
-    public int getTimeStep() { return timeStep; }
-
-    public void incrementTimeStep() { timeStep++; }
-
     public void setPosition(Vector3I position)
     {
         getTile().onPlayerExit(this);
         this.position = position;
         getTile().onPlayerEnter(this);
+    }
+
+    public int getTimeStep()
+    {
+        return timeStep;
+    }
+
+    public void incrementTimeStep()
+    {
+        timeStep++;
     }
 
     public void onStep()

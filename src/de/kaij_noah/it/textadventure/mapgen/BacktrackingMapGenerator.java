@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class BacktrackingMapGenerator implements IMapGenerator
+public final class BacktrackingMapGenerator implements IMapGenerator
 {
-    private static final boolean DEBUG = false;
-
     @Override
     public TileTemplate[][][] Generate(int sizeX, int sizeY, int sizeZ)
     {
@@ -24,7 +22,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
         var current = 0;
 
         int pathI = 0;
-        while(true)
+        while (true)
         {
             visited.add(current);
 
@@ -48,7 +46,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
                 var t = Util.Index2D(x - 1, y, z, sizeX, sizeY, sizeZ);
                 if (!visited.contains(t))
                     for (int i = 0; i < sameLevelMultiplier; i++)
-                    possibleDirs.add(new Vector3I(x - 1, y, z));
+                        possibleDirs.add(new Vector3I(x - 1, y, z));
             }
 
             if (y - 1 >= 0)
@@ -56,7 +54,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
                 var t = Util.Index2D(x, y - 1, z, sizeX, sizeY, sizeZ);
                 if (!visited.contains(t))
                     for (int i = 0; i < sameLevelMultiplier; i++)
-                    possibleDirs.add(new Vector3I(x, y - 1, z));
+                        possibleDirs.add(new Vector3I(x, y - 1, z));
             }
 
             if (z - 1 >= 0)
@@ -71,7 +69,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
                 var t = Util.Index2D(x + 1, y, z, sizeX, sizeY, sizeZ);
                 if (!visited.contains(t))
                     for (int i = 0; i < sameLevelMultiplier; i++)
-                    possibleDirs.add(new Vector3I(x + 1, y, z));
+                        possibleDirs.add(new Vector3I(x + 1, y, z));
             }
 
             if (y + 1 < sizeY)
@@ -79,7 +77,7 @@ public class BacktrackingMapGenerator implements IMapGenerator
                 var t = Util.Index2D(x, y + 1, z, sizeX, sizeY, sizeZ);
                 if (!visited.contains(t))
                     for (int i = 0; i < sameLevelMultiplier; i++)
-                    possibleDirs.add(new Vector3I(x, y + 1, z));
+                        possibleDirs.add(new Vector3I(x, y + 1, z));
             }
 
             if (z + 1 < sizeZ)

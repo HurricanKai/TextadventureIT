@@ -9,8 +9,13 @@ import java.util.List;
 
 public final class Teleporter extends Tile
 {
-    private Vector3I target;
-    private String directionString;
+    private static final String[] titleLines = new String[]
+            {
+                    "Ein uralter Teleporter. Du könntest ihn aktivieren, aber es ist ungewiss wohin er dich bringt.",
+                    "Nur die richtung kannst du abschätzen."
+            };
+    private final Vector3I target;
+    private final String directionString;
 
     public Teleporter(Vector3I target, String directionString, boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
@@ -25,13 +30,11 @@ public final class Teleporter extends Tile
         return 'Т';
     }
 
-    private static final String[] titleLines = new String[]
-    {
-        "Ein uralter Teleporter. Du könntest ihn aktivieren, aber es ist ungewiss wohin er dich bringt.",
-        "Nur die richtung kannst du abschätzen."
-    };
     @Override
-    public String[] getTitleLines(GameState gameState) { return titleLines; }
+    public String[] getTitleLines(GameState gameState)
+    {
+        return titleLines;
+    }
 
     @Override
     protected void addToPossibleActions(List<IAction> list, GameState gameState)

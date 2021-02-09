@@ -8,6 +8,8 @@ import java.util.List;
 
 public final class StairUpTile extends Tile
 {
+    private static final String[] titleLines = new String[0];
+
     public StairUpTile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
@@ -19,7 +21,6 @@ public final class StairUpTile extends Tile
         return 'u';
     }
 
-    private static final String[] titleLines = new String[0];
     @Override
     public String[] getTitleLines(GameState gameState)
     {

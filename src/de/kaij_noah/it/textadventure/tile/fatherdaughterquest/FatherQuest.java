@@ -54,8 +54,7 @@ public final class FatherQuest extends Tile
         if ((boolean) gameState.getState("fatherQuestFinished"))
         {
             return 'а';
-        }
-        else
+        } else
         {
             return 'А';
         }
@@ -67,20 +66,17 @@ public final class FatherQuest extends Tile
         if ((boolean) gameState.getState("fatherQuestFinished"))
         {
             return questFinishedTitleLines;
-        }
-        else
+        } else
         {
             if ((boolean) gameState.getState("hasDaughter"))
             {
                 return daughterFoundTitleLines;
-            }
-            else
+            } else
             {
                 if ((boolean) gameState.getState("fatherQuestStarted"))
                 {
                     return daughterNotFoundTitleLines;
-                }
-                else
+                } else
                 {
                     return questStartTitleLines;
                 }
@@ -96,8 +92,7 @@ public final class FatherQuest extends Tile
         if ((boolean) gameState.getState("fatherQuestFinished"))
         {
 
-        }
-        else
+        } else
         {
             if ((boolean) gameState.getState("hasDaughter"))
             {
@@ -118,8 +113,7 @@ public final class FatherQuest extends Tile
                             gameState.putState("hasDaughter", false);
                         }
                     });
-                }
-                else
+                } else
                 {
                     list.add(new IAction()
                     {
@@ -137,14 +131,12 @@ public final class FatherQuest extends Tile
                         }
                     });
                 }
-            }
-            else
+            } else
             {
                 if ((boolean) gameState.getState("fatherQuestStarted"))
                 {
 
-                }
-                else
+                } else
                 {
                     list.add(new IAction()
                     {

@@ -9,7 +9,10 @@ public final class TileTemplate
     private boolean canMoveUp;
     private boolean canMoveDown;
 
-    public boolean canMoveWest() { return canMoveWest; }
+    public boolean canMoveWest()
+    {
+        return canMoveWest;
+    }
 
     public boolean canMoveEast()
     {
@@ -25,10 +28,12 @@ public final class TileTemplate
     {
         return canMoveSouth;
     }
+
     public boolean canMoveUp()
     {
         return canMoveUp;
     }
+
     public boolean canMoveDown()
     {
         return canMoveDown;

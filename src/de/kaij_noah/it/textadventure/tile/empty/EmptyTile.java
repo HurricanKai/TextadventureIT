@@ -13,8 +13,14 @@ public class EmptyTile extends Tile
     }
 
     @Override
-    public String[] getTitleLines(GameState gameState) { return titleLines; }
+    public String[] getTitleLines(GameState gameState)
+    {
+        return titleLines;
+    }
 
     @Override
-    public char renderFloor(GameState gameState) { return ' '; }
+    public char renderFloor(GameState gameState)
+    {
+        return ' ';
+    }
 }

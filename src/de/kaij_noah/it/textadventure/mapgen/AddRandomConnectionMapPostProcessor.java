@@ -5,7 +5,7 @@ import de.kaij_noah.it.textadventure.base.TileTemplate;
 
 import java.util.Random;
 
-public class AddRandomConnectionMapPostProcessor implements IMapPostProcessor
+public final class AddRandomConnectionMapPostProcessor implements IMapPostProcessor
 {
     @Override
     public TileTemplate[][][] Process(TileTemplate[][][] tiles)

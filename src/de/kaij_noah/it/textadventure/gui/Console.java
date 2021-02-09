@@ -6,12 +6,12 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
-public class Console
+public final class Console
 {
     private final JTextArea textArea;
-    private StringBuilder backBuffer;
     private final Font font;
     private final JFrame frame;
+    private StringBuilder backBuffer;
 
     public Console() throws IOException, FontFormatException
     {
@@ -40,7 +40,11 @@ public class Console
     {
         backBuffer.append(String.copyValueOf(chars));
     }
-    public void Write(String string) { backBuffer.append(string); }
+
+    public void Write(String string)
+    {
+        backBuffer.append(string);
+    }
 
     public void NewLine()
     {

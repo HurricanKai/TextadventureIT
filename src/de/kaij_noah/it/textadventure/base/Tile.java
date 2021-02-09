@@ -18,7 +18,10 @@ public abstract class Tile
         this.canMoveSouth = canMoveSouth;
     }
 
-    public boolean canMoveWest() { return canMoveWest; }
+    public boolean canMoveWest()
+    {
+        return canMoveWest;
+    }
 
     public boolean canMoveEast()
     {
@@ -35,9 +38,12 @@ public abstract class Tile
         return canMoveSouth;
     }
 
-    public void initialize(GameState gameState) { }
+    public void initialize(GameState gameState)
+    {
+    }
 
     public abstract char renderFloor(GameState gameState);
+
     public abstract String[] getTitleLines(GameState gameState);
 
     public IAction[] getPossibleActions(GameState gameState)

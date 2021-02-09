@@ -36,22 +36,22 @@ public class Main
         var mapHeight = 5;
 
         var tileGenerator = new WeightedTileGenerator(new Weighted[]
-        {
-            new Weighted(100f, new EmptyGenerator()),
-            new Weighted(15f, new SpikesGenerator()),
-            new Weighted(1f, new TeleporterGenerator()),
-            new Weighted(1f, new FatherDaughterQuestGenerator()),
-            new Weighted(1f, new TestDialogGenerator()),
-            new Weighted(2f, new CampfireGenerator()),
-        });
+                {
+                        new Weighted(100f, new EmptyGenerator()),
+                        new Weighted(15f, new SpikesGenerator()),
+                        new Weighted(1f, new TeleporterGenerator()),
+                        new Weighted(1f, new FatherDaughterQuestGenerator()),
+                        new Weighted(1f, new TestDialogGenerator()),
+                        new Weighted(2f, new CampfireGenerator()),
+                });
         var postProcessors = new IMapPostProcessor[]
-        {
-            new AddRandomConnectionMapPostProcessor()
-        };
+                {
+                        new AddRandomConnectionMapPostProcessor()
+                };
         IMapGenerator generator = new BacktrackingMapGenerator();
         // var generator = new OpenRoomMapGenerator();
         var mapTemplate = generator.Generate(mapWidth, mapDepth, mapHeight);
-        for(var processor : postProcessors)
+        for (var processor : postProcessors)
             mapTemplate = processor.Process(mapTemplate);
 
         var mapTiles = new Tile[mapTemplate.length][mapTemplate[0].length][mapTemplate[0][0].length];
@@ -71,14 +71,12 @@ public class Main
                         mapTiles[x][y][z] = new StairDownTile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth());
                         var v = mapTemplate[x][y][z - 1];
                         mapTiles[x][y][z - 1] = new StairUpTile(v.canMoveWest(), v.canMoveEast(), v.canMoveNorth(), v.canMoveSouth());
-                    }
-                    else if (template.canMoveUp())
+                    } else if (template.canMoveUp())
                     {
                         mapTiles[x][y][z] = new StairUpTile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth());
                         var v = mapTemplate[x][y][z + 1];
                         mapTiles[x][y][z + 1] = new StairDownTile(v.canMoveWest(), v.canMoveEast(), v.canMoveNorth(), v.canMoveSouth());
-                    }
-                    else
+                    } else
                     {
                         mapTiles[x][y][z] = tileGenerator.Generate(template, x, y, z, mapTiles.length, mapTiles[x].length, mapTiles[x][y].length, random);
                     }
@@ -89,14 +87,14 @@ public class Main
 
         var gui = new MenuRenderer();
         var renderables = new IRenderer[]
-        {
-            new DebugRenderer(),
-            new CompactMapRenderer(map),
-            // new SpacedMapRenderer(map),
-            new BlankLineRenderer(),
-            new TitleLineRenderer(),
-            gui,
-        };
+                {
+                        new DebugRenderer(),
+                        new CompactMapRenderer(map),
+                        // new SpacedMapRenderer(map),
+                        new BlankLineRenderer(),
+                        new TitleLineRenderer(),
+                        gui,
+                };
 
         var gameState = new GameState(new Vector3I(0, 0, 0), map);
         console.addKeyListener(new KeyListener()
@@ -155,14 +153,14 @@ public class Main
 
         for (Tile[][] col : map.get_tiles())
         {
-            for(Tile[] row : col)
+            for (Tile[] row : col)
             {
-                for(Tile t : row)
+                for (Tile t : row)
                     t.initialize(gameState);
             }
         }
 
-        while(true)
+        while (true)
         {
             for (var renderable : renderables)
                 renderable.Render(console, gameState);

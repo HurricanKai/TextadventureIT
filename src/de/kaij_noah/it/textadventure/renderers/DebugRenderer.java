@@ -4,7 +4,7 @@ import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IRenderer;
 import de.kaij_noah.it.textadventure.gui.Console;
 
-public class DebugRenderer implements IRenderer
+public final class DebugRenderer implements IRenderer
 {
     private int frameCount = 0;
 

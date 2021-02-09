@@ -8,7 +8,7 @@ import de.kaij_noah.it.textadventure.base.TileTemplate;
 import java.util.Arrays;
 import java.util.Random;
 
-public class WeightedTileGenerator implements ITileGenerator
+public final class WeightedTileGenerator implements ITileGenerator
 {
     private final Weighted<ITileGenerator>[] tileGenerators;
 
@@ -39,15 +39,19 @@ public class WeightedTileGenerator implements ITileGenerator
         System.out.printf("FAILED TO GENERATE %s %s remaining weight %s\n", x, y, rnd);
         return new Tile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth())
         {
+            private final String[] titleLines = new String[0];
+
             @Override
             public char renderFloor(GameState gameState)
             {
                 return 'E';
             }
 
-            private final String[] titleLines = new String[0];
             @Override
-            public String[] getTitleLines(GameState gameState) { return titleLines; }
+            public String[] getTitleLines(GameState gameState)
+            {
+                return titleLines;
+            }
         };
     }
 }

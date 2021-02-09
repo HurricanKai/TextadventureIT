@@ -14,11 +14,11 @@ public final class TeleporterGenerator implements ITileGenerator
     public Tile Generate(TileTemplate template, int x, int y, int z, int maxx, int maxy, int maxz, Random random)
     {
         var range = random.nextDouble() * 30; // NOTE: this range is a bit difficult to get right
-                                              // issue is, if the range is too big, hits will always be out of bounds,
-                                              // leading to MOST teleports going to the edges. -> undesirable
+        // issue is, if the range is too big, hits will always be out of bounds,
+        // leading to MOST teleports going to the edges. -> undesirable
 
-        var targetx = (int)Math.round(x + random.nextDouble() * range * 2 - range);
-        var targety = (int)Math.round(y + random.nextDouble() * range * 2 - range);
+        var targetx = (int) Math.round(x + random.nextDouble() * range * 2 - range);
+        var targety = (int) Math.round(y + random.nextDouble() * range * 2 - range);
         targetx = Math.max(0, Math.min(targetx - 1, maxx));
         targety = Math.max(0, Math.min(targety - 1, maxy));
 
@@ -28,42 +28,34 @@ public final class TeleporterGenerator implements ITileGenerator
             if (targetx > x)
             {
                 directionString = "southeast";
-            }
-            else if (targetx < x)
+            } else if (targetx < x)
             {
                 directionString = "southwest";
-            }
-            else
+            } else
             {
                 directionString = "south";
             }
-        }
-        else if (targety < y)
+        } else if (targety < y)
         {
             if (targetx > x)
             {
                 directionString = "northeast";
-            }
-            else if (targetx < x)
+            } else if (targetx < x)
             {
                 directionString = "northwest";
-            }
-            else
+            } else
             {
                 directionString = "north";
             }
-        }
-        else
+        } else
         {
             if (targetx > x)
             {
                 directionString = "east";
-            }
-            else if (targetx < x)
+            } else if (targetx < x)
             {
                 directionString = "west";
-            }
-            else
+            } else
             {
                 return Generate(template, x, y, z, maxx, maxy, maxz, random); // this is very unlikely
             }

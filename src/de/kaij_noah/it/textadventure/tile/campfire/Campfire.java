@@ -1,30 +1,28 @@
 package de.kaij_noah.it.textadventure.tile.campfire;
 
-import de.kaij_noah.it.textadventure.tile.AnimatedTile;
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IAction;
+import de.kaij_noah.it.textadventure.tile.AnimatedTile;
 
 import java.util.List;
 
-public class Campfire extends AnimatedTile
+public final class Campfire extends AnimatedTile
 {
+    private final char[] possibleTiles = new char[]
+            {
+                    'a',
+                    'b'
+            };
+    private final String[] titleLine = new String[]
+            {
+                    "Ein Lagerfeuer, es ist schön hier zu sitzen."
+            };
+
     public Campfire(int startIndex, boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
         setStartIndex(startIndex);
     }
-
-    private char[] possibleTiles = new char[]
-    {
-            'a',
-            'b'
-    };
-
-    private String[] titleLine = new String[]
-    {
-            "Ein Lagerfeuer, es ist schön hier zu sitzen."
-    };
-
 
     @Override
     protected char[] getPossibleTiles()
