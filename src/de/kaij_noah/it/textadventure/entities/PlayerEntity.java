@@ -37,4 +37,10 @@ public final class PlayerEntity extends BaseEntity implements IGuiInitializable
     {
         return health <= 0f;
     }
+
+    @Override
+    public char render()
+    {
+        return '#';
+    }
 }

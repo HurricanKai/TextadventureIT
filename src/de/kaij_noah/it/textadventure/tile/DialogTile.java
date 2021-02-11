@@ -136,7 +136,7 @@ public abstract class DialogTile extends Tile
         private final ArrayList<DialogBuilder> children = new ArrayList<>();
         private String description = null;
         private ITileAction action;
-        private char appearance = ' ';
+        private char appearance = '\u0000';
         private String[] titleLines = emptyTitleLines;
 
         public DialogBuilder ChangeAppearance(char appearance)
@@ -173,6 +173,8 @@ public abstract class DialogTile extends Tile
             for (int i = 0; i < actions.length; i++)
             {
                 var childBuilder = children.get(i);
+                if (childBuilder.appearance == '\u0000')
+                    childBuilder.appearance = this.appearance;
                 var childNode = childBuilder.Build();
                 actions[i] = new IAction()
                 {

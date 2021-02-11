@@ -5,6 +5,8 @@ import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.Map;
 import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 
+import java.util.stream.Collectors;
+
 public final class CompactMapRenderer extends MapRendererBase
 {
     private final char[] chars;
@@ -19,6 +21,7 @@ public final class CompactMapRenderer extends MapRendererBase
     public void Render(IConsole console, GameState gameState)
     {
         var playerPosition = gameState.getPlayerEntity().getPosition();
+        var rowGroups = gameState.getEntityManager().getAll().collect(Collectors.groupingBy(b -> b.getPosition().Y));
 
         for (int tiley = 0; tiley < map.getSizeY(); tiley++)
         {
@@ -35,7 +38,11 @@ public final class CompactMapRenderer extends MapRendererBase
                 }
 
                 if (tiley == playerPosition.Y && tileoffsety == 1)
-                    chars[playerPosition.X * 2 + 1] = '#';
+                {
+                    var entities = rowGroups.get(tiley);
+                    for (var entity : entities)
+                        chars[entity.getPosition().X * 2 + 1] = entity.render();
+                }
                 console.Write(chars);
                 console.NewLine();
             }

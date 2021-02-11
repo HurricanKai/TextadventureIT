@@ -10,4 +10,5 @@ public interface IEntity
     void mapInitialize(Map map);
     boolean hasDied();
     void onStep(GameState gameState);
+    char render();
 }
