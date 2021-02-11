@@ -2,7 +2,9 @@ package de.kaij_noah.it.textadventure.tile;
 
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IAction;
+import de.kaij_noah.it.textadventure.base.IEntity;
 import de.kaij_noah.it.textadventure.base.Tile;
+import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 
 import java.util.ArrayList;
 
@@ -50,7 +52,7 @@ public abstract class DialogTile extends Tile
     }
 
     @Override
-    public char renderFloor(GameState gameState)
+    public char renderFloor()
     {
         return currentDialog.Appearance;
     }
@@ -62,31 +64,37 @@ public abstract class DialogTile extends Tile
     }
 
     @Override
-    public IAction[] getPossibleActions(GameState gameState)
+    public IAction[] getPossibleActions()
     {
         return currentDialog.Actions;
     }
 
     @Override
-    public void onPlayerEnter(GameState gameState)
+    public void onEntityEnter(IEntity entity, GameState gameState)
     {
-        super.onPlayerEnter(gameState);
-        if (!isFirstVisit && entryDialogNode != null)
+        super.onEntityEnter(entity, gameState);
+        if (entity instanceof PlayerEntity)
         {
-            tempEntryStore = currentDialog;
-            currentDialog = entryDialogNode;
+            if (!isFirstVisit && entryDialogNode != null)
+            {
+                tempEntryStore = currentDialog;
+                currentDialog = entryDialogNode;
+            }
         }
     }
 
     @Override
-    public void onPlayerExit(GameState gameState)
+    public void onEntityExit(IEntity entity, GameState gameState)
     {
-        super.onPlayerExit(gameState);
-        isFirstVisit = false;
-        if (tempEntryStore != null)
+        super.onEntityExit(entity, gameState);
+        if (entity instanceof PlayerEntity)
         {
-            currentDialog = tempEntryStore;
-            tempEntryStore = null;
+            isFirstVisit = false;
+            if (tempEntryStore != null)
+            {
+                currentDialog = tempEntryStore;
+                tempEntryStore = null;
+            }
         }
     }
 

@@ -43,7 +43,7 @@ public abstract class MapRendererBase implements IRenderer
             return tile.canMoveSouth() ? Empty : DownBlock;
 
         else if (tileoffsetx == 1 && tileoffsety == 1)
-            return tile.renderFloor(gameState);
+            return tile.renderFloor();
 
         throw null;
     }

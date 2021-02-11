@@ -22,12 +22,7 @@ public final class Teleporter extends Tile
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
         this.target = target;
         this.directionString = directionString;
-    }
-
-    @Override
-    public char renderFloor(GameState gameState)
-    {
-        return 'Т';
+        setAppearance('Т');
     }
 
     @Override
@@ -37,9 +32,9 @@ public final class Teleporter extends Tile
     }
 
     @Override
-    protected void addToPossibleActions(List<IAction> list, GameState gameState)
+    protected void addToPossibleActions(List<IAction> list)
     {
-        super.addToPossibleActions(list, gameState);
+        super.addToPossibleActions(list);
         list.add(new IAction()
         {
             @Override
@@ -51,7 +46,7 @@ public final class Teleporter extends Tile
             @Override
             public void Execute(GameState gameState)
             {
-                gameState.setPosition(target);
+                gameState.getPlayerEntity().setPosition(target);
             }
         });
     }

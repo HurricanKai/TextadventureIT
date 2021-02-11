@@ -37,9 +37,9 @@ public final class Campfire extends AnimatedTile
     }
 
     @Override
-    protected void addToPossibleActions(List<IAction> list, GameState gameState)
+    protected void addToPossibleActions(List<IAction> list)
     {
-        super.addToPossibleActions(list, gameState);
+        super.addToPossibleActions(list);
         list.add(new IAction()
         {
             @Override
@@ -51,7 +51,7 @@ public final class Campfire extends AnimatedTile
             @Override
             public void Execute(GameState gameState)
             {
-                gameState.putState("health", 1f);
+                gameState.getPlayerEntity().setHealth(1f);
             }
         });
     }

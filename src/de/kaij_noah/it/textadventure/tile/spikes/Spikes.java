@@ -1,7 +1,9 @@
 package de.kaij_noah.it.textadventure.tile.spikes;
 
 import de.kaij_noah.it.textadventure.base.GameState;
+import de.kaij_noah.it.textadventure.base.IEntity;
 import de.kaij_noah.it.textadventure.base.Tile;
+import de.kaij_noah.it.textadventure.entities.base.IHealthEntity;
 
 public final class Spikes extends Tile
 {
@@ -10,12 +12,7 @@ public final class Spikes extends Tile
     public Spikes(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
-    }
-
-    @Override
-    public char renderFloor(GameState gameState)
-    {
-        return 'Ѕ';
+        setAppearance('Ѕ');
     }
 
     @Override
@@ -25,8 +22,12 @@ public final class Spikes extends Tile
     }
 
     @Override
-    public void onPlayerEnter(GameState gameState)
+    public void onEntityEnter(IEntity entity, GameState gameState)
     {
-        gameState.putState("health", ((float) gameState.getState("health")) - .10f);
+        if (entity instanceof IHealthEntity)
+        {
+            var healthEntity = (IHealthEntity)entity;
+            healthEntity.setHealth(healthEntity.getHealth() - .10f);
+        }
     }
 }

@@ -32,6 +32,9 @@ public final class FatherQuest extends Tile
                     "Vielleicht ist ihr etwas zugestoßen.",
                     "Bitte findet sie!",
             };
+    private boolean fatherQuestFinished = false;
+    private boolean hasDaughter = false;
+    private boolean fatherQuestStarted = false;
 
     public FatherQuest(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
@@ -42,21 +45,25 @@ public final class FatherQuest extends Tile
     public void initialize(GameState gameState)
     {
         super.initialize(gameState);
-        gameState.putState("fatherQuestStarted", false);
-        gameState.putState("fatherQuestFinished", false);
-        gameState.putState("hasDaughter", false);
-
+        gameState.setState("fatherQuestStarted", false);
+        gameState.setState("fatherQuestFinished", false);
+        gameState.setState("hasDaughter", false);
     }
 
     @Override
-    public char renderFloor(GameState gameState)
+    public void onStep(GameState gameState)
     {
-        if ((boolean) gameState.getState("fatherQuestFinished"))
+        super.onStep(gameState);
+        fatherQuestFinished = gameState.getState("fatherQuestFinished");
+        hasDaughter = gameState.getState("hasDaughter");
+        fatherQuestStarted = gameState.getState("fatherQuestStarted");
+        if (fatherQuestFinished)
         {
-            return 'а';
-        } else
+            setAppearance('а');
+        }
+        else
         {
-            return 'А';
+            setAppearance('А');
         }
     }
 
@@ -85,18 +92,15 @@ public final class FatherQuest extends Tile
     }
 
     @Override
-    protected void addToPossibleActions(List<IAction> list, GameState gameState)
+    protected void addToPossibleActions(List<IAction> list)
     {
-        super.addToPossibleActions(list, gameState);
+        super.addToPossibleActions(list);
 
-        if ((boolean) gameState.getState("fatherQuestFinished"))
+        if (!fatherQuestFinished)
         {
-
-        } else
-        {
-            if ((boolean) gameState.getState("hasDaughter"))
+            if (hasDaughter)
             {
-                if ((boolean) gameState.getState("fatherQuestStarted"))
+                if (fatherQuestStarted)
                 {
                     list.add(new IAction()
                     {
@@ -109,8 +113,8 @@ public final class FatherQuest extends Tile
                         @Override
                         public void Execute(GameState gameState)
                         {
-                            gameState.putState("fatherQuestFinished", true);
-                            gameState.putState("hasDaughter", false);
+                            gameState.setState("fatherQuestFinished", true);
+                            gameState.setState("hasDaughter", false);
                         }
                     });
                 } else
@@ -126,17 +130,14 @@ public final class FatherQuest extends Tile
                         @Override
                         public void Execute(GameState gameState)
                         {
-                            gameState.putState("fatherQuestFinished", true);
-                            gameState.putState("hasDaughter", false);
+                            gameState.setState("fatherQuestFinished", true);
+                            gameState.setState("hasDaughter", false);
                         }
                     });
                 }
             } else
             {
-                if ((boolean) gameState.getState("fatherQuestStarted"))
-                {
-
-                } else
+                if (!fatherQuestStarted)
                 {
                     list.add(new IAction()
                     {
@@ -149,7 +150,7 @@ public final class FatherQuest extends Tile
                         @Override
                         public void Execute(GameState gameState)
                         {
-                            gameState.putState("fatherQuestStarted", true);
+                            gameState.setState("fatherQuestStarted", true);
                         }
                     });
                 }

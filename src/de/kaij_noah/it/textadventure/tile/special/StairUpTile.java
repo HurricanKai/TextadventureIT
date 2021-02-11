@@ -13,12 +13,7 @@ public final class StairUpTile extends Tile
     public StairUpTile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
-    }
-
-    @Override
-    public char renderFloor(GameState gameState)
-    {
-        return 'u';
+        setAppearance('u');
     }
 
     @Override
@@ -28,9 +23,9 @@ public final class StairUpTile extends Tile
     }
 
     @Override
-    protected void addToPossibleActions(List<IAction> list, GameState gameState)
+    protected void addToPossibleActions(List<IAction> list)
     {
-        super.addToPossibleActions(list, gameState);
+        super.addToPossibleActions(list);
         list.add(new IAction()
         {
             @Override
@@ -42,9 +37,9 @@ public final class StairUpTile extends Tile
             @Override
             public void Execute(GameState gameState)
             {
-                var pos = gameState.getPosition();
+                var pos = gameState.getPlayerEntity().getPosition();
                 pos.Z++;
-                gameState.setPosition(pos);
+                gameState.getPlayerEntity().setPosition(pos);
             }
         });
     }

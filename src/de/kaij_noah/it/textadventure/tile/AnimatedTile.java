@@ -20,9 +20,10 @@ public abstract class AnimatedTile extends Tile
     }
 
     @Override
-    public char renderFloor(GameState gameState)
+    public void onStep(GameState gameState)
     {
+        super.onStep(gameState);
         var tiles = getPossibleTiles();
-        return tiles[(gameState.getTimeStep() + startIndex) % tiles.length];
+        setAppearance(tiles[(gameState.getTime() + startIndex) % tiles.length]);
     }
 }

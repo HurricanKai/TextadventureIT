@@ -21,6 +21,7 @@ public final class DaughterQuest extends Tile
                     "Hier habe ich ein Mädchen gefunden."
             };
     private boolean daughterAway = false;
+    private boolean fatherQuestStarted = false;
 
     public DaughterQuest(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
@@ -28,14 +29,16 @@ public final class DaughterQuest extends Tile
     }
 
     @Override
-    public char renderFloor(GameState gameState)
+    public void onStep(GameState gameState)
     {
+        super.onStep(gameState);
+        fatherQuestStarted = gameState.getState("fatherQuestStarted");
         if (daughterAway)
         {
-            return 'р';
+            setAppearance('р');
         } else
         {
-            return 'Р';
+            setAppearance('Р');
         }
     }
 
@@ -59,15 +62,15 @@ public final class DaughterQuest extends Tile
     }
 
     @Override
-    protected void addToPossibleActions(List<IAction> list, GameState gameState)
+    protected void addToPossibleActions(List<IAction> list)
     {
-        super.addToPossibleActions(list, gameState);
+        super.addToPossibleActions(list);
 
         if (daughterAway)
             return;
         else
         {
-            if ((boolean) gameState.getState("fatherQuestStarted"))
+            if (fatherQuestStarted)
             {
                 list.add(new IAction()
                 {
@@ -80,7 +83,7 @@ public final class DaughterQuest extends Tile
                     @Override
                     public void Execute(GameState gameState)
                     {
-                        gameState.putState("hasDaughter", true);
+                        gameState.setState("hasDaughter", true);
                         daughterAway = true;
                     }
                 });
@@ -97,7 +100,7 @@ public final class DaughterQuest extends Tile
                     @Override
                     public void Execute(GameState gameState)
                     {
-                        gameState.putState("hasDaughter", true);
+                        gameState.setState("hasDaughter", true);
                         daughterAway = true;
                     }
                 });

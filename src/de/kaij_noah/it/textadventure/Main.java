@@ -1,12 +1,13 @@
 package de.kaij_noah.it.textadventure;
 
 import de.kaij_noah.it.textadventure.base.*;
+import de.kaij_noah.it.textadventure.entities.EntityManager;
+import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 import de.kaij_noah.it.textadventure.gui.Console;
 import de.kaij_noah.it.textadventure.mapgen.AddRandomConnectionMapPostProcessor;
 import de.kaij_noah.it.textadventure.mapgen.BacktrackingMapGenerator;
 import de.kaij_noah.it.textadventure.mapgen.Weighted;
 import de.kaij_noah.it.textadventure.mapgen.WeightedTileGenerator;
-import de.kaij_noah.it.textadventure.math.Vector3I;
 import de.kaij_noah.it.textadventure.renderers.*;
 import de.kaij_noah.it.textadventure.tile.campfire.CampfireGenerator;
 import de.kaij_noah.it.textadventure.tile.empty.EmptyGenerator;
@@ -85,7 +86,10 @@ public class Main
         }
         var map = new Map(mapTiles.length, mapTiles[0].length, mapTiles[0][0].length, mapTiles);
 
-        var gui = new MenuRenderer();
+        var entityManager = new EntityManager();
+        var playerEntity = entityManager.addEntity(new PlayerEntity());
+
+        var gui = new MenuRenderer(map, playerEntity);
         var renderables = new IRenderer[]
                 {
                         new DebugRenderer(),
@@ -96,7 +100,7 @@ public class Main
                         gui,
                 };
 
-        var gameState = new GameState(new Vector3I(0, 0, 0), map);
+        var gameState = new GameState(playerEntity, map, entityManager);
         console.addKeyListener(new KeyListener()
         {
             @Override
@@ -108,38 +112,38 @@ public class Main
             @Override
             public void keyPressed(KeyEvent e)
             {
-                var pos = gameState.getPosition();
+                var pos = playerEntity.getPosition();
                 switch (e.getKeyCode())
                 {
                     case KeyEvent.VK_UP:
-                        if (gameState.getTile().canMoveNorth() && pos.Y > 0)
+                        if (map.get_tile(pos).canMoveNorth() && pos.Y > 0)
                         {
                             pos.Y -= 1;
-                            gameState.setPosition(pos);
+                            playerEntity.setPosition(pos);
                         }
                         break;
 
                     case KeyEvent.VK_DOWN:
-                        if (gameState.getTile().canMoveSouth() && pos.Y < gameState.getMap().getSizeY() - 1)
+                        if (map.get_tile(pos).canMoveSouth() && pos.Y < gameState.getMap().getSizeY() - 1)
                         {
                             pos.Y += 1;
-                            gameState.setPosition(pos);
+                            playerEntity.setPosition(pos);
                         }
                         break;
 
                     case KeyEvent.VK_LEFT:
-                        if (gameState.getTile().canMoveWest() && pos.X > 0)
+                        if (map.get_tile(pos).canMoveWest() && pos.X > 0)
                         {
                             pos.X -= 1;
-                            gameState.setPosition(pos);
+                            playerEntity.setPosition(pos);
                         }
                         break;
 
                     case KeyEvent.VK_RIGHT:
-                        if (gameState.getTile().canMoveEast() && pos.X < gameState.getMap().getSizeX() - 1)
+                        if (map.get_tile(pos).canMoveEast() && pos.X < gameState.getMap().getSizeX() - 1)
                         {
                             pos.X += 1;
-                            gameState.setPosition(pos);
+                            playerEntity.setPosition(pos);
                         }
                         break;
                 }
@@ -166,7 +170,7 @@ public class Main
                 renderable.Render(console, gameState);
 
             console.SwapBuffer();
-            gameState.incrementTimeStep();
+            gameState.incrementTime();
             gameState.onStep();
             TimeUnit.MILLISECONDS.sleep(10);
         }

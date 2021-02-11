@@ -9,6 +9,7 @@ public abstract class Tile
     private final boolean canMoveEast;
     private final boolean canMoveNorth;
     private final boolean canMoveSouth;
+    private char appearance;
 
     public Tile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
@@ -42,27 +43,35 @@ public abstract class Tile
     {
     }
 
-    public abstract char renderFloor(GameState gameState);
+    public char renderFloor()
+    {
+        return appearance;
+    }
+
+    protected void setAppearance(char appearance)
+    {
+        this.appearance = appearance;
+    }
 
     public abstract String[] getTitleLines(GameState gameState);
 
-    public IAction[] getPossibleActions(GameState gameState)
+    public IAction[] getPossibleActions()
     {
         var list = new ArrayList<IAction>();
-        addToPossibleActions(list, gameState);
+        addToPossibleActions(list);
         return list.toArray(IAction[]::new);
     }
 
-    protected void addToPossibleActions(List<IAction> list, GameState gameState)
+    protected void addToPossibleActions(List<IAction> list)
     {
     }
 
-    public void onPlayerEnter(GameState gameState)
+    public void onEntityEnter(IEntity entity, GameState gameState)
     {
 
     }
 
-    public void onPlayerExit(GameState gameState)
+    public void onEntityExit(IEntity entity, GameState gameState)
     {
 
     }

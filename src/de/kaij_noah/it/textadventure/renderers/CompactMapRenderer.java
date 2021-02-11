@@ -3,6 +3,7 @@ package de.kaij_noah.it.textadventure.renderers;
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.Map;
+import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 
 public final class CompactMapRenderer extends MapRendererBase
 {
@@ -17,7 +18,7 @@ public final class CompactMapRenderer extends MapRendererBase
     @Override
     public void Render(IConsole console, GameState gameState)
     {
-        var playerPosition = gameState.getPosition();
+        var playerPosition = gameState.getPlayerEntity().getPosition();
 
         for (int tiley = 0; tiley < map.getSizeY(); tiley++)
         {

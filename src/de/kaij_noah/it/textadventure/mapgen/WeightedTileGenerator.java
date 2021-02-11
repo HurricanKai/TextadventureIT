@@ -42,7 +42,7 @@ public final class WeightedTileGenerator implements ITileGenerator
             private final String[] titleLines = new String[0];
 
             @Override
-            public char renderFloor(GameState gameState)
+            public char renderFloor()
             {
                 return 'E';
             }

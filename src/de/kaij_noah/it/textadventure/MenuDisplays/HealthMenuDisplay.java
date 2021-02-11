@@ -1,13 +1,20 @@
 package de.kaij_noah.it.textadventure.MenuDisplays;
 
-import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IMenuDisplay;
+import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 
 public final class HealthMenuDisplay implements IMenuDisplay
 {
-    @Override
-    public String[] getLines(GameState gameState)
+    private final PlayerEntity playerEntity;
+
+    public HealthMenuDisplay(PlayerEntity playerEntity)
     {
-        return new String[]{String.format("Health: %s%%", Math.round(((float) gameState.getState("health")) * 100))};
+        this.playerEntity = playerEntity;
+    }
+
+    @Override
+    public String[] getLines()
+    {
+        return new String[]{String.format("Health: %s%%", Math.round(playerEntity.getHealth() * 100))};
     }
 }

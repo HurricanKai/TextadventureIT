@@ -1,27 +1,29 @@
 package de.kaij_noah.it.textadventure.base;
 
-import de.kaij_noah.it.textadventure.math.Vector3I;
+import de.kaij_noah.it.textadventure.entities.EntityManager;
+import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
 
 public final class GameState
 {
+    private final PlayerEntity playerEntity;
     private final Map map;
-    private Vector3I position;
-    private int timeStep;
-    private final Dictionary<String, Object> customState = new Hashtable<>();
+    private final Dictionary<String, Object> states = new Hashtable<>();
+    private final EntityManager entityManager;
+    private int time = 0;
 
-    public GameState(Vector3I position, Map map)
+    public GameState(PlayerEntity playerEntity, Map map, EntityManager entityManager)
     {
-        this.position = position;
+        this.playerEntity = playerEntity;
         this.map = map;
-        putState("health", 1.0f);
+        this.entityManager = entityManager;
     }
 
-    public Tile getTile()
+    public PlayerEntity getPlayerEntity()
     {
-        return map.get_tile(position.X, position.Y, position.Z);
+        return playerEntity;
     }
 
     public Map getMap()
@@ -29,47 +31,30 @@ public final class GameState
         return map;
     }
 
-    public Vector3I getPosition()
+    public <T> T getState(String key)
     {
-        // for safety reasons, we return a copy
-        return position.copy();
+        return (T) states.get(key);
     }
 
-    public void setPosition(Vector3I position)
+    public <T> void setState(String key, T value)
     {
-        getTile().onPlayerExit(this);
-        this.position = position;
-        getTile().onPlayerEnter(this);
+        states.put(key, value);
     }
 
-    public int getTimeStep()
+    public EntityManager getEntityManager()
     {
-        return timeStep;
+        return entityManager;
     }
 
-    public void incrementTimeStep()
+    public void incrementTime()
     {
-        timeStep++;
+        time++;
     }
+    public int getTime() { return time; }
 
     public void onStep()
     {
-        var tiles = map.get_tiles();
-        for (Tile[][] v : tiles)
-        {
-            for (Tile[] v2 : v)
-                for (Tile tile : v2)
-                    tile.onStep(this);
-        }
-    }
-
-    public <T> void putState(String key, T value)
-    {
-        customState.put(key, value);
-    }
-
-    public <T> T getState(String key)
-    {
-        return (T) customState.get(key);
+        map.onStep(this);
+        entityManager.onStep(this);
     }
 }
