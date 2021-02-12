@@ -1,5 +1,8 @@
 package de.kaij_noah.it.textadventure.base;
 
+import de.kaij_noah.it.textadventure.math.Vector3I;
+import de.kaij_noah.it.textadventure.math.Weighted;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +51,7 @@ public abstract class Tile
         return appearance;
     }
 
-    protected void setAppearance(char appearance)
+    public void setAppearance(char appearance)
     {
         this.appearance = appearance;
     }
@@ -79,6 +82,34 @@ public abstract class Tile
     public void onStep(GameState gameState)
     {
 
+    }
+
+    public void addToReferences(List<Weighted<Vector3I>> references, Vector3I ownPosition)
+    {
+        if (canMoveWest())
+        {
+            var pos = ownPosition.copy();
+            pos.X--;
+            references.add(new Weighted<>(1.0, pos));
+        }
+        if (canMoveEast())
+        {
+            var pos = ownPosition.copy();
+            pos.X++;
+            references.add(new Weighted<>(1.0, pos));
+        }
+        if (canMoveNorth())
+        {
+            var pos = ownPosition.copy();
+            pos.Y--;
+            references.add(new Weighted<>(1.0, pos));
+        }
+        if (canMoveSouth())
+        {
+            var pos = ownPosition.copy();
+            pos.Y++;
+            references.add(new Weighted<>(1.0, pos));
+        }
     }
 }
 

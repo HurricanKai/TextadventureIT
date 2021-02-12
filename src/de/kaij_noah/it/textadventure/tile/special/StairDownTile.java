@@ -3,6 +3,8 @@ package de.kaij_noah.it.textadventure.tile.special;
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IAction;
 import de.kaij_noah.it.textadventure.base.Tile;
+import de.kaij_noah.it.textadventure.math.Vector3I;
+import de.kaij_noah.it.textadventure.math.Weighted;
 
 import java.util.List;
 
@@ -42,5 +44,14 @@ public final class StairDownTile extends Tile
                 gameState.getPlayerEntity().setPosition(pos);
             }
         });
+    }
+
+    @Override
+    public void addToReferences(List<Weighted<Vector3I>> references, Vector3I ownPosition)
+    {
+        super.addToReferences(references, ownPosition);
+        var p = ownPosition.copy();
+        p.Z--;
+        references.add(new Weighted<>(10, p));
     }
 }

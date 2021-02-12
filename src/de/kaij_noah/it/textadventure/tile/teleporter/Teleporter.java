@@ -4,6 +4,7 @@ import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IAction;
 import de.kaij_noah.it.textadventure.base.Tile;
 import de.kaij_noah.it.textadventure.math.Vector3I;
+import de.kaij_noah.it.textadventure.math.Weighted;
 
 import java.util.List;
 
@@ -49,5 +50,12 @@ public final class Teleporter extends Tile
                 gameState.getPlayerEntity().setPosition(target);
             }
         });
+    }
+
+    @Override
+    public void addToReferences(List<Weighted<Vector3I>> references, Vector3I ownPosition)
+    {
+        super.addToReferences(references, ownPosition);
+        references.add(new Weighted<>(2, target));
     }
 }

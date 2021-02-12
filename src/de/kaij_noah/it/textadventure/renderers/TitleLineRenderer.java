@@ -9,7 +9,7 @@ public final class TitleLineRenderer implements IRenderer
     @Override
     public void Render(IConsole console, GameState gameState)
     {
-        var titleLines = gameState.getMap().get_tile(gameState.getPlayerEntity().getPosition()).getTitleLines(gameState);
+        var titleLines = gameState.getMap().getTile(gameState.getPlayerEntity().getPosition()).getTitleLines(gameState);
 
         for (var line : titleLines)
         {

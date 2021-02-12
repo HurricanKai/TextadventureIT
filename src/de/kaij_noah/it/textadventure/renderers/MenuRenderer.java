@@ -24,7 +24,7 @@ public final class MenuRenderer implements IRenderer, IMenuManager
     {
         int maxLineLength = 0;
         int spaceWidth = console.getCharWidth(' ');
-        var actions = map.get_tile(playerEntity.getPosition()).getPossibleActions();
+        var actions = map.getTile(playerEntity.getPosition()).getPossibleActions();
 
         for (IMenuDisplay display : displays)
         {
@@ -91,7 +91,7 @@ public final class MenuRenderer implements IRenderer, IMenuManager
 
     public void keyTyped(char c, GameState gameState)
     {
-        var possibleActions = map.get_tile(playerEntity.getPosition()).getPossibleActions();
+        var possibleActions = map.getTile(playerEntity.getPosition()).getPossibleActions();
         int index = -1;
         switch (c)
         {

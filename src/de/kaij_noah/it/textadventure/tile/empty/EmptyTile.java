@@ -10,17 +10,12 @@ public class EmptyTile extends Tile
     public EmptyTile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
+        setAppearance(' ');
     }
 
     @Override
     public String[] getTitleLines(GameState gameState)
     {
         return titleLines;
-    }
-
-    @Override
-    public char renderFloor()
-    {
-        return ' ';
     }
 }

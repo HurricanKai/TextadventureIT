@@ -1,13 +1,21 @@
 package de.kaij_noah.it.textadventure.base;
 
 import de.kaij_noah.it.textadventure.math.Vector3I;
+import de.kaij_noah.it.textadventure.math.Weighted;
+import de.kaij_noah.it.textadventure.pathfinding.base.INavigationMap;
+import de.kaij_noah.it.textadventure.pathfinding.base.INavigationTile;
 
-public final class Map
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
+public final class Map implements INavigationMap
 {
     private final int sizeX;
     private final int sizeY;
     private final int sizeZ;
-    private Tile[][][] tiles;
+    private final Tile[][][] tiles;
+    private final NavigationTile[][][] navigationTiles;
 
     public Map(int sizeX, int sizeY, int sizeZ, Tile[][][] tiles)
     {
@@ -15,6 +23,44 @@ public final class Map
         this.sizeY = sizeY;
         this.sizeZ = sizeZ;
         this.tiles = tiles;
+        navigationTiles = new NavigationTile[sizeX][sizeY][sizeZ];
+        for (int x = 0; x < sizeX; x++)
+        {
+            var row = navigationTiles[x];
+            for (int y = 0; y < sizeY; y++)
+            {
+                var col = row[y];
+                for (int z = 0; z < sizeZ; z++)
+                    col[z] = new NavigationTile();
+            }
+        }
+
+        for (int x = 0; x < sizeX; x++)
+        {
+            var row = navigationTiles[x];
+            for (int y = 0; y < sizeY; y++)
+            {
+                var col = row[y];
+                for (int z = 0; z < sizeZ; z++)
+                    col[z] = new NavigationTile();
+            }
+        }
+
+        for (int x = 0; x < sizeX; x++)
+        {
+            var row = tiles[x];
+            for (int y = 0; y < sizeY; y++)
+            {
+                var col = row[y];
+                for (int z = 0; z < sizeZ; z++)
+                {
+                    var list = new ArrayList<Weighted<Vector3I>>();
+                    var tile = col[z];
+                    tile.addToReferences(list, new Vector3I(x, y, z));
+                    navigationTiles[x][y][z].setChildren(list);
+                }
+            }
+        }
     }
 
     public Tile[][][] get_tiles()
@@ -22,27 +68,13 @@ public final class Map
         return tiles;
     }
 
-    public void set_tiles(Tile[][][] tiles)
-    {
-        this.tiles = tiles;
-    }
-
-    public Tile get_tile(int x, int y, int z)
+    public Tile getTile(int x, int y, int z)
     {
         return tiles[x][y][z];
     }
-    public Tile get_tile(Vector3I position)
+    public Tile getTile(Vector3I position)
     {
         return tiles[position.X][position.Y][position.Z];
-    }
-
-    public void set_tile(int x, int y, int z, Tile tile)
-    {
-        tiles[x][y][z] = tile;
-    }
-    public void set_tile(Vector3I position, Tile tile)
-    {
-        tiles[position.X][position.Y][position.Z] = tile;
     }
 
     public int getSizeX()
@@ -66,5 +98,30 @@ public final class Map
             for (var col : row)
                 for (var tile : col)
                     tile.onStep(gameState);
+    }
+
+    public INavigationTile getNavigationTile(int x, int y, int z)
+    {
+        return navigationTiles[x][y][z];
+    }
+    public INavigationTile getNavigationTile(Vector3I position)
+    {
+        return navigationTiles[position.X][position.Y][position.Z];
+    }
+
+    private final class NavigationTile implements INavigationTile
+    {
+        private Collection<Weighted<Vector3I>> children;
+
+        @Override
+        public Collection<Weighted<Vector3I>> getWeightedChildren()
+        {
+            return children;
+        }
+
+        public void setChildren(Collection<Weighted<Vector3I>> children)
+        {
+            this.children = children;
+        }
     }
 }

@@ -4,6 +4,7 @@ import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.ITileGenerator;
 import de.kaij_noah.it.textadventure.base.Tile;
 import de.kaij_noah.it.textadventure.base.TileTemplate;
+import de.kaij_noah.it.textadventure.math.Weighted;
 
 import java.util.Arrays;
 import java.util.Random;

@@ -3,10 +3,14 @@ package de.kaij_noah.it.textadventure;
 import de.kaij_noah.it.textadventure.base.*;
 import de.kaij_noah.it.textadventure.entities.EntityManager;
 import de.kaij_noah.it.textadventure.entities.PlayerEntity;
+import de.kaij_noah.it.textadventure.entities.SimpleHomingEntity;
+import de.kaij_noah.it.textadventure.entities.base.IGuiInitializable;
+import de.kaij_noah.it.textadventure.entities.base.IMapInitializable;
 import de.kaij_noah.it.textadventure.gui.Console;
 import de.kaij_noah.it.textadventure.mapgen.AddRandomConnectionMapPostProcessor;
 import de.kaij_noah.it.textadventure.mapgen.BacktrackingMapGenerator;
-import de.kaij_noah.it.textadventure.mapgen.Weighted;
+import de.kaij_noah.it.textadventure.math.Vector3I;
+import de.kaij_noah.it.textadventure.math.Weighted;
 import de.kaij_noah.it.textadventure.mapgen.WeightedTileGenerator;
 import de.kaij_noah.it.textadventure.renderers.*;
 import de.kaij_noah.it.textadventure.tile.campfire.CampfireGenerator;
@@ -34,7 +38,7 @@ public class Main
 
         var mapWidth = 40;
         var mapDepth = 15;
-        var mapHeight = 5;
+        var mapHeight = 10;
 
         var tileGenerator = new WeightedTileGenerator(new Weighted[]
                 {
@@ -116,7 +120,7 @@ public class Main
                 switch (e.getKeyCode())
                 {
                     case KeyEvent.VK_UP:
-                        if (map.get_tile(pos).canMoveNorth() && pos.Y > 0)
+                        if (map.getTile(pos).canMoveNorth() && pos.Y > 0)
                         {
                             pos.Y -= 1;
                             playerEntity.setPosition(pos);
@@ -124,7 +128,7 @@ public class Main
                         break;
 
                     case KeyEvent.VK_DOWN:
-                        if (map.get_tile(pos).canMoveSouth() && pos.Y < gameState.getMap().getSizeY() - 1)
+                        if (map.getTile(pos).canMoveSouth() && pos.Y < gameState.getMap().getSizeY() - 1)
                         {
                             pos.Y += 1;
                             playerEntity.setPosition(pos);
@@ -132,7 +136,7 @@ public class Main
                         break;
 
                     case KeyEvent.VK_LEFT:
-                        if (map.get_tile(pos).canMoveWest() && pos.X > 0)
+                        if (map.getTile(pos).canMoveWest() && pos.X > 0)
                         {
                             pos.X -= 1;
                             playerEntity.setPosition(pos);
@@ -140,7 +144,7 @@ public class Main
                         break;
 
                     case KeyEvent.VK_RIGHT:
-                        if (map.get_tile(pos).canMoveEast() && pos.X < gameState.getMap().getSizeX() - 1)
+                        if (map.getTile(pos).canMoveEast() && pos.X < gameState.getMap().getSizeX() - 1)
                         {
                             pos.X += 1;
                             playerEntity.setPosition(pos);
@@ -163,6 +167,10 @@ public class Main
                     t.initialize(gameState);
             }
         }
+
+        var h = entityManager.addEntity(new SimpleHomingEntity(new Vector3I(mapWidth - 1, mapDepth - 1, mapHeight - 1)));
+        entityManager.getAll(IMapInitializable.class).forEach(v -> v.mapInitialize(map));
+        entityManager.getAll(IGuiInitializable.class).forEach(v -> v.guiInitialize(console, gui));
 
         while (true)
         {

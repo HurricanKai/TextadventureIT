@@ -19,8 +19,8 @@ public final class TeleporterGenerator implements ITileGenerator
 
         var targetx = (int) Math.round(x + random.nextDouble() * range * 2 - range);
         var targety = (int) Math.round(y + random.nextDouble() * range * 2 - range);
-        targetx = Math.max(0, Math.min(targetx - 1, maxx));
-        targety = Math.max(0, Math.min(targety - 1, maxy));
+        targetx = Math.max(0, Math.min(targetx - 1, maxx - 1));
+        targety = Math.max(0, Math.min(targety - 1, maxy - 1));
 
         String directionString;
         if (targety > y)

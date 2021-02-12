@@ -3,7 +3,6 @@ package de.kaij_noah.it.textadventure.renderers;
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.Map;
-import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ public final class CompactMapRenderer extends MapRendererBase
     public void Render(IConsole console, GameState gameState)
     {
         var playerPosition = gameState.getPlayerEntity().getPosition();
-        var rowGroups = gameState.getEntityManager().getAll().collect(Collectors.groupingBy(b -> b.getPosition().Y));
+        var rowGroups = gameState.getEntityManager().getAll().filter(b -> b.getPosition().Z == playerPosition.Z).collect(Collectors.groupingBy(b -> b.getPosition().Y));
 
         for (int tiley = 0; tiley < map.getSizeY(); tiley++)
         {
@@ -33,15 +32,18 @@ public final class CompactMapRenderer extends MapRendererBase
                     // we only want to draw the sub-tile above the actual tile if the current tile is row 0 (since that is the left wall)
                     for (int tileoffsetx = tilex == 0 ? 0 : 1; tileoffsetx <= 2; tileoffsetx++)
                     {
-                        chars[tilex * 2 + tileoffsetx] = getTileOffsetChar(map.get_tile(tilex, tiley, playerPosition.Z), tileoffsetx, tileoffsety, gameState);
+                        chars[tilex * 2 + tileoffsetx] = getTileOffsetChar(map.getTile(tilex, tiley, playerPosition.Z), tileoffsetx, tileoffsety, gameState);
                     }
                 }
 
-                if (tiley == playerPosition.Y && tileoffsety == 1)
+                if (tileoffsety == 1)
                 {
                     var entities = rowGroups.get(tiley);
-                    for (var entity : entities)
-                        chars[entity.getPosition().X * 2 + 1] = entity.render();
+                    if (entities != null)
+                    {
+                        for (var entity : entities)
+                            chars[entity.getPosition().X * 2 + 1] = entity.render();
+                    }
                 }
                 console.Write(chars);
                 console.NewLine();

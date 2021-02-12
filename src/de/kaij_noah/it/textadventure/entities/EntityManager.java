@@ -2,9 +2,10 @@ package de.kaij_noah.it.textadventure.entities;
 
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IEntity;
+import de.kaij_noah.it.textadventure.entities.base.IPostStepable;
+import de.kaij_noah.it.textadventure.entities.base.IPreStepable;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 public final class EntityManager
@@ -39,7 +40,15 @@ public final class EntityManager
                 continue;
             }
 
+            if (e instanceof IPreStepable)
+            {
+                ((IPreStepable)e).preStep(gameState);
+            }
             e.onStep(gameState);
+            if (e instanceof IPostStepable)
+            {
+                ((IPostStepable)e).postStep(gameState);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package de.kaij_noah.it.textadventure.mapgen;
+package de.kaij_noah.it.textadventure.math;
 
 public final class Weighted<T>
 {

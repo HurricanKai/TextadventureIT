@@ -56,5 +56,6 @@ public final class GameState
     {
         map.onStep(this);
         entityManager.onStep(this);
+        System.out.printf("Step %s\n", time);
     }
 }
