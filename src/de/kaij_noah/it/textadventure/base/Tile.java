@@ -51,7 +51,7 @@ public abstract class Tile
         return appearance;
     }
 
-    public void setAppearance(char appearance)
+    protected void setAppearance(char appearance)
     {
         this.appearance = appearance;
     }
