@@ -9,7 +9,6 @@ import de.kaij_noah.it.textadventure.pathfinding.lpastar.LPAStarPathFinder;
 public final class SimpleHomingEntity extends BaseEntity implements IMapInitializable
 {
     private LPAStarPathFinder pathFinder;
-    private boolean hasBegun = false;
 
     public SimpleHomingEntity(Vector3I position)
     {
@@ -32,7 +31,7 @@ public final class SimpleHomingEntity extends BaseEntity implements IMapInitiali
     public void onStep(GameState gameState)
     {
         super.onStep(gameState);
-        if (gameState.getTime() % 2 == 0 && pathFinder.hasNext())
+        if (gameState.getTime() % 10 == 0 && pathFinder.hasNext())
         {
             var p = pathFinder.next();
             this.setPosition(p);
