@@ -96,12 +96,12 @@ public class Main
 
             var tileGenerator = new WeightedTileGenerator(new Weighted[]
                     {
-                            new Weighted(100f, new EmptyGenerator()),
-                            new Weighted(15f, new SpikesGenerator()),
-                            new Weighted(1f, new TeleporterGenerator()),
-                            new Weighted(1f, new FatherDaughterQuestGenerator()),
-                            new Weighted(1f, new TestDialogGenerator()),
-                            new Weighted(2f, new CampfireGenerator()),
+                            new Weighted<ITileGenerator>(100f, new EmptyGenerator()),
+                            new Weighted<ITileGenerator>(15f, new SpikesGenerator()),
+                            new Weighted<ITileGenerator>(1f, new TeleporterGenerator()),
+                            new Weighted<ITileGenerator>(1f, new FatherDaughterQuestGenerator()),
+                            new Weighted<ITileGenerator>(1f, new TestDialogGenerator()),
+                            new Weighted<ITileGenerator>(2f, new CampfireGenerator()),
                     });
             generateTiles(random, mapTemplate, mapTiles, tileGenerator);
             mapRenderer.Render(console, gameState);
