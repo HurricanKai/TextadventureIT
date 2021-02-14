@@ -5,9 +5,10 @@ import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.IMenuDisplay;
 import de.kaij_noah.it.textadventure.base.IMenuManager;
 import de.kaij_noah.it.textadventure.entities.base.IGuiInitializable;
+import de.kaij_noah.it.textadventure.entities.base.IHealthEntity;
 import de.kaij_noah.it.textadventure.math.Vector3I;
 
-public final class PlayerEntity extends BaseEntity implements IGuiInitializable
+public final class PlayerEntity extends BaseEntity implements IGuiInitializable, IHealthEntity
 {
     private float health = 1f;
 

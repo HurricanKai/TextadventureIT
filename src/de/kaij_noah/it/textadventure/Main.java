@@ -46,7 +46,7 @@ public class Main
                         new AddRandomConnectionMapPostProcessor()
                 };
 
-        IMapGenerator generator = new OpenRoomMapGenerator();
+        IMapGenerator generator = new BacktrackingMapGenerator();
         // var generator = new OpenRoomMapGenerator();
 
         Map map;
