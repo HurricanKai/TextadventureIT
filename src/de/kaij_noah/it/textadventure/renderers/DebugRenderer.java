@@ -11,6 +11,10 @@ public final class DebugRenderer implements IRenderer
     @Override
     public void Render(IConsole console, GameState gameState)
     {
-        console.Write(String.format("Frame: %s\n", frameCount++));
+        var p = gameState.getPlayerEntity().getPosition();
+        var x = p.X;
+        var y = p.Y;
+        var z = p.Z;
+        console.Write(String.format("Frame: %s | Pos: %s %s %s\n", frameCount++, x, y, z));
     }
 }

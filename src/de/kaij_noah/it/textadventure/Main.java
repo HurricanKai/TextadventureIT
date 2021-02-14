@@ -9,6 +9,7 @@ import de.kaij_noah.it.textadventure.entities.base.IMapInitializable;
 import de.kaij_noah.it.textadventure.gui.Console;
 import de.kaij_noah.it.textadventure.mapgen.AddRandomConnectionMapPostProcessor;
 import de.kaij_noah.it.textadventure.mapgen.BacktrackingMapGenerator;
+import de.kaij_noah.it.textadventure.mapgen.OpenRoomMapGenerator;
 import de.kaij_noah.it.textadventure.math.Vector3I;
 import de.kaij_noah.it.textadventure.math.Weighted;
 import de.kaij_noah.it.textadventure.mapgen.WeightedTileGenerator;
@@ -40,71 +41,111 @@ public class Main
         var mapDepth = 15;
         var mapHeight = 10;
 
-        var tileGenerator = new WeightedTileGenerator(new Weighted[]
-                {
-                        new Weighted(100f, new EmptyGenerator()),
-                        new Weighted(15f, new SpikesGenerator()),
-                        new Weighted(1f, new TeleporterGenerator()),
-                        new Weighted(1f, new FatherDaughterQuestGenerator()),
-                        new Weighted(1f, new TestDialogGenerator()),
-                        new Weighted(2f, new CampfireGenerator()),
-                });
         var postProcessors = new IMapPostProcessor[]
                 {
                         new AddRandomConnectionMapPostProcessor()
                 };
-        IMapGenerator generator = new BacktrackingMapGenerator();
+
+        IMapGenerator generator = new OpenRoomMapGenerator();
         // var generator = new OpenRoomMapGenerator();
-        var mapTemplate = generator.Generate(mapWidth, mapDepth, mapHeight);
-        for (var processor : postProcessors)
-            mapTemplate = processor.Process(mapTemplate);
 
-        var mapTiles = new Tile[mapTemplate.length][mapTemplate[0].length][mapTemplate[0][0].length];
-
-        for (int x = 0; x < mapTiles.length; x++)
+        Map map;
+        IRenderer mapRenderer;
+        MenuRenderer gui;
+        GameState gameState;
+        TileTemplate[][][] mapTemplate;
+        Tile[][][] mapTiles;
+        EntityManager entityManager;
+        PlayerEntity playerEntity;
         {
-            for (int y = 0; y < mapTiles[x].length; y++)
-            {
-                for (int z = 0; z < mapTiles[x][y].length; z++)
-                {
-                    if (mapTiles[x][y][z] != null)
-                        continue;
+            var start = System.currentTimeMillis();
+            console.NewLine();
+            console.NewLine();
+            console.NewLine();
+            console.Write("Generating Map...");
+            console.SwapBuffer();
 
-                    var template = mapTemplate[x][y][z];
-                    if (template.canMoveDown())
-                    {
-                        mapTiles[x][y][z] = new StairDownTile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth());
-                        var v = mapTemplate[x][y][z - 1];
-                        mapTiles[x][y][z - 1] = new StairUpTile(v.canMoveWest(), v.canMoveEast(), v.canMoveNorth(), v.canMoveSouth());
-                    } else if (template.canMoveUp())
-                    {
-                        mapTiles[x][y][z] = new StairUpTile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth());
-                        var v = mapTemplate[x][y][z + 1];
-                        mapTiles[x][y][z + 1] = new StairDownTile(v.canMoveWest(), v.canMoveEast(), v.canMoveNorth(), v.canMoveSouth());
-                    } else
-                    {
-                        mapTiles[x][y][z] = tileGenerator.Generate(template, x, y, z, mapTiles.length, mapTiles[x].length, mapTiles[x][y].length, random);
-                    }
-                }
-            }
+            mapTemplate = generator.Generate(mapWidth, mapDepth, mapHeight);
+            for (var processor : postProcessors)
+                mapTemplate = processor.Process(mapTemplate);
+
+            mapTiles = new Tile[mapTemplate.length][mapTemplate[0].length][mapTemplate[0][0].length];
+
+            map = new Map(mapTiles.length, mapTiles[0].length, mapTiles[0][0].length, mapTiles);
+            mapRenderer = new CompactMapRenderer(map);
+
+            entityManager = new EntityManager();
+            playerEntity = entityManager.addEntity(new PlayerEntity());
+
+            gui = new MenuRenderer(map, playerEntity);
+            gameState = new GameState(playerEntity, map, entityManager);
+
+            generateTiles(random, mapTemplate, mapTiles, new EmptyGenerator());
+            mapRenderer.Render(console, gameState);
+            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            System.out.printf("Map gen Took %sms\n", System.currentTimeMillis() - start);
         }
-        var map = new Map(mapTiles.length, mapTiles[0].length, mapTiles[0][0].length, mapTiles);
 
-        var entityManager = new EntityManager();
-        var playerEntity = entityManager.addEntity(new PlayerEntity());
+        {
+            var start = System.currentTimeMillis();
+            console.NewLine();
+            console.NewLine();
+            console.NewLine();
+            console.Write("Populating Map...");
+            console.SwapBuffer();
 
-        var gui = new MenuRenderer(map, playerEntity);
+            var tileGenerator = new WeightedTileGenerator(new Weighted[]
+                    {
+                            new Weighted(100f, new EmptyGenerator()),
+                            new Weighted(15f, new SpikesGenerator()),
+                            new Weighted(1f, new TeleporterGenerator()),
+                            new Weighted(1f, new FatherDaughterQuestGenerator()),
+                            new Weighted(1f, new TestDialogGenerator()),
+                            new Weighted(2f, new CampfireGenerator()),
+                    });
+            generateTiles(random, mapTemplate, mapTiles, tileGenerator);
+            mapRenderer.Render(console, gameState);
+
+            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            System.out.printf("Map pop Took %sms\n", System.currentTimeMillis() - start);
+        }
+
+        {
+            var start = System.currentTimeMillis();
+            console.NewLine();
+            console.NewLine();
+            console.NewLine();
+            console.Write("Generating Pathfinding overlay...");
+            console.SwapBuffer();
+            map.initializePathFinding();
+            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            System.out.printf("Path ov Took %sms\n", System.currentTimeMillis() - start);
+        }
+
+        {
+            var start = System.currentTimeMillis();
+            console.NewLine();
+            console.NewLine();
+            console.NewLine();
+            console.Write("Generating Quests and Enemies...");
+            console.SwapBuffer();
+
+            // do stuff
+
+            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            System.out.printf("QE Took %sms\n", System.currentTimeMillis() - start);
+        }
+
         var renderables = new IRenderer[]
                 {
                         new DebugRenderer(),
-                        new CompactMapRenderer(map),
-                        // new SpacedMapRenderer(map),
+                        mapRenderer,
                         new BlankLineRenderer(),
                         new TitleLineRenderer(),
                         gui,
                 };
 
-        var gameState = new GameState(playerEntity, map, entityManager);
+
         console.addKeyListener(new KeyListener()
         {
             @Override
@@ -181,6 +222,34 @@ public class Main
             gameState.incrementTime();
             gameState.onStep();
             TimeUnit.MILLISECONDS.sleep(10);
+        }
+    }
+
+    private static void generateTiles(Random random, TileTemplate[][][] mapTemplate, Tile[][][] mapTiles, ITileGenerator tileGenerator)
+    {
+        for (int x = 0; x < mapTiles.length; x++)
+        {
+            for (int y = 0; y < mapTiles[x].length; y++)
+            {
+                for (int z = 0; z < mapTiles[x][y].length; z++)
+                {
+                    var template = mapTemplate[x][y][z];
+                    if (template.canMoveDown())
+                    {
+                        mapTiles[x][y][z] = new StairDownTile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth());
+                        var v = mapTemplate[x][y][z - 1];
+                        mapTiles[x][y][z - 1] = new StairUpTile(v.canMoveWest(), v.canMoveEast(), v.canMoveNorth(), v.canMoveSouth());
+                    } else if (template.canMoveUp())
+                    {
+                        mapTiles[x][y][z] = new StairUpTile(template.canMoveWest(), template.canMoveEast(), template.canMoveNorth(), template.canMoveSouth());
+                        var v = mapTemplate[x][y][z + 1];
+                        mapTiles[x][y][z + 1] = new StairDownTile(v.canMoveWest(), v.canMoveEast(), v.canMoveNorth(), v.canMoveSouth());
+                    } else
+                    {
+                        mapTiles[x][y][z] = tileGenerator.Generate(template, x, y, z, mapTiles.length, mapTiles[x].length, mapTiles[x][y].length, random);
+                    }
+                }
+            }
         }
     }
 }

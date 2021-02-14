@@ -123,7 +123,7 @@ public final class MenuRenderer implements IRenderer, IMenuManager
                 index = 8;
                 break;
         }
-        if (index < 0 || index > possibleActions.length)
+        if (index < 0 || index >= possibleActions.length)
             return;
         possibleActions[index].Execute(gameState);
     }

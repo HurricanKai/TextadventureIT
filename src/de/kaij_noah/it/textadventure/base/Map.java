@@ -24,17 +24,10 @@ public final class Map implements INavigationMap
         this.sizeZ = sizeZ;
         this.tiles = tiles;
         navigationTiles = new NavigationTile[sizeX][sizeY][sizeZ];
-        for (int x = 0; x < sizeX; x++)
-        {
-            var row = navigationTiles[x];
-            for (int y = 0; y < sizeY; y++)
-            {
-                var col = row[y];
-                for (int z = 0; z < sizeZ; z++)
-                    col[z] = new NavigationTile();
-            }
-        }
+    }
 
+    public void initializePathFinding()
+    {
         for (int x = 0; x < sizeX; x++)
         {
             var row = navigationTiles[x];

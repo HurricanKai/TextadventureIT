@@ -17,10 +17,14 @@ public final class OpenRoomMapGenerator implements IMapGenerator
                 for (int z = 0; z < sizeZ; z++)
                 {
                     var tile = new TileTemplate();
-                    tile.setCanMoveNorth(true);
-                    tile.setCanMoveSouth(true);
-                    tile.setCanMoveEast(true);
-                    tile.setCanMoveWest(true);
+                    tile.setCanMoveNorth(y - 1 >= 0);
+                    tile.setCanMoveSouth(y + 1 < sizeY);
+                    tile.setCanMoveEast(x + 1 < sizeX);
+                    tile.setCanMoveWest(x - 1 >= 0);
+                    // eh idk this logic is bugged
+                    var v = z % 2;
+                    tile.setCanMoveDown(z - 1 >= 0 && x == v && y == v - 1);
+                    tile.setCanMoveUp(z + 1 < sizeZ && x == v - 1 && y == v);
                     templates[x][y][z] = tile;
                 }
             }

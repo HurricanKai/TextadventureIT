@@ -36,7 +36,7 @@ public final class BacktrackingMapGenerator implements IMapGenerator
 
             var tile = tiles[x][y][z];
 
-            System.out.printf("Walking %s %s %s\n", x, y, z);
+            // System.out.printf("Walking %s %s %s\n", x, y, z);
 
             var sameLevelMultiplier = 100;
             var possibleDirs = new ArrayList<Vector3I>();

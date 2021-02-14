@@ -5,6 +5,7 @@ import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Random;
 
 public final class GameState
 {
@@ -12,6 +13,7 @@ public final class GameState
     private final Map map;
     private final Dictionary<String, Object> states = new Hashtable<>();
     private final EntityManager entityManager;
+    private final Random random = new Random();
     private int time = 0;
 
     public GameState(PlayerEntity playerEntity, Map map, EntityManager entityManager)
@@ -56,5 +58,10 @@ public final class GameState
     {
         map.onStep(this);
         entityManager.onStep(this);
+    }
+
+    public Random getRandom()
+    {
+        return random;
     }
 }

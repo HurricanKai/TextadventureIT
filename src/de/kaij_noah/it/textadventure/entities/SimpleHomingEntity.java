@@ -35,7 +35,6 @@ public final class SimpleHomingEntity extends BaseEntity implements IMapInitiali
         {
             var p = pathFinder.next();
             this.setPosition(p);
-            System.out.printf("Moving to %s %s %s\n", p.X, p.Y, p.Z);
         }
     }
 
