@@ -31,7 +31,7 @@ public final class SpacedMapRenderer extends MapRendererBase
                 var tilex = x / 3;
                 var tileoffsetx = x % 3;
 
-                chars[x] = getTileOffsetChar(map.getTile(tilex, tiley, z), tileoffsetx, tileoffsety, gameState);
+                chars[x] = getTileOffsetChar(map, tilex, tiley, z, tileoffsetx, tileoffsety, gameState);
             }
             if (y == playerTilePositionY + 1)
                 chars[playerTilePositionX + 1] = '#';

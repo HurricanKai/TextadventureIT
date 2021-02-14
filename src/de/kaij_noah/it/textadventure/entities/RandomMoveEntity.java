@@ -25,14 +25,14 @@ public abstract class RandomMoveEntity extends BaseEntity
         {
             var p = pos.copy();
             p.X--;
-            if (p.X > 0)
+            if (p.X >= 0)
                 dirs.add(p);
         }
 
         {
             var p = pos.copy();
             p.Y--;
-            if (p.Y > 0)
+            if (p.Y >= 0)
                 dirs.add(p);
 
         }

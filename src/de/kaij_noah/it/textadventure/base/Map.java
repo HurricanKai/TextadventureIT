@@ -70,6 +70,18 @@ public final class Map implements INavigationMap
         return tiles[position.X][position.Y][position.Z];
     }
 
+    public Tile getOptionalTile(int x, int y, int z)
+    {
+        if (x < 0 || x > sizeX || y < 0 || y > sizeY || z < 0 || z > sizeZ)
+            return null;
+
+        return tiles[x][y][z];
+    }
+    public Tile getOptionalTile(Vector3I position)
+    {
+        return getOptionalTile(position.X, position.Y, position.Z);
+    }
+
     public int getSizeX()
     {
         return sizeX;
