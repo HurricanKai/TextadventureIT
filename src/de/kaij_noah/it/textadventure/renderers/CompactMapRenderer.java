@@ -46,8 +46,8 @@ public final class CompactMapRenderer extends MapRendererBase
                             chars[entity.getPosition().X * 2 + 1] = entity.render();
                     }
                 }
-                console.Write(chars);
-                console.NewLine();
+                console.write(chars);
+                console.newLine();
             }
         }
     }

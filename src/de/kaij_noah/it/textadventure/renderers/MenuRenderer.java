@@ -52,32 +52,32 @@ public final class MenuRenderer implements IRenderer, IMenuManager
                 if (lines.length > 0)
                 {
                     lineWidth = console.getStringWidth(lines[lineIndex]);
-                    console.Write(lines[lineIndex]);
+                    console.write(lines[lineIndex]);
                 }
             }
             int amountSpaces = (maxLineLength - lineWidth) / spaceWidth;
 
             for (int j = 0; j < amountSpaces; j++)
             {
-                console.Write(" ");
+                console.write(" ");
             }
 
             if (lineWidth % 2 == 0)
             {
-                console.Write(" ");
+                console.write(" ");
             }
 
-            console.Write(" | ");
+            console.write(" | ");
 
 
             if (actionIndex < actions.length)
             {
-                console.Write(+(actionIndex + 1) + ": ");
-                console.Write(actions[actionIndex].getDescription());
+                console.write(+(actionIndex + 1) + ": ");
+                console.write(actions[actionIndex].getDescription());
                 actionIndex++;
             }
 
-            console.NewLine();
+            console.newLine();
 
             lineIndex++;
             if (lineIndex >= linesLength)

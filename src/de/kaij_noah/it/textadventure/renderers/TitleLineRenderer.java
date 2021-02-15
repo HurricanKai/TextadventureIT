@@ -13,9 +13,9 @@ public final class TitleLineRenderer implements IRenderer
 
         for (var line : titleLines)
         {
-            console.Write(line);
-            console.NewLine();
-            console.NewLine();
+            console.write(line);
+            console.newLine();
+            console.newLine();
         }
     }
 }

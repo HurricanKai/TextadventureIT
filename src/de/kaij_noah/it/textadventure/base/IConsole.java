@@ -4,13 +4,13 @@ import java.awt.event.KeyListener;
 
 public interface IConsole
 {
-    void Write(char[] chars);
+    void write(char[] chars);
 
-    void Write(String string);
+    void write(String string);
 
-    void NewLine();
+    void newLine();
 
-    void SwapBuffer();
+    void swapBuffer();
 
     int getStringWidth(String s);
 

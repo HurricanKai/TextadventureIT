@@ -2,6 +2,7 @@ package de.kaij_noah.it.textadventure.base;
 
 import de.kaij_noah.it.textadventure.entities.EntityManager;
 import de.kaij_noah.it.textadventure.entities.PlayerEntity;
+import de.kaij_noah.it.textadventure.options.GameOptions;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -14,13 +15,15 @@ public final class GameState
     private final Dictionary<String, Object> states = new Hashtable<>();
     private final EntityManager entityManager;
     private final Random random = new Random();
+    private final GameOptions options;
     private int time = 0;
 
-    public GameState(PlayerEntity playerEntity, Map map, EntityManager entityManager)
+    public GameState(PlayerEntity playerEntity, Map map, EntityManager entityManager, GameOptions options)
     {
         this.playerEntity = playerEntity;
         this.map = map;
         this.entityManager = entityManager;
+        this.options = options;
     }
 
     public PlayerEntity getPlayerEntity()
@@ -64,4 +67,6 @@ public final class GameState
     {
         return random;
     }
+
+    public GameOptions getOptions() { return options; }
 }

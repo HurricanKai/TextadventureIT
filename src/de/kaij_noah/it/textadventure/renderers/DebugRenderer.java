@@ -15,6 +15,6 @@ public final class DebugRenderer implements IRenderer
         var x = p.X;
         var y = p.Y;
         var z = p.Z;
-        console.Write(String.format("Frame: %s | Pos: %s %s %s\n", frameCount++, x, y, z));
+        console.write(String.format("Frame: %s | Pos: %s %s %s\n", frameCount++, x, y, z));
     }
 }

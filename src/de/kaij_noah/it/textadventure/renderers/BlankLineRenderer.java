@@ -9,6 +9,6 @@ public final class BlankLineRenderer implements IRenderer
     @Override
     public void Render(IConsole console, GameState gameState)
     {
-        console.NewLine();
+        console.newLine();
     }
 }

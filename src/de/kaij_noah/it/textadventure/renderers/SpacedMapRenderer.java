@@ -35,8 +35,8 @@ public final class SpacedMapRenderer extends MapRendererBase
             }
             if (y == playerTilePositionY + 1)
                 chars[playerTilePositionX + 1] = '#';
-            console.Write(chars);
-            console.NewLine();
+            console.write(chars);
+            console.newLine();
         }
     }
 }

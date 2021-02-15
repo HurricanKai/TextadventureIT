@@ -8,11 +8,11 @@ import de.kaij_noah.it.textadventure.entities.base.IGuiInitializable;
 import de.kaij_noah.it.textadventure.entities.base.IMapInitializable;
 import de.kaij_noah.it.textadventure.gui.Console;
 import de.kaij_noah.it.textadventure.mapgen.AddRandomConnectionMapPostProcessor;
-import de.kaij_noah.it.textadventure.mapgen.BacktrackingMapGenerator;
-import de.kaij_noah.it.textadventure.mapgen.OpenRoomMapGenerator;
 import de.kaij_noah.it.textadventure.math.Vector3I;
 import de.kaij_noah.it.textadventure.math.Weighted;
 import de.kaij_noah.it.textadventure.mapgen.WeightedTileGenerator;
+import de.kaij_noah.it.textadventure.options.GameOptions;
+import de.kaij_noah.it.textadventure.options.OptionsMenu;
 import de.kaij_noah.it.textadventure.renderers.*;
 import de.kaij_noah.it.textadventure.tile.campfire.CampfireGenerator;
 import de.kaij_noah.it.textadventure.tile.empty.EmptyGenerator;
@@ -36,18 +36,18 @@ public class Main
     {
         var console = new Console();
         var random = new Random();
+        var options = new GameOptions();
 
-        var mapWidth = 40;
-        var mapDepth = 15;
-        var mapHeight = 10;
+        var optionMenu = new OptionsMenu(console, options);
+        optionMenu.display();
 
         var postProcessors = new IMapPostProcessor[]
                 {
                         new AddRandomConnectionMapPostProcessor()
                 };
 
-        IMapGenerator generator = new BacktrackingMapGenerator();
-        // var generator = new OpenRoomMapGenerator();
+        IMapGenerator generator;
+        generator = options.getMapGenerator();
 
         Map map;
         IRenderer mapRenderer;
@@ -59,13 +59,13 @@ public class Main
         PlayerEntity playerEntity;
         {
             var start = System.currentTimeMillis();
-            console.NewLine();
-            console.NewLine();
-            console.NewLine();
-            console.Write("Generating Map...");
-            console.SwapBuffer();
+            console.newLine();
+            console.newLine();
+            console.newLine();
+            console.write("Generating Map...");
+            console.swapBuffer();
 
-            mapTemplate = generator.Generate(mapWidth, mapDepth, mapHeight);
+            mapTemplate = generator.Generate(options.getMapWidth(), options.getMapDepth(), options.getMapHeight());
             for (var processor : postProcessors)
                 mapTemplate = processor.Process(mapTemplate);
 
@@ -78,21 +78,21 @@ public class Main
             playerEntity = entityManager.addEntity(new PlayerEntity());
 
             gui = new MenuRenderer(map, playerEntity);
-            gameState = new GameState(playerEntity, map, entityManager);
+            gameState = new GameState(playerEntity, map, entityManager, options);
 
             generateTiles(random, mapTemplate, mapTiles, new EmptyGenerator());
             mapRenderer.Render(console, gameState);
-            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            console.write(String.format("Took %sms", System.currentTimeMillis() - start));
             System.out.printf("Map gen Took %sms\n", System.currentTimeMillis() - start);
         }
 
         {
             var start = System.currentTimeMillis();
-            console.NewLine();
-            console.NewLine();
-            console.NewLine();
-            console.Write("Populating Map...");
-            console.SwapBuffer();
+            console.newLine();
+            console.newLine();
+            console.newLine();
+            console.write("Populating Map...");
+            console.swapBuffer();
 
             var tileGenerator = new WeightedTileGenerator(new Weighted[]
                     {
@@ -106,33 +106,33 @@ public class Main
             generateTiles(random, mapTemplate, mapTiles, tileGenerator);
             mapRenderer.Render(console, gameState);
 
-            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            console.write(String.format("Took %sms", System.currentTimeMillis() - start));
             System.out.printf("Map pop Took %sms\n", System.currentTimeMillis() - start);
         }
 
         {
             var start = System.currentTimeMillis();
-            console.NewLine();
-            console.NewLine();
-            console.NewLine();
-            console.Write("Generating Pathfinding overlay...");
-            console.SwapBuffer();
+            console.newLine();
+            console.newLine();
+            console.newLine();
+            console.write("Generating Pathfinding overlay...");
+            console.swapBuffer();
             map.initializePathFinding();
-            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            console.write(String.format("Took %sms", System.currentTimeMillis() - start));
             System.out.printf("Path ov Took %sms\n", System.currentTimeMillis() - start);
         }
 
         {
             var start = System.currentTimeMillis();
-            console.NewLine();
-            console.NewLine();
-            console.NewLine();
-            console.Write("Generating Quests and Enemies...");
-            console.SwapBuffer();
+            console.newLine();
+            console.newLine();
+            console.newLine();
+            console.write("Generating Quests and Enemies...");
+            console.swapBuffer();
 
             // do stuff
 
-            console.Write(String.format("Took %sms", System.currentTimeMillis() - start));
+            console.write(String.format("Took %sms", System.currentTimeMillis() - start));
             System.out.printf("QE Took %sms\n", System.currentTimeMillis() - start);
         }
 
@@ -144,7 +144,6 @@ public class Main
                         new TitleLineRenderer(),
                         gui,
                 };
-
 
         console.addKeyListener(new KeyListener()
         {
@@ -209,7 +208,7 @@ public class Main
             }
         }
 
-        var h = entityManager.addEntity(new SimpleHomingEntity(new Vector3I(mapWidth - 1, mapDepth - 1, mapHeight - 1)));
+        var h = entityManager.addEntity(new SimpleHomingEntity(new Vector3I(options.getMapWidth() - 1, options.getMapDepth() - 1, options.getMapHeight() - 1)));
         entityManager.getAll(IMapInitializable.class).forEach(v -> v.mapInitialize(map));
         entityManager.getAll(IGuiInitializable.class).forEach(v -> v.guiInitialize(console, gui));
 
@@ -218,7 +217,7 @@ public class Main
             for (var renderable : renderables)
                 renderable.Render(console, gameState);
 
-            console.SwapBuffer();
+            console.swapBuffer();
             gameState.incrementTime();
             gameState.onStep();
             TimeUnit.MILLISECONDS.sleep(10);

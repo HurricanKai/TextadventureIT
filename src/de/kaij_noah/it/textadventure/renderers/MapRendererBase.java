@@ -28,7 +28,7 @@ public abstract class MapRendererBase implements IRenderer
         if (tileoffsetx == 0 && tileoffsety == 0) // top left
         {
             // basically, if this "pillar" would be ringed by floor, make it empty.
-            if (tile.canMoveNorth() && tile.canMoveWest())
+            if (gameState.getOptions().shouldHidePillars() && tile.canMoveNorth() && tile.canMoveWest())
             {
                 var diagonal = map.getOptionalTile(tilex - 1, tiley - 1, tilez);
                 if (diagonal == null || (diagonal.canMoveSouth() && diagonal.canMoveEast()))
@@ -43,7 +43,7 @@ public abstract class MapRendererBase implements IRenderer
         // see first case
         else if (tileoffsetx == 2 && tileoffsety == 0) // top right
         {
-            if (tile.canMoveNorth() && tile.canMoveEast())
+            if (gameState.getOptions().shouldHidePillars() && tile.canMoveNorth() && tile.canMoveEast())
             {
                 var diagonal = map.getOptionalTile(tilex - 1, tiley + 1, tilez);
                 if (diagonal == null || (diagonal.canMoveSouth() && diagonal.canMoveWest()))
@@ -57,7 +57,7 @@ public abstract class MapRendererBase implements IRenderer
         // see first case
         else if (tileoffsetx == 0 && tileoffsety == 2) // bottom left
         {
-            if (tile.canMoveSouth() && tile.canMoveWest())
+            if (gameState.getOptions().shouldHidePillars() && tile.canMoveSouth() && tile.canMoveWest())
             {
                 var diagonal = map.getOptionalTile(tilex + 1, tiley - 1, tilez);
                 if (diagonal == null || (diagonal.canMoveNorth() && diagonal.canMoveEast()))
@@ -71,7 +71,7 @@ public abstract class MapRendererBase implements IRenderer
         // see first case
         else if (tileoffsetx == 2 && tileoffsety == 2) // bottom right
         {
-            if (tile.canMoveSouth() && tile.canMoveEast())
+            if (gameState.getOptions().shouldHidePillars() && tile.canMoveSouth() && tile.canMoveEast())
             {
                 var diagonal = map.getOptionalTile(tilex + 1, tiley + 1, tilez);
                 if (diagonal == null || (diagonal.canMoveNorth() && diagonal.canMoveWest()))

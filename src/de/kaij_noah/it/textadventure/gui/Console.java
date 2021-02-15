@@ -37,25 +37,25 @@ public final class Console implements de.kaij_noah.it.textadventure.base.IConsol
     }
 
     @Override
-    public void Write(char[] chars)
+    public void write(char[] chars)
     {
         backBuffer.append(String.copyValueOf(chars));
     }
 
     @Override
-    public void Write(String string)
+    public void write(String string)
     {
         backBuffer.append(string);
     }
 
     @Override
-    public void NewLine()
+    public void newLine()
     {
         backBuffer.append("\n");
     }
 
     @Override
-    public void SwapBuffer()
+    public void swapBuffer()
     {
         textArea.setText(backBuffer.toString());
         backBuffer = new StringBuilder();
