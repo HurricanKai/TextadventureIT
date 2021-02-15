@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public final class EntityManager
 {
-    private ArrayList<IEntity> entities = new ArrayList<>();
+    private final ArrayList<IEntity> entities = new ArrayList<>();
 
     public <T extends IEntity> Stream<T> getAll(Class<T> tClass)
     {

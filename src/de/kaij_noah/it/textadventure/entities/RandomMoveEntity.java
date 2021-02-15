@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public abstract class RandomMoveEntity extends BaseEntity
 {
-    private ArrayList<Vector3I> dirs = new ArrayList<>();
+    private final ArrayList<Vector3I> dirs = new ArrayList<>();
 
     public RandomMoveEntity(Vector3I position)
     {
