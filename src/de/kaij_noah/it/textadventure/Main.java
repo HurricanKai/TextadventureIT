@@ -72,7 +72,7 @@ public class Main
             mapTiles = new Tile[mapTemplate.length][mapTemplate[0].length][mapTemplate[0][0].length];
 
             map = new Map(mapTiles.length, mapTiles[0].length, mapTiles[0][0].length, mapTiles);
-            mapRenderer = new CompactMapRenderer(map);
+            mapRenderer = new ZoomedCompactMapRenderer(map);
 
             entityManager = new EntityManager();
             playerEntity = entityManager.addEntity(new PlayerEntity());
