@@ -23,6 +23,12 @@ public final class Teleporter extends Tile
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
         this.target = target;
         this.directionString = directionString;
+    }
+
+    @Override
+    public void initialize(GameState gameState)
+    {
+        super.initialize(gameState);
         setAppearance('Т');
     }
 

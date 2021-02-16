@@ -23,7 +23,6 @@ public abstract class DialogTile extends Tile
         var builder = new DialogBuilder();
         buildDialog(builder);
         rootDialog = builder.Build();
-        currentDialog = rootDialog;
 
         var entryLines = getEntryLines();
         if (entryLines != null)
@@ -51,10 +50,17 @@ public abstract class DialogTile extends Tile
         }
     }
 
-    @Override
-    public char renderFloor()
+    private void setCurrentDialog(DialogNode dialogNode)
     {
-        return currentDialog.Appearance;
+        setAppearance(dialogNode.Appearance);
+        currentDialog = dialogNode;
+    }
+
+    @Override
+    public void initialize(GameState gameState)
+    {
+        super.initialize(gameState);
+        setCurrentDialog(rootDialog);
     }
 
     @Override
@@ -78,7 +84,7 @@ public abstract class DialogTile extends Tile
             if (!isFirstVisit && entryDialogNode != null)
             {
                 tempEntryStore = currentDialog;
-                currentDialog = entryDialogNode;
+                setCurrentDialog(entryDialogNode);
             }
         }
     }
@@ -92,7 +98,7 @@ public abstract class DialogTile extends Tile
             isFirstVisit = false;
             if (tempEntryStore != null)
             {
-                currentDialog = tempEntryStore;
+                setCurrentDialog(currentDialog);
                 tempEntryStore = null;
             }
         }
@@ -187,7 +193,7 @@ public abstract class DialogTile extends Tile
                     @Override
                     public void Execute(GameState gameState)
                     {
-                        currentDialog = childNode;
+                        setCurrentDialog(childNode);
                         if (childBuilder.action != null)
                         {
                             childBuilder.action.Invoke(gameState);

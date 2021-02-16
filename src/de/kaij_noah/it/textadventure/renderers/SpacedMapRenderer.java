@@ -3,14 +3,15 @@ package de.kaij_noah.it.textadventure.renderers;
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.Map;
+import de.kaij_noah.it.textadventure.options.GameOptions;
 
 public final class SpacedMapRenderer extends MapRendererBase
 {
     private final char[] chars;
 
-    public SpacedMapRenderer(Map map)
+    public SpacedMapRenderer(Map map, GameOptions options)
     {
-        super(map);
+        super(map, options);
         chars = new char[map.getSizeX() * 3];
     }
 
@@ -31,7 +32,7 @@ public final class SpacedMapRenderer extends MapRendererBase
                 var tilex = x / 3;
                 var tileoffsetx = x % 3;
 
-                chars[x] = getTileOffsetChar(map, tilex, tiley, z, tileoffsetx, tileoffsety, gameState);
+                // chars[x] = getTileOffsetIcon(map, tilex, tiley, z, tileoffsetx, tileoffsety, gameState);
             }
             if (y == playerTilePositionY + 1)
                 chars[playerTilePositionX + 1] = '#';
