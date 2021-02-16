@@ -38,8 +38,8 @@ public class Main
         var random = new Random();
         var options = new GameOptions();
 
-        var optionMenu = new OptionsMenu(console, options);
-        optionMenu.display();
+        // var optionMenu = new OptionsMenu(console, options);
+        // optionMenu.display();
 
         var postProcessors = new IMapPostProcessor[]
                 {
