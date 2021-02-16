@@ -82,6 +82,6 @@ public final class Console implements de.kaij_noah.it.textadventure.base.IConsol
     @Override
     public void addKeyListener(KeyListener keyListener)
     {
-        textArea.addKeyListener(keyListener);
+        frame.addKeyListener(keyListener);
     }
 }

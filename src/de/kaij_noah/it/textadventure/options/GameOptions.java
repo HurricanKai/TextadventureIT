@@ -10,8 +10,8 @@ public final class GameOptions
 {
     private boolean shouldHidePillars = true;
     private MapGeneratorKind mapGeneratorKind = MapGeneratorKind.Backtracking;
-    private int mapWidth = 40;
-    private int mapDepth = 15;
+    private int mapWidth = 120;
+    private int mapDepth = 120;
     private int mapHeight = 10;
 
     public boolean shouldHidePillars()
