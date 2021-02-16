@@ -6,6 +6,7 @@ import de.kaij_noah.it.textadventure.entities.PlayerEntity;
 import de.kaij_noah.it.textadventure.entities.SimpleHomingEntity;
 import de.kaij_noah.it.textadventure.entities.base.IGuiInitializable;
 import de.kaij_noah.it.textadventure.entities.base.IMapInitializable;
+import de.kaij_noah.it.textadventure.entities.base.IOptionsInitializable;
 import de.kaij_noah.it.textadventure.gui.Console;
 import de.kaij_noah.it.textadventure.mapgen.AddRandomConnectionMapPostProcessor;
 import de.kaij_noah.it.textadventure.math.Vector3I;
@@ -209,6 +210,8 @@ public class Main
         }
 
         var h = entityManager.addEntity(new SimpleHomingEntity(new Vector3I(options.getMapWidth() - 1, options.getMapDepth() - 1, options.getMapHeight() - 1)));
+
+        entityManager.getAll(IOptionsInitializable.class).forEach(v -> v.optionsInitialize(options));
         entityManager.getAll(IMapInitializable.class).forEach(v -> v.mapInitialize(map));
         entityManager.getAll(IGuiInitializable.class).forEach(v -> v.guiInitialize(console, gui));
 

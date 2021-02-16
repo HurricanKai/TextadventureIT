@@ -1,15 +1,14 @@
 package de.kaij_noah.it.textadventure.base;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
 public final class Icon
 {
-    public static final Icon DebugIcon = CreateCheckerboardPattern();
+    public static final Icon DebugIcon = createCheckerboardPattern();
 
-    private static Icon CreateCheckerboardPattern()
+    private static Icon createCheckerboardPattern()
     {
         // NOTE: THIS WILL BREAK EVERYTHING WHEN NON-32 ICON SIZE IS CHOSEN
         var v = new Icon(32, 16);
@@ -40,7 +39,7 @@ public final class Icon
         put('4', '█');
     }};
 
-    public static Icon LoadFromText(String text, Dictionary<Character, Character> pallet)
+    public static Icon loadFromText(String text, Dictionary<Character, Character> pallet)
     {
         var lines = text.split("\n");
         var height = lines.length;
@@ -71,6 +70,13 @@ public final class Icon
         this.width = width;
         this.height = height;
         chars = new char[width * height];
+    }
+
+    public static Icon createFromSingle(char c, int width, int height)
+    {
+        var v = new Icon(width, height);
+        v.fill(c);
+        return v;
     }
 
     public char getCharAt(int x, int y)

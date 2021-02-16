@@ -2,6 +2,7 @@ package de.kaij_noah.it.textadventure.renderers;
 
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IConsole;
+import de.kaij_noah.it.textadventure.base.Icon;
 import de.kaij_noah.it.textadventure.base.Map;
 import de.kaij_noah.it.textadventure.options.GameOptions;
 
@@ -75,11 +76,15 @@ public final class ZoomedCompactMapRenderer extends MapRendererBase
                                         || entity.getPosition().Y < minTileY || entity.getPosition().Y > maxTileY)
                                     continue;
 
+                                var icon = entity.render();
+                                if (icon == null)
+                                    icon = Icon.DebugIcon;
+
                                 for (int iconx = 0; iconx < iconSize; iconx++)
                                 {
                                     for (int zoomx = 0; zoomx < zoomFactorX; zoomx++)
                                     {
-                                        chars[(((entity.getPosition().X - minTileX) * 2 + 1) * iconSize + iconx) * zoomFactorX + zoomx] = entity.render();
+                                        chars[(((entity.getPosition().X - minTileX) * 2 + 1) * iconSize + iconx) * zoomFactorX + zoomx] = icon.getCharAt(iconx, icony);
                                     }
                                 }
                             }

@@ -59,9 +59,7 @@ public abstract class Tile
     }
     protected void setAppearance(char appearance)
     {
-        var v = new Icon(iconSize, iconSize / 2);
-        v.fill(appearance);
-        setAppearance(v);
+        setAppearance(Icon.createFromSingle(appearance, iconSize, iconSize / 2));
     }
 
     public abstract String[] getTitleLines(GameState gameState);

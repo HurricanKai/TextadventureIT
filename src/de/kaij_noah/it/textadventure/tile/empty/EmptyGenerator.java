@@ -3,7 +3,6 @@ package de.kaij_noah.it.textadventure.tile.empty;
 import de.kaij_noah.it.textadventure.base.ITileGenerator;
 import de.kaij_noah.it.textadventure.base.Tile;
 import de.kaij_noah.it.textadventure.base.TileTemplate;
-import de.kaij_noah.it.textadventure.tile.special.DebugTile;
 
 import java.util.Random;
 

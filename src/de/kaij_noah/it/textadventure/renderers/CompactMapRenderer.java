@@ -54,7 +54,13 @@ public final class CompactMapRenderer extends MapRendererBase
                         if (entities != null)
                         {
                             for (var entity : entities)
-                                chars[entity.getPosition().X * 2 + 1] = entity.render();
+                            {
+                                var icon = entity.render();
+                                for (int tilex = 0; tilex < map.getSizeX(); tilex++)
+                                {
+                                    //chars[entity.getPosition().X * 2 + 1] = icon;
+                                }
+                            }
                         }
                     }
                     console.write(chars);
