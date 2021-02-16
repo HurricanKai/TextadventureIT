@@ -16,10 +16,10 @@ public final class ZoomedCompactMapRenderer extends MapRendererBase
         chars = new char[viewRangeX * zoomFactorX * 3 + 1];
     }
 
-    private final int zoomFactorX = 2;
-    private final int zoomFactorY = 2;
-    private final int viewRangeX = 32;
-    private final int viewRangeY = 8;
+    private final int zoomFactorX = 1;
+    private final int zoomFactorY = 1;
+    private final int viewRangeX = 64 * zoomFactorX;
+    private final int viewRangeY = 24 * zoomFactorY;
     @Override
     public void Render(IConsole console, GameState gameState)
     {
@@ -50,7 +50,6 @@ public final class ZoomedCompactMapRenderer extends MapRendererBase
                         for (int zoomx = 0; zoomx < zoomFactorX; zoomx++)
                         {
                             chars[((tilex - minTileX) * 2 + tileoffsetx) * zoomFactorX + zoomx] = c;
-                            i++;
                         }
                     }
                 }
@@ -80,7 +79,6 @@ public final class ZoomedCompactMapRenderer extends MapRendererBase
                     console.write(chars);
                     console.newLine();
                 }
-                System.out.println(i);
             }
         }
     }

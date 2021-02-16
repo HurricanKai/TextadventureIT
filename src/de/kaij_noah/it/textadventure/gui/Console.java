@@ -8,57 +8,57 @@ import java.io.IOException;
 
 public final class Console implements de.kaij_noah.it.textadventure.base.IConsole
 {
-    private final JTextArea textArea;
+    private final CustomTextComponent textArea;
     private final Font font;
     private final JFrame frame;
-    private StringBuilder backBuffer;
+    private StringBuilder lineBuffer;
 
     public Console() throws IOException, FontFormatException
     {
         frame = new JFrame("TitleLessJFrame");
-        //frame.setUndecorated(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
 
-        textArea = new JTextArea();
+        var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/Inconsolata/OpenType-TT/Inconsolata-Medium.ttf"));
+        font = tempfont.deriveFont(10f);
+        textArea = new CustomTextComponent(font);
         textArea.setBackground(Color.BLACK);
         frame.getContentPane().add(textArea);
         textArea.setSize(frame.getSize());
+        textArea.setPreferredSize(frame.getSize());
         textArea.setForeground(Color.WHITE);
-        // textArea.setLineWrap(true);
-        var c = textArea.getCaret();
-        c.setSelectionVisible(false);
-        textArea.setCaretColor(Color.WHITE);
-        var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/Inconsolata/OpenType-TT/Inconsolata-Medium.ttf"));
-        font = tempfont.deriveFont(15f);
-        textArea.setFont(font);
-        backBuffer = new StringBuilder();
+        lineBuffer = new StringBuilder();
     }
 
     @Override
     public void write(char[] chars)
     {
-        backBuffer.append(String.copyValueOf(chars));
+        lineBuffer.append(String.copyValueOf(chars));
     }
 
     @Override
     public void write(String string)
     {
-        backBuffer.append(string);
+        lineBuffer.append(string);
     }
 
     @Override
     public void newLine()
     {
-        backBuffer.append("\n");
+        textArea.addLine(lineBuffer.toString());
+        lineBuffer.setLength(0);
     }
 
     @Override
     public void swapBuffer()
     {
-        textArea.setText(backBuffer.toString());
-        backBuffer = new StringBuilder();
+        if (lineBuffer.length() != 0)
+        {
+            textArea.addLine(lineBuffer.toString());
+            lineBuffer.setLength(0);
+        }
+        textArea.swapBuffers();
     }
 
     @Override
@@ -82,6 +82,6 @@ public final class Console implements de.kaij_noah.it.textadventure.base.IConsol
     @Override
     public void addKeyListener(KeyListener keyListener)
     {
-        textArea.addKeyListener(keyListener);
+        frame.addKeyListener(keyListener);
     }
 }

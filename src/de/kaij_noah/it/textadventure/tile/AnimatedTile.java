@@ -24,6 +24,6 @@ public abstract class AnimatedTile extends Tile
     {
         super.onStep(gameState);
         var tiles = getPossibleTiles();
-        setAppearance(tiles[(gameState.getTime() + startIndex) % tiles.length]);
+        setAppearance(tiles[((gameState.getTime() / 100) + startIndex) % tiles.length]);
     }
 }
