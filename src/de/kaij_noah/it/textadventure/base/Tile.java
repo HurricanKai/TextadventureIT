@@ -12,7 +12,8 @@ public abstract class Tile
     private final boolean canMoveEast;
     private final boolean canMoveNorth;
     private final boolean canMoveSouth;
-    private char appearance;
+    private Icon appearance;
+    private int iconSize;
 
     public Tile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
@@ -44,16 +45,21 @@ public abstract class Tile
 
     public void initialize(GameState gameState)
     {
+        iconSize = gameState.getOptions().getIconSize();
     }
 
-    public char renderFloor()
+    public Icon renderFloor()
     {
         return appearance;
     }
 
-    protected void setAppearance(char appearance)
+    protected void setAppearance(Icon appearance)
     {
         this.appearance = appearance;
+    }
+    protected void setAppearance(char appearance)
+    {
+        setAppearance(Icon.createFromSingle(appearance, iconSize, iconSize / 2));
     }
 
     public abstract String[] getTitleLines(GameState gameState);

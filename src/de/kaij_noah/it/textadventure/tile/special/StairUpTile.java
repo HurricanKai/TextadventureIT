@@ -15,6 +15,12 @@ public final class StairUpTile extends Tile
     public StairUpTile(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
+    }
+
+    @Override
+    public void initialize(GameState gameState)
+    {
+        super.initialize(gameState);
         setAppearance('u');
     }
 

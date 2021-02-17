@@ -32,6 +32,9 @@ final class CustomTextComponent extends JComponent
     @Override
     public void paint(Graphics g)
     {
+        if (drawQueue.isEmpty())
+            return;
+
         var lines = drawQueue.remove();
         var bounds = g.getClipBounds();
         g.setColor(this.getBackground());

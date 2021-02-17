@@ -8,5 +8,5 @@ public interface IEntity
     void setPosition(Vector3I position);
     boolean hasDied();
     void onStep(GameState gameState);
-    char render();
+    Icon render();
 }

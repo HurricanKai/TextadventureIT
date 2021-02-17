@@ -12,6 +12,12 @@ public final class Spikes extends Tile
     public Spikes(boolean canMoveWest, boolean canMoveEast, boolean canMoveNorth, boolean canMoveSouth)
     {
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
+    }
+
+    @Override
+    public void initialize(GameState gameState)
+    {
+        super.initialize(gameState);
         setAppearance('Ѕ');
     }
 

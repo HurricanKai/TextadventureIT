@@ -21,7 +21,7 @@ public final class Console implements de.kaij_noah.it.textadventure.base.IConsol
         frame.setVisible(true);
 
         var tempfont = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/Inconsolata/OpenType-TT/Inconsolata-Medium.ttf"));
-        font = tempfont.deriveFont(10f);
+        font = tempfont.deriveFont(7f);
         textArea = new CustomTextComponent(font);
         textArea.setBackground(Color.BLACK);
         frame.getContentPane().add(textArea);

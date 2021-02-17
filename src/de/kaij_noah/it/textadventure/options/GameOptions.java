@@ -4,8 +4,6 @@ import de.kaij_noah.it.textadventure.base.IMapGenerator;
 import de.kaij_noah.it.textadventure.mapgen.BacktrackingMapGenerator;
 import de.kaij_noah.it.textadventure.mapgen.OpenRoomMapGenerator;
 
-import static de.kaij_noah.it.textadventure.options.MapGeneratorKind.OpenRoom;
-
 public final class GameOptions
 {
     private boolean shouldHidePillars = true;
@@ -13,6 +11,7 @@ public final class GameOptions
     private int mapWidth = 120;
     private int mapDepth = 120;
     private int mapHeight = 10;
+    private int iconSize = 32;
 
     public boolean shouldHidePillars()
     {
@@ -77,5 +76,15 @@ public final class GameOptions
                 break;
         }
         return generator;
+    }
+
+    public int getIconSize()
+    {
+        return iconSize;
+    }
+
+    public void setIconSize(int iconSize)
+    {
+        this.iconSize = iconSize;
     }
 }

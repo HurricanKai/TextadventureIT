@@ -1,25 +1,32 @@
 package de.kaij_noah.it.textadventure.renderers;
 
-import de.kaij_noah.it.textadventure.base.GameState;
-import de.kaij_noah.it.textadventure.base.IRenderer;
-import de.kaij_noah.it.textadventure.base.Map;
-import de.kaij_noah.it.textadventure.base.Tile;
+import de.kaij_noah.it.textadventure.base.*;
+import de.kaij_noah.it.textadventure.options.GameOptions;
 
 public abstract class MapRendererBase implements IRenderer
 {
-    private static final char Block = '█';
-    private static final char RightBlock = Block;
-    private static final char LeftBlock = Block;
-    private static final char UpBlock = Block;
-    private static final char DownBlock = Block;
-    private static final char Empty = ' ';
+    private final Icon Block;
+    private final Icon RightBlock;
+    private final Icon LeftBlock;
+    private final Icon UpBlock ;
+    private final Icon DownBlock;
+    private final Icon Empty;
     protected final Map map;
-    public MapRendererBase(Map map)
+    public MapRendererBase(Map map, GameOptions options)
     {
         this.map = map;
+        var iconSize = options.getIconSize();
+        Empty = new Icon(iconSize, iconSize / 2);
+        Empty.fill(' ');
+        Block = new Icon(iconSize, iconSize / 2);
+        Block.fill('█');
+        RightBlock = Block;
+        LeftBlock = Block;
+        UpBlock = Block;
+        DownBlock = Block;
     }
 
-    protected char getTileOffsetChar(Map map, int tilex, int tiley, int tilez, int tileoffsetx, int tileoffsety, GameState gameState)
+    protected Icon getTileOffsetIcon(Map map, int tilex, int tiley, int tilez, int tileoffsetx, int tileoffsety, GameState gameState)
     {
         var tile = map.getTile(tilex, tiley, tilez);
 
@@ -102,9 +109,12 @@ public abstract class MapRendererBase implements IRenderer
         }
         else if (tileoffsetx == 1 && tileoffsety == 1) // center
         {
-            return tile.renderFloor();
+            var icon = tile.renderFloor();
+            if (icon == null)
+                icon = Icon.DebugIcon;
+            return icon;
         }
 
-        throw null;
+        throw new ArithmeticException();
     }
 }
