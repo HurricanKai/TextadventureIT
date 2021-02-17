@@ -4,6 +4,7 @@ import de.kaij_noah.it.textadventure.MenuDisplays.HealthMenuDisplay;
 import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.IMenuManager;
 import de.kaij_noah.it.textadventure.base.Icon;
+import de.kaij_noah.it.textadventure.base.IconCache;
 import de.kaij_noah.it.textadventure.entities.base.IGuiInitializable;
 import de.kaij_noah.it.textadventure.entities.base.IHealthEntity;
 import de.kaij_noah.it.textadventure.entities.base.IOptionsInitializable;
@@ -51,6 +52,6 @@ public final class PlayerEntity extends BaseEntity implements IGuiInitializable,
     @Override
     public void optionsInitialize(GameOptions options)
     {
-        icon = Icon.createFromSingle('#', options.getIconSize(), options.getIconSize() / 2);
+        icon = IconCache.Instance.getIcon("Player");
     }
 }
