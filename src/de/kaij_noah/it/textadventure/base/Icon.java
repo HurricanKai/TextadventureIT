@@ -1,8 +1,6 @@
 package de.kaij_noah.it.textadventure.base;
 
-import java.util.Arrays;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.*;
 
 public final class Icon
 {
@@ -42,18 +40,48 @@ public final class Icon
     public static Icon loadFromText(String text, Dictionary<Character, Character> pallet)
     {
         var lines = text.split("\n");
-        var height = lines.length;
-        var width = lines[0].length() / 2;
+        return loadFromLines(lines, 0, lines.length, pallet);
+    }
+
+    public static Icon loadFromLines(String[] lines, int start, int end, Dictionary<Character, Character> pallet)
+    {
+        var height = end - start;
+        var width = lines[start].length() / 2;
         var icon = new Icon(width, height);
-        for (int y = 0; y < height; y++)
+        for (int y = start; y < end; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                icon.setCharAt(x, y, pallet.get(lines[y].charAt(x * 2)));
+                icon.setCharAt(x, y - start, pallet.get(lines[y].charAt(x * 2)));
             }
         }
 
         return icon;
+    }
+
+    public static Icon[] loadAnimatedFromText(String text, Dictionary<Character, Character> pallet)
+    {
+        var icons = new ArrayList<Icon>();
+        var lines = text.split("\n");
+        var last = 0;
+        for (int i = 0; i < lines.length; i++)
+        {
+            if (lines[i].startsWith(";Frame"))
+            {
+                var diff = i - last;
+                if (diff > 0)
+                {
+                    icons.add(loadFromLines(lines, last + 1, i, pallet));
+                }
+
+                last = i;
+            }
+        }
+        icons.add(loadFromLines(lines, last + 1, lines.length, pallet));
+
+        var v = new Icon[icons.size()];
+        icons.toArray(v);
+        return v;
     }
 
     private final char[] chars;

@@ -1,6 +1,7 @@
 package de.kaij_noah.it.textadventure.tile;
 
 import de.kaij_noah.it.textadventure.base.GameState;
+import de.kaij_noah.it.textadventure.base.Icon;
 import de.kaij_noah.it.textadventure.base.Tile;
 
 public abstract class AnimatedTile extends Tile
@@ -12,7 +13,7 @@ public abstract class AnimatedTile extends Tile
         super(canMoveWest, canMoveEast, canMoveNorth, canMoveSouth);
     }
 
-    protected abstract char[] getPossibleTiles();
+    protected abstract Icon[] getPossibleTiles();
 
     protected void setStartIndex(int startIndex)
     {
