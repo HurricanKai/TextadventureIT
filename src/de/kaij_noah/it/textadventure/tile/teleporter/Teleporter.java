@@ -1,8 +1,6 @@
 package de.kaij_noah.it.textadventure.tile.teleporter;
 
-import de.kaij_noah.it.textadventure.base.GameState;
-import de.kaij_noah.it.textadventure.base.IAction;
-import de.kaij_noah.it.textadventure.base.Tile;
+import de.kaij_noah.it.textadventure.base.*;
 import de.kaij_noah.it.textadventure.math.Vector3I;
 import de.kaij_noah.it.textadventure.math.Weighted;
 
@@ -29,7 +27,7 @@ public final class Teleporter extends Tile
     public void initialize(GameState gameState)
     {
         super.initialize(gameState);
-        setAppearance('Т');
+        setAppearance(IconCache.Instance.getIcon("Teleporter"));
     }
 
     @Override

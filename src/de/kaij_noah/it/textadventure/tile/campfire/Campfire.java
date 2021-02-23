@@ -21,7 +21,6 @@ public final class Campfire extends AnimatedTile
     public void initialize(GameState gameState)
     {
         super.initialize(gameState);
-        setAppearance(IconCache.Instance.getIcon("Campfire"));
     }
 
     @Override
@@ -53,6 +52,6 @@ public final class Campfire extends AnimatedTile
     @Override
     protected Icon[] getPossibleTiles()
     {
-        return IconCache.Instance.getAnimatedIcon("test-animated");
+        return IconCache.Instance.getAnimatedIcon("Campfire");
     }
 }

@@ -1,6 +1,7 @@
 package de.kaij_noah.it.textadventure.tile.empty;
 
 import de.kaij_noah.it.textadventure.base.GameState;
+import de.kaij_noah.it.textadventure.base.IconCache;
 import de.kaij_noah.it.textadventure.base.Tile;
 
 public class EmptyTile extends Tile
@@ -16,7 +17,7 @@ public class EmptyTile extends Tile
     public void initialize(GameState gameState)
     {
         super.initialize(gameState);
-        setAppearance(' ');
+        setAppearance(IconCache.Instance.getIcon("Floor"));
     }
 
     @Override

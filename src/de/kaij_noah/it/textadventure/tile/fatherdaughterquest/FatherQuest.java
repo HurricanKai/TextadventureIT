@@ -2,6 +2,7 @@ package de.kaij_noah.it.textadventure.tile.fatherdaughterquest;
 
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IAction;
+import de.kaij_noah.it.textadventure.base.IconCache;
 import de.kaij_noah.it.textadventure.base.Tile;
 
 import java.util.List;
@@ -59,11 +60,11 @@ public final class FatherQuest extends Tile
         fatherQuestStarted = gameState.getState("fatherQuestStarted");
         if (fatherQuestFinished)
         {
-            setAppearance('а');
+            setAppearance(IconCache.Instance.getIcon("FatherDaughter"));
         }
         else
         {
-            setAppearance('А');
+            setAppearance(IconCache.Instance.getIcon("Father"));
         }
     }
 

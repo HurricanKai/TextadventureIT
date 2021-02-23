@@ -1,8 +1,6 @@
 package de.kaij_noah.it.textadventure.tile.special;
 
-import de.kaij_noah.it.textadventure.base.GameState;
-import de.kaij_noah.it.textadventure.base.IAction;
-import de.kaij_noah.it.textadventure.base.Tile;
+import de.kaij_noah.it.textadventure.base.*;
 import de.kaij_noah.it.textadventure.math.Vector3I;
 import de.kaij_noah.it.textadventure.math.Weighted;
 
@@ -21,7 +19,7 @@ public final class StairUpTile extends Tile
     public void initialize(GameState gameState)
     {
         super.initialize(gameState);
-        setAppearance('u');
+        setAppearance(IconCache.Instance.getIcon("StairUp"));
     }
 
     @Override

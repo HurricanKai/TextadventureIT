@@ -2,6 +2,7 @@ package de.kaij_noah.it.textadventure.tile.spikes;
 
 import de.kaij_noah.it.textadventure.base.GameState;
 import de.kaij_noah.it.textadventure.base.IEntity;
+import de.kaij_noah.it.textadventure.base.IconCache;
 import de.kaij_noah.it.textadventure.base.Tile;
 import de.kaij_noah.it.textadventure.entities.base.IHealthEntity;
 
@@ -18,7 +19,7 @@ public final class Spikes extends Tile
     public void initialize(GameState gameState)
     {
         super.initialize(gameState);
-        setAppearance('Ѕ');
+        setAppearance(IconCache.Instance.getIcon("Spike"));
     }
 
     @Override

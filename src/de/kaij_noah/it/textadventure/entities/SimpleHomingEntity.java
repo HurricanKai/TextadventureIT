@@ -52,6 +52,6 @@ public final class SimpleHomingEntity extends BaseEntity implements IMapInitiali
     @Override
     public void optionsInitialize(GameOptions options)
     {
-        icon = Icon.createFromSingle('H', options.getIconSize(), options.getIconSize() / 2);
+        icon = Icon.DebugIcon;
     }
 }

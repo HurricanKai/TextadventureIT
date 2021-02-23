@@ -57,10 +57,6 @@ public abstract class Tile
     {
         this.appearance = appearance;
     }
-    protected void setAppearance(char appearance)
-    {
-        setAppearance(Icon.createFromSingle(appearance, iconSize, iconSize / 2));
-    }
 
     public abstract String[] getTitleLines(GameState gameState);
 

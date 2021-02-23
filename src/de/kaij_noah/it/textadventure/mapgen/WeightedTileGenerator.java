@@ -1,9 +1,6 @@
 package de.kaij_noah.it.textadventure.mapgen;
 
-import de.kaij_noah.it.textadventure.base.GameState;
-import de.kaij_noah.it.textadventure.base.ITileGenerator;
-import de.kaij_noah.it.textadventure.base.Tile;
-import de.kaij_noah.it.textadventure.base.TileTemplate;
+import de.kaij_noah.it.textadventure.base.*;
 import de.kaij_noah.it.textadventure.math.Weighted;
 
 import java.util.Arrays;
@@ -46,7 +43,7 @@ public final class WeightedTileGenerator implements ITileGenerator
             public void initialize(GameState gameState)
             {
                 super.initialize(gameState);
-                setAppearance('E');
+                setAppearance(Icon.DebugIcon);
             }
 
             @Override
