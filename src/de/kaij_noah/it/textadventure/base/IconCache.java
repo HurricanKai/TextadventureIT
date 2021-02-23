@@ -13,6 +13,7 @@ public final class IconCache
     public static final IconCache Instance = new IconCache();
 
     private final HashMap<String, Icon> cache = new HashMap<>();
+    private final HashMap<String, Icon[]> animatedCache = new HashMap<>();
     private IconCache()
     {
 
@@ -35,6 +36,26 @@ public final class IconCache
         }
 
         cache.put(name, res);
+        return res;
+    }
+
+    public Icon[] getAnimatedIcon(String name)
+    {
+        if (animatedCache.containsKey(name))
+            return animatedCache.get(name);
+
+        Icon[] res;
+        try
+        {
+            res = Icon.loadAnimatedFromText(Files.readString(Path.of("./resources/Icons/" + name)), Icon.DefaultPallet);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            res = new Icon[] { Icon.DebugIcon };
+        }
+
+        animatedCache.put(name, res);
         return res;
     }
 }
