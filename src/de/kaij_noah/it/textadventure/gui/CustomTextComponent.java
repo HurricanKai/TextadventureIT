@@ -33,7 +33,6 @@ final class CustomTextComponent extends JComponent
     @Override
     public void paint(Graphics g)
     {
-        System.out.printf("%s %s\n", drawQueue.size(), writeQueue.size());
         if (drawQueue.isEmpty())
             return;
 
