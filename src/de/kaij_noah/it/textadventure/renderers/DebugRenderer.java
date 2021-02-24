@@ -10,7 +10,7 @@ public final class DebugRenderer implements IRenderer
     private long lastFrame;
 
     @Override
-    public void Render(IConsole console, GameState gameState)
+    public void render(IConsole console, GameState gameState)
     {
         var currentTime = System.currentTimeMillis();
         var diff = currentTime - lastFrame;

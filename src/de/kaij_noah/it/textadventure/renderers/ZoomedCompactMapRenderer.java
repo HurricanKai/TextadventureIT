@@ -23,7 +23,7 @@ public final class ZoomedCompactMapRenderer extends MapRendererBase
     private final int viewRangeX = 5 * zoomFactorX;
     private final int viewRangeY = 5 * zoomFactorY;
     @Override
-    public void Render(IConsole console, GameState gameState)
+    public void render(IConsole console, GameState gameState)
     {
         chars = new char[viewRangeX * zoomFactorX * 3 * gameState.getOptions().getIconSize() + 1];
         var iconSize = gameState.getOptions().getIconSize();

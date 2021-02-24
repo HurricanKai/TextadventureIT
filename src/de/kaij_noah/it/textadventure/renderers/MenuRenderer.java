@@ -20,7 +20,7 @@ public final class MenuRenderer implements IRenderer, IMenuManager
     }
 
     @Override
-    public void Render(IConsole console, GameState gameState)
+    public void render(IConsole console, GameState gameState)
     {
         int maxLineLength = 0;
         int spaceWidth = console.getCharWidth(' ');

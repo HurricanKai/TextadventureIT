@@ -7,7 +7,7 @@ import de.kaij_noah.it.textadventure.base.IRenderer;
 public final class TitleLineRenderer implements IRenderer
 {
     @Override
-    public void Render(IConsole console, GameState gameState)
+    public void render(IConsole console, GameState gameState)
     {
         var titleLines = gameState.getMap().getTile(gameState.getPlayerEntity().getPosition()).getTitleLines(gameState);
 

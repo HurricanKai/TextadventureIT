@@ -1,5 +1,6 @@
 package de.kaij_noah.it.textadventure.tile.testdialog;
 
+import de.kaij_noah.it.textadventure.base.Icon;
 import de.kaij_noah.it.textadventure.tile.DialogTile;
 
 public final class TestDialogTile extends DialogTile
@@ -17,7 +18,7 @@ public final class TestDialogTile extends DialogTile
     @Override
     protected void buildDialog(DialogBuilder dialogBuilder)
     {
-        dialogBuilder.ChangeAppearance('X');
+        dialogBuilder.ChangeAppearance(Icon.DebugIcon);
 
         dialogBuilder.AddOption("1", (b1) -> b1
                         .AddOption("1-1", (b11) -> b11

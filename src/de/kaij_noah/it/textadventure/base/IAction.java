@@ -4,5 +4,5 @@ public interface IAction
 {
     String getDescription();
 
-    void Execute(GameState gameState);
+    void Execute(GameState gameState);      //todo name conventions kontrollieren
 }

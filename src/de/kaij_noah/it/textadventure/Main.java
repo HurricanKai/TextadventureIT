@@ -13,7 +13,6 @@ import de.kaij_noah.it.textadventure.math.Vector3I;
 import de.kaij_noah.it.textadventure.math.Weighted;
 import de.kaij_noah.it.textadventure.mapgen.WeightedTileGenerator;
 import de.kaij_noah.it.textadventure.options.GameOptions;
-import de.kaij_noah.it.textadventure.options.OptionsMenu;
 import de.kaij_noah.it.textadventure.renderers.*;
 import de.kaij_noah.it.textadventure.tile.campfire.CampfireGenerator;
 import de.kaij_noah.it.textadventure.tile.empty.EmptyGenerator;
@@ -82,7 +81,7 @@ public class Main
             gameState = new GameState(playerEntity, map, entityManager, options);
 
             generateTiles(random, mapTemplate, mapTiles, new EmptyGenerator());
-            mapRenderer.Render(console, gameState);
+            mapRenderer.render(console, gameState);
             console.write(String.format("Took %sms", System.currentTimeMillis() - start));
             System.out.printf("Map gen Took %sms\n", System.currentTimeMillis() - start);
         }
@@ -105,7 +104,7 @@ public class Main
                             new Weighted<ITileGenerator>(2f, new CampfireGenerator()),
                     });
             generateTiles(random, mapTemplate, mapTiles, tileGenerator);
-            mapRenderer.Render(console, gameState);
+            mapRenderer.render(console, gameState);
 
             console.write(String.format("Took %sms", System.currentTimeMillis() - start));
             System.out.printf("Map pop Took %sms\n", System.currentTimeMillis() - start);
@@ -218,7 +217,7 @@ public class Main
         while (true)
         {
             for (var renderable : renderables)
-                renderable.Render(console, gameState);
+                renderable.render(console, gameState);
 
             console.swapBuffer();
             gameState.incrementTime();
