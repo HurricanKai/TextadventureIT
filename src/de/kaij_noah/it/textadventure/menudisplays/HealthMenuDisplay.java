@@ -1,4 +1,4 @@
-package de.kaij_noah.it.textadventure.MenuDisplays;
+package de.kaij_noah.it.textadventure.menudisplays;
 
 import de.kaij_noah.it.textadventure.base.IMenuDisplay;
 import de.kaij_noah.it.textadventure.entities.PlayerEntity;

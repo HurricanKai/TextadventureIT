@@ -1,6 +1,6 @@
 package de.kaij_noah.it.textadventure.entities;
 
-import de.kaij_noah.it.textadventure.MenuDisplays.HealthMenuDisplay;
+import de.kaij_noah.it.textadventure.menudisplays.HealthMenuDisplay;
 import de.kaij_noah.it.textadventure.base.IConsole;
 import de.kaij_noah.it.textadventure.base.IMenuManager;
 import de.kaij_noah.it.textadventure.base.Icon;
