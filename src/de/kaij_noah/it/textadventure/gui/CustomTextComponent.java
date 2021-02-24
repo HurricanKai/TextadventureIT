@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -13,8 +14,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 final class CustomTextComponent extends JComponent
 {
-    private final Queue<ArrayList<String>> drawQueue = new ArrayDeque<>(3);
-    private final Queue<ArrayList<String>> writeQueue = new ArrayDeque<>(3);
+    private final Queue<ArrayList<String>> drawQueue = new ArrayBlockingQueue<>(3);
+    private final Queue<ArrayList<String>> writeQueue = new ArrayBlockingQueue<>(3);
     private ArrayList<String> currentDraw = new ArrayList<>();
 
     private final Font font;
@@ -32,6 +33,7 @@ final class CustomTextComponent extends JComponent
     @Override
     public void paint(Graphics g)
     {
+        System.out.printf("%s %s\n", drawQueue.size(), writeQueue.size());
         if (drawQueue.isEmpty())
             return;
 
