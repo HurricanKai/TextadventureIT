@@ -7,6 +7,8 @@ import de.kaij_noah.it.textadventure.entities.SimpleHomingEntity;
 import de.kaij_noah.it.textadventure.entities.base.IGuiInitializable;
 import de.kaij_noah.it.textadventure.entities.base.IMapInitializable;
 import de.kaij_noah.it.textadventure.entities.base.IOptionsInitializable;
+import de.kaij_noah.it.textadventure.entities.fatherdaughterquest.DaughterQuest;
+import de.kaij_noah.it.textadventure.entities.fatherdaughterquest.FatherQuest;
 import de.kaij_noah.it.textadventure.gui.Console;
 import de.kaij_noah.it.textadventure.mapgen.AddRandomConnectionMapPostProcessor;
 import de.kaij_noah.it.textadventure.math.Vector3I;
@@ -16,7 +18,6 @@ import de.kaij_noah.it.textadventure.options.GameOptions;
 import de.kaij_noah.it.textadventure.renderers.*;
 import de.kaij_noah.it.textadventure.tile.campfire.CampfireGenerator;
 import de.kaij_noah.it.textadventure.tile.empty.EmptyGenerator;
-import de.kaij_noah.it.textadventure.tile.fatherdaughterquest.FatherDaughterQuestGenerator;
 import de.kaij_noah.it.textadventure.tile.special.StairDownTile;
 import de.kaij_noah.it.textadventure.tile.special.StairUpTile;
 import de.kaij_noah.it.textadventure.tile.spikes.SpikesGenerator;
@@ -99,7 +100,6 @@ public class Main
                             new Weighted<ITileGenerator>(100f, new EmptyGenerator()),
                             new Weighted<ITileGenerator>(15f, new SpikesGenerator()),
                             new Weighted<ITileGenerator>(1f, new TeleporterGenerator()),
-                            new Weighted<ITileGenerator>(1f, new FatherDaughterQuestGenerator()),
                             new Weighted<ITileGenerator>(1f, new TestDialogGenerator()),
                             new Weighted<ITileGenerator>(2f, new CampfireGenerator()),
                     });
@@ -209,6 +209,9 @@ public class Main
         }
 
         var h = entityManager.addEntity(new SimpleHomingEntity(new Vector3I(options.getMapWidth() - 1, options.getMapDepth() - 1, options.getMapHeight() - 1)));
+        var a = entityManager.addEntity(new FatherQuest(new Vector3I(1,0,0)));
+        var b = entityManager.addEntity(new DaughterQuest(new Vector3I(0,1, 0), a));
+        a.setDaughter(b);
 
         entityManager.getAll(IOptionsInitializable.class).forEach(v -> v.optionsInitialize(options));
         entityManager.getAll(IMapInitializable.class).forEach(v -> v.mapInitialize(map));
